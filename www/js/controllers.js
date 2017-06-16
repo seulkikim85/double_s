@@ -146,6 +146,8 @@ angular.module('starter.controllers', [])
     // $scope.$parent.setExpanded(true);
     // $scope.$parent.setHeaderFab('right');
 
+    $scope.test_say = 'says "Perhaps that is the secret. It is not what we do, so much as why we do it."';
+
     $timeout(function() {
         ionicMaterialMotion.fadeSlideIn({
             selector: '.animate-fade-slide-in .item'
@@ -155,6 +157,11 @@ angular.module('starter.controllers', [])
     // Activate ink for controller
     ionicMaterialInk.displayEffect();
 })
+
+.controller('mainCtrl', function() {
+
+})
+
 
 .controller('GalleryCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
     $scope.$parent.showHeader();
