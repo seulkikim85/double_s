@@ -95,6 +95,10 @@ angular.module('starter.controllers', [])
     
 })
 
+.controller('weeklyDetailCtrl', function() {
+    
+})
+
 .controller('LoginCtrl', function($scope, $timeout, $stateParams, ionicMaterialInk) {
     $scope.$parent.clearFabs();
     $timeout(function() {

@@ -42,6 +42,16 @@ angular.module('starter.router', ['ionic'])
         }
     })
 
+    .state('app.weeklyDetail', {
+        url : '/weeklyDetail',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/weeklyDetail.html',
+                controller: 'weeklyDetailCtrl'
+            }
+        }
+    })
+
     .state('app.activity', {
         url: '/activity',
         views: {
