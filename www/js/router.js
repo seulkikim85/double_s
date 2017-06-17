@@ -32,6 +32,16 @@ angular.module('starter.router', ['ionic'])
         }
     })
 
+    .state('app.join', {
+        url : '/join',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/join.html',
+                controller: 'joinCtrl'
+            }
+        }
+    })
+
     .state('app.activity', {
         url: '/activity',
         views: {

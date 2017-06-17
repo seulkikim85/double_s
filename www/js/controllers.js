@@ -91,6 +91,10 @@ angular.module('starter.controllers', [])
 
 })
 
+.controller('joinCtrl', function() {
+    
+})
+
 .controller('LoginCtrl', function($scope, $timeout, $stateParams, ionicMaterialInk) {
     $scope.$parent.clearFabs();
     $timeout(function() {
