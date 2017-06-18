@@ -87,6 +87,21 @@ angular.module('starter.controllers', [])
     };
 })
 
+.controller('mainCtrl',function() {
+
+})
+
+.controller('joinCtrl', function() {
+    
+})
+
+.controller('weeklyDetailCtrl', function() {
+    
+})
+
+.controller('introCtrl', function() {
+    
+})
 .controller('LoginCtrl', function($scope, $timeout, $stateParams, ionicMaterialInk) {
     $scope.$parent.clearFabs();
     $timeout(function() {
@@ -157,11 +172,6 @@ angular.module('starter.controllers', [])
     // Activate ink for controller
     ionicMaterialInk.displayEffect();
 })
-
-.controller('mainCtrl', function() {
-
-})
-
 
 .controller('GalleryCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
     $scope.$parent.showHeader();

@@ -1,5 +1,18 @@
 {
   "name": "HelloIonic",
+  "version": "0.0.1",
+  "authors": [
+    "seulkikim85",
+    "Sunny"
+  ],
+  "description": "College Term Project",
+  "ignore": [
+    "docs",
+    "Gulpfile.js",
+    "index.html",
+    "node_modules"
+  ],
+
   "private": "true",
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.3.3"
