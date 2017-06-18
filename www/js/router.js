@@ -22,6 +22,45 @@ angular.module('starter.router', ['ionic'])
         controller: 'AppCtrl'
     })
 
+    .state('app.main', {
+        url : '/main',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/main.html',
+                controller: 'mainCtrl'
+            }
+        }
+    })
+
+    .state('app.join', {
+        url : '/join',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/join.html',
+                controller: 'joinCtrl'
+            }
+        }
+    })
+
+    .state('app.weeklyDetail', {
+        url : '/weeklyDetail',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/weeklyDetail.html',
+                controller: 'weeklyDetailCtrl'
+            }
+        }
+    })
+
+    .state('app.intro', {
+        url : '/intro',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/intro.html',
+                controller: 'introCtrl'
+            }
+        }
+    })
     .state('app.activity', {
         url: '/activity',
         views: {
@@ -74,17 +113,6 @@ angular.module('starter.router', ['ionic'])
                 }
             }
         }
-    })
-
-    .state('app.main', {
-        url: '/main',
-        views: {
-            'menuContent': {
-                templateUrl: 'templates/main.html',
-                controller: 'mainCtrl'
-            },
-        }
-      
     })
 
     .state('app.login', {
