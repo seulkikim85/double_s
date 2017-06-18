@@ -52,6 +52,15 @@ angular.module('starter.router', ['ionic'])
         }
     })
 
+    .state('app.intro', {
+        url : '/intro',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/intro.html',
+                controller: 'introCtrl'
+            }
+        }
+    })
     .state('app.activity', {
         url: '/activity',
         views: {
