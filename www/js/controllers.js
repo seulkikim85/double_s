@@ -91,6 +91,19 @@ angular.module('starter.controllers', [])
 
 })
 
+.controller('weeklyCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk) {
+
+    // Activate ink for controller
+    ionicMaterialInk.displayEffect();
+
+})
+
+.controller('matchingCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk) {
+
+    // Activate ink for controller
+    ionicMaterialInk.displayEffect();
+
+})
 .controller('joinCtrl', function() {
     
 })

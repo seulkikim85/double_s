@@ -14,6 +14,8 @@ angular.module('starter.router', ['ionic'])
     // Turn off back button text
     $ionicConfigProvider.backButton.previousTitleText(false);
     */
+    // set the tabs at the top
+    $ionicConfigProvider.tabs.position('top');
 
     $stateProvider.state('app', {
         url: '/app',
@@ -24,10 +26,33 @@ angular.module('starter.router', ['ionic'])
 
     .state('app.main', {
         url : '/main',
+        abstract: true,
         views: {
             'menuContent': {
                 templateUrl: 'templates/main.html',
                 controller: 'mainCtrl'
+            }
+        }
+    })
+
+// Each tab has its own nav history stack:
+ 
+    .state('app.main.weekly', {
+        url: '/weekly',
+        views: {
+            'weekly-tab': {
+                templateUrl: 'templates/tab-weekly.html',
+                controller: 'weeklyCtrl'
+            }
+        }
+    })
+
+    .state('app.main.matching', {
+        url: '/matching',
+        views: {
+            'matching-tab': {
+                templateUrl: 'templates/tab-matching.html',
+                controller: 'matchingCtrl'
             }
         }
     })
@@ -158,5 +183,5 @@ angular.module('starter.router', ['ionic'])
     ;
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/main');
+    $urlRouterProvider.otherwise('/app/main/weekly');
 });

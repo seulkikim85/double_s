@@ -1,28 +1,17 @@
 <ion-view view-title="Double_S">
-    <ion-tabs class = "tabs-stable">
-        <ion-tab title = "Weekly Fashion">
-        </ion-tab>
-        <ion-tab title = "Items Matching">
-        </ion-tab>
+
+    <ion-tabs class="tabs-icon-top tabs-positive">
+
+        <div class="tabs-striped tabs-top tabs-background-stable">
+            <ion-tab title="Weelky" icon="ion-home" ui-sref="app.main.weekly">
+                <ion-nav-view name="weekly-tab"></ion-nav-view>
+            </ion-tab>
+
+            <ion-tab title="Matching" icon="ion-information" ui-sref="app.main.matching">
+                <ion-nav-view name="matching-tab"></ion-nav-view>
+            </ion-tab>
+        </div>
     </ion-tabs>
-
-    <ion-content >
-         <div class="padding">
-             <br>
-             <br><br>
-             <br><br><br>
-            <button ui-sref="app.profile" class="button">go</button>
-            <button ui-sref="app.join" class="button">join</button>
-        </div>
-    </ion-content>
-
-        <div class="float-button">
-            <span class="height-fix">
-                 <a class="content">
-                     <i class="ion-ios-arrow-up"></i>
-                </a>
-            </span>     
-        </div>
-    
+        
 </ion-view>
 
