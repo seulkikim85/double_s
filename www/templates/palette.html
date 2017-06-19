@@ -1,0 +1,890 @@
+<ion-view view-title="Ionic Components+">
+  <ion-content overflow-scroll="false">
+    <div class="bar bar-subheader bar-stable static text-center">
+        <strong class="title">All Ionic, Materialized</strong>
+    </div>
+    <div class="im-wrapper">
+        <h2>Welcome to Ionic</h2>
+        <!-- Ionic Components -->
+        <h4 class="border-top">
+            <i class="icon ion-ionic"></i>
+            Ionic + Material Expansion
+        </h4>
+        <p>No need to add new styling! Ionic Material includes <strong>all</strong> <a href="http://ionicframework.com/docs/components/" target="_blank" class="link">Ionic components</a> out of the box, closely themed to the Google Material Design spec.</p>
+        <p>View the <a href="../demo/www/index.html"><strong>DEMO APP</strong></a> "Thronester" in /demo/www/ to see how things can be pieced together (notice: it does push the limits on Android).</p>
+        <p>
+            <em>Ionic Material aims to provide Ionic with the "...visual language [that] synthesizes the classic principles of good design with the innovation and possibility of technology and science."</em>
+        </p>
+
+    <!--// expandable list-->
+      <ion-list>
+        <div ng-repeat="group in groups">
+          <ion-item class="item-stable"
+                    ng-click="toggleGroup(group)"
+                    ng-class="{active: isGroupShown(group)}">
+              <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
+            &nbsp;
+            Group {{group.name}}
+          </ion-item>
+          <ion-item class="item-accordion"
+                    ng-repeat="item in group.items"
+                    ng-show="isGroupShown(group)">
+            {{item}}
+          </ion-item>
+        </div>
+      </ion-list>
+
+        <h4 class="border-top">
+        <i class="icon ion-android-color-palette"></i> 
+        More Color</h4>
+        <p>Ionic Material builds on Ionic's color naming conventions, and provides 3 variations based off <a href="http://www.google.com/design/spec/style/color.html#" target="_blank" class="link">Google's color style guide</a> (900, 500, 100 - respectively). These can, of course, be overridden to fit your needs.</p>
+        <div class="button-bar">
+            <a class="button button-positive-900">-900</a>
+            <a class="button button-positive">Positive</a>
+            <a class="button button-positive-100">-100</a>
+        </div>
+        <div class="button-bar">
+            <a class="button button-calm-900">-900</a>
+            <a class="button button-calm">Calm</a>
+            <a class="button button-calm-100">-100</a>
+        </div>
+        <div class="button-bar">
+            <a class="button button-royal-900">-900</a>
+            <a class="button button-royal">Royal</a>
+            <a class="button button-royal-100">-100</a>
+        </div>
+        <div class="button-bar">
+            <a class="button button-balanced-900">-900</a>
+            <a class="button button-balanced">Balanced</a>
+            <a class="button button-balanced-100">-100</a>
+        </div>
+        <div class="button-bar">
+            <a class="button button-energized-900">-900</a>
+            <a class="button button-energized">Energized</a>
+            <a class="button button-energized-100">-100</a>
+        </div>
+        <div class="button-bar">
+            <a class="button button-assertive-900">-900</a>
+            <a class="button button-assertive">Assertive</a>
+            <a class="button button-assertive-100">-100</a>
+        </div>
+        <div class="button-bar">
+            <a class="button button-dark">Dark</a>
+            <a class="button button-stable">Stable</a>
+            <a class="button button-light">Light</a>
+        </div>
+        <br />
+        <p>
+            <strong>Add -900 (darker) or -100 (lighter) to Ionic's color classes to use the extended scheme colors</strong>
+        </p>
+
+    <!-- Material Buttons -->
+        <h4 class="border-top">
+            <i class="icon ion-waterdrop"></i>
+            Material Buttons</h4>
+        <p>Materials buttons work like regular Ionic buttons, but they <strong>contain ink</strong> by default.</p>
+        <h5>FAB:</h5>
+        <button class="button button-fab button-balanced icon ion-leaf"></button>
+        <button class="button button-fab button-assertive icon ion-bug"></button>
+        <button class="button button-fab ink-dark button-calm icon ion-tshirt"></button>
+        <button class="button button-fab button-dark icon ion-heart" data-ink-color="#ff0000" data-ink-opacity=".8"></button>
+        <br />
+        <br /><strong>*</strong> Check out the <a href="#/app/ink" class="link">ink API</a> or using <a href="#/app/motion" class="link">motion</a> with FAB
+        <br />
+        <br />
+        <h5>RAISED:</h5>
+        <button class="button button-raised button-stable ink-dark">Risen Up</button>
+        <br />
+        <br />
+        <h5>FLAT:</h5>
+        <button class="button button-flat button-positive icon-left ion-outlet">Outlets = Emojis</button>
+        <br />
+
+
+    <!-- Ionic Buttons -->
+        <h4 class="border-top"><i class="icon ion-checkmark-circled"></i> Ionic Buttons</h4>
+        <p>Ionic buttons have been altered to resemble Material Design guidelines. They can have ink too, but all except -clear require adding <a href="#/app/ink" class="link">.ink</a> class to inkify.</p>
+        <button class="button button-small button-royal">
+            Small
+        </button>
+        <button class="button button-positive">
+            Button
+        </button>
+        <button class="button button-large button-dark">
+            Large
+        </button>
+        <br />
+        <button class="button button-outline button-assertive">
+            Outline Button
+        </button>
+        <br />
+        <br />
+        <button class="button button-clear button-dark">
+            Clear Button
+        </button>
+        <br />
+        <button class="button button-block button-calm">
+            Block
+        </button>
+        <br />
+        <button class="button button-full button-calm">
+            Full Button
+        </button>
+        <br />
+        <button class="button icon-left ion-home button-balanced">Icon Left</button>
+        <button class="button icon-right ion-star button-energized">Icon Right</button>
+
+
+
+    <h3> Popup & Button-Bar Example</h3>
+    <div class="button-bar">
+        <button class="button button-positive" ng-click="popupLogin()"> Login Popup </button>
+        <button class="button button-assertive" ng-click="popupLogout()"> Logout Popup </button>
+        <button class="button button-balanced" ng-click="popupWifiPopup()"> WiFi Popup </button>
+        <button class="button button-energized" ng-click="showAlert()"> Alert Popup </button>
+    </div>
+    <div class="card">
+        <a class="button button-small button-positive button-clear button-block " ng-click="popupLogin()">
+        Login Popup</a><br>
+        <a class="button button-small button-positive button-clear button-block " ng-click="popupLogout()">
+        Logout Popup</a><br>
+        <a class="button button-small button-positive button-clear button-block " ng-click="popupWifiPopup()">
+        WiFi Popup</a><br>
+        <a class="button button-small button-positive button-clear button-block " ng-click="showAlert()">
+        Alert Popup</a>
+    </div>            
+
+    <h3> Add Icons</h3>
+    <div class="list">
+        <a class="item item-icon-left" href="#">
+        <i class="icon ion-email"></i>
+            Check mail
+        </a>
+        <a class="item item-icon-left item-icon-right" href="#">
+        <i class="icon ion-chatbubble-working"></i>
+            Call Ma
+        <i class="icon ion-ios7-telephone-outline"></i>
+        </a>
+        <a class="item item-icon-left" href="#">
+        <i class="icon ion-mic-a"></i>
+        Record album
+        <span class="item-note">
+            Grammy
+        </span>
+        </a>
+        <a class="item item-icon-left" href="#">
+        <i class="icon ion-person-stalker"></i>
+            Friends
+        <span class="badge badge-assertive">0</span>
+        </a>
+    </div>
+
+    <h4 class="border-top"><i class="icon ion-checkmark-circled"></i> 
+        Ionic Buttons Default</h4>
+
+        <ion-list>
+        <div class="item">
+            <button class="button"> Default </button>
+        </div>
+        <div class="item">
+            <button class="button button-light"> button-light </button>
+        </div>
+        <div class="item">
+            <button class="button button-stable"> button-stable </button>
+        </div>
+        <div class="item">
+            <button class="button button-positive"> button-positive </button>
+        </div>
+        <div class="item">
+            <button class="button button-calm"> button-calm </button>
+        </div>
+        <div class="item">
+            <button class="button button-balanced"> button-balanced </button>
+        </div>
+        <div class="item">
+            <button class="button button-energized"> button-energized </button>
+        </div>
+        <div class="item">
+            <button class="button button-assertive"> button-assertive </button>
+        </div>
+        <div class="item">
+            <button class="button button-royal"> button-royal </button>
+        </div>
+        <div class="item">
+            <button class="button button-dark"> button-dark </button>
+        </div>
+        </ion-list>
+
+    <h4 class="border-top"><i class="icon ion-checkmark-circled"></i> 
+        Ionic Buttons normal & disabled</h4>
+            <p>
+                <button class="button">Default</button>
+                <button class="button" disabled>Default</button>
+            </p>
+            <p><button class="button icon ion-heart button-icon"></button></p>
+            <p>
+                <button class="button button-light">button-light</button>
+                <button class="button button-light" disabled>button-light</button>
+            </p>
+            <p>
+                <button class="button button-stable">button-stable</button>
+                <button class="button button-stable" disabled>button-stable</button>
+            </p>
+            <p>
+                <button class="button button-positive">button-positive</button>
+                <button class="button button-positive" disabled>button-positive</button>
+            </p>
+            <p>
+                <button class="button button-calm">button-calm</button>
+                <button class="button button-calm" disabled>button-calm</button>
+            </p>
+            <p>
+                <button class="button button-balanced">button-balanced</button>
+                <button class="button button-balanced" disabled>button-balanced</button>
+            </p>
+            <p>
+                <button class="button button-energized">button-energized</button>
+                <button class="button button-energized" disabled>button-energized</button>
+            </p>
+            <p>
+                <button class="button button-assertive">button-assertive</button>
+                <button class="button button-assertive" disabled>button-assertive</button>
+            </p>
+            <p>
+                <button class="button button-royal">button-royal</button>
+                <button class="button button-royal" disabled>button-royal</button>
+            </p>
+            <p>
+                <button class="button button-dark">button-dark</button>
+                <button class="button button-dark" disabled>button-dark</button>
+            </p>
+
+
+    <h4 class="border-top"><i class="icon ion-checkmark-circled"></i> 
+        Ionic Buttons Block</h4>
+
+            <p>
+                <button class="button button-block">Default</button>
+            </p>
+            <p>
+                <button class="button button-block button-light">button-light</button>
+            </p>
+            <p>
+                <button class="button button-block button-stable">button-stable</button>
+            </p>
+            <p>
+                <button class="button button-block button-positive">button-positive</button>
+            </p>
+            <p>
+                <button class="button button-block button-calm">button-calm</button>
+            </p>
+            <p>
+                <button class="button button-block button-balanced">button-balanced</button>
+            </p>
+            <p>
+                <button class="button button-block button-energized">button-energized</button>
+            </p>
+            <p>
+                <button class="button button-block button-assertive">button-assertive</button>
+            </p>
+            <p>
+                <button class="button button-block button-royal">button-royal</button>
+            </p>
+            <p>
+                <button class="button button-block button-dark">button-dark</button>
+            </p>
+
+    <h4 class="border-top"><i class="icon ion-checkmark-circled"></i> 
+        Ionic Buttons outline</h4>
+
+            <p>
+                <button class="button button-outline">Default</button>
+            </p>
+            <p>
+                <button class="button button-outline button-light">button-light</button>
+            </p>
+            <p>
+                <button class="button button-outline button-stable">button-stable</button>
+            </p>
+            <p>
+                <button class="button button-outline button-positive">button-positive</button>
+            </p>
+            <p>
+                <button class="button button-outline button-calm">button-calm</button>
+            </p>
+            <p>
+                <button class="button button-outline button-balanced">button-balanced</button>
+            </p>
+            <p>
+                <button class="button button-outline button-energized">button-energized</button>
+            </p>
+            <p>
+                <button class="button button-outline button-assertive">button-assertive</button>
+            </p>
+            <p>
+                <button class="button button-outline button-royal">button-royal</button>
+            </p>
+            <p>
+                <button class="button button-outline button-dark">button-dark</button>
+            </p>
+
+            <p>
+                <button class="button icon-left ion-home button-royal">home</button>
+            </p>
+            <p>
+                <button class="button icon-right ion-chevron-right button-positive">learn more</button>
+            </p>
+    <br>
+    <br>
+
+    <!-- Headers -->
+                <h4 class="border-top"><i class="icon ion-chevron-up"></i> 
+                Headers</h4>
+                <p>
+                    Headers come in a variety of default color options, and can contain left/right buttons. View Ionic Header Docs. Material Design usually suggests left-aligning the title.
+                </p>
+                <!-- Header Icon + Fab -->
+                <div class="bar bar-header bar-calm-900" style="position: static;">
+                    <div class="buttons buttons-left header-item">
+                        <span class="left-buttons">
+                            <button class="button button-icon button-clear ion-navicon"></button>
+                        </span>
+                    </div>
+                    <div class="h1 title title-left light">Header Icons + Fab</div>
+                    <div class="buttons buttons-right header-item">
+                        <span class="right-buttons">
+                            <button class="button button-balanced button-fab">
+                                <i class="icon ion-star"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+    <br>
+    <br>
+
+    <!-- Header Fab Left -->
+                <div class="bar bar-header bar-dark" style="position: static; margin-bottom: 25px;">
+                    <div class="buttons buttons-left header-item">
+                        <span class="left-buttons">
+                            <button class="button button-energized-900 button-fab">
+                                <i class="icon ion-star"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <div class="h1 title title-left fab-left light">Header Fab Left</div>
+                    <div class="buttons buttons-right header-item">
+                        <span class="right-buttons">
+                            <button class="button button-icon button-clear ion-android-more-vertical"></button>
+                        </span>
+                    </div>
+                </div>
+    <br>
+    <br>
+
+    <!-- Normal Header -->
+                <div class="bar bar-header bar-assertive" style="position: static;">
+                    <div class="buttons buttons-left header-item">
+                        <span class="left-buttons">
+                            <button class="button button-icon button-clear ion-navicon"></button>
+                        </span>
+                    </div>
+                    <div class="h1 title">Normal Header</div>
+                    <div class="buttons buttons-right header-item">
+                        <span class="right-buttons">
+                            <button class="button button-icon button-clear ion-android-more-vertical"></button>
+                        </span>
+                    </div>
+                </div>
+    <br>
+    <br>
+
+    <!-- Footer - Fab Right -->
+                <h4 class="border-top"><i class="icon ion-chevron-down"></i> Footers</h4>
+                <div class="bar bar-footer bar-energized-100" style="position: static;">
+                    <div class="title">Footer - Fab Right</div>
+                    <div class="buttons buttons-right">
+                        <button class="button button-energized-900 button-fab">
+                            <i class="icon ion-code light"></i>
+                        </button>
+                    </div>
+                </div>
+    <br>
+    <br>
+
+    <!-- Footer - Fab Left -->
+                <div class="bar bar-footer bar-royal-900" style="position: static;">
+                    <div class="buttons buttons-left">
+                        <button class="button button-royal-100 button-fab">
+                            <i class="icon ion-code royal"></i>
+                        </button>
+                    </div>
+                    <div class="title">Footer - Fab Left</div>
+                </div>
+    <br>
+    <br>
+    <!-- Tabs -->
+                <h4 class="border-top"><i class="icon ion-stop"></i> Tabs</h4>
+                <p>Supports all ionic tabs</p>
+                <!-- Normal Tabs -->
+                <div class="tabs tabs-dark" style="position: static; margin-bottom: 15px;">
+                    <a class="tab-item">
+                        Home
+                    </a>
+                    <a class="tab-item">
+                        Favorites
+                    </a>
+                    <a class="tab-item">
+                        Settings
+                    </a>
+                </div>                                    
+
+    <!-- Tab Icons -->
+                <div class="tabs tabs-positive tabs-icon-only" style="position: static; margin-bottom: 15px;">
+                    <a class="tab-item active">
+                        <i class="icon ion-home"></i>
+                    </a>
+                    <a class="tab-item">
+                        <i class="icon ion-star"></i>
+                    </a>
+                    <a class="tab-item">
+                        <i class="icon ion-gear-a"></i>
+                    </a>
+                </div>
+
+    <!-- Tabs Icons Top -->
+                <div class="tabs tabs-balanced tabs-icon-top" style="position: static; margin-bottom: 15px;">
+                    <a class="tab-item">
+                        <i class="icon ion-home"></i> Home
+                    </a>
+                    <a class="tab-item active">
+                        <i class="icon ion-star"></i> Favorites
+                    </a>
+                    <a class="tab-item">
+                        <i class="icon ion-gear-a"></i> Settings
+                    </a>
+                </div>
+
+    <!-- Tabs Icons Left -->
+                <div class="tabs tabs-royal tabs-icon-left" style="position: static; margin-bottom: 15px;">
+                    <a class="tab-item">
+                        <i class="icon ion-home"></i> Home
+                    </a>
+                    <a class="tab-item">
+                        <i class="icon ion-star"></i> Favorites
+                    </a>
+                    <a class="tab-item active">
+                        <i class="icon ion-gear-a"></i> Settings
+                    </a>
+                </div>
+
+    <!-- Tabs Striped -->
+                <div class="tabs-striped tabs-color-assertive" style="position: static; margin-bottom: 15px;">
+                    <div class="tabs" style="position: static;">
+                        <a class="tab-item active" data-ink-color="#ef473a" data-ink-opacity=".35">
+                            <i class="icon ion-home"></i> Test
+                        </a>
+                        <a class="tab-item" data-ink-color="#ef473a" data-ink-opacity=".35">
+                            <i class="icon ion-star"></i> Favorites
+                        </a>
+                        <a class="tab-item" data-ink-color="#ef473a" data-ink-opacity=".35">
+                            <i class="icon ion-gear-a"></i> Settings
+                        </a>
+                    </div>
+                </div>
+
+
+    <!-- Button Bars -->
+                <h4 class="border-top"><i class="icon ion-minus"></i> Button Bars</h4>
+                <div class="button-bar">
+                    <a class="button button-raised ink-dark">1</a>
+                    <a class="button button-raised ink-dark">2</a>
+                    <a class="button button-raised ink-dark">3</a>
+                    <a class="button button-raised ink-dark">4</a>
+                </div>
+
+                <div class="button-bar bar-balanced">
+                    <a class="button button-raised">1</a>
+                    <a class="button button-raised">2</a>
+                    <a class="button button-raised">3</a>
+                    <a class="button button-raised">4</a>
+                </div>                        
+
+
+                <div class="button-bar bar-positive">
+                    <a class="button button-raised ink-dark">1</a>
+                    <a class="button button-raised ink-dark">2</a>
+                    <a class="button button-raised ink-dark">3</a>
+                    <a class="button button-raised ink-dark">4</a>
+                </div>
+
+    <!-- Plain List -->
+                <h4 class="border-top"><i class="icon ion-navicon-round"></i> Plain List</h4>
+                <div class="list">
+                    <div class="item item-divider">
+                        Candy Bars
+                    </div>
+                    <a class="item">
+                        Butterfinger
+                    </a>
+                    <a class="item">
+                        Kit Kat
+                    </a>
+                    <a class="item">
+                        Snickers
+                    </a>
+                    <div class="item item-divider">
+                        Hard Candy
+                    </div>
+                    <a class="item">
+                        Jolly Rancher
+                    </a>
+                    <a class="item">
+                        Skittles
+                    </a>
+                </div>
+
+    <!-- Icon List -->
+                <h4 class="border-top">
+                    <i class="icon ion-nuclear"></i>
+                    Icon List</h4>
+                <div class="list">
+                    <a class="item item-icon-left">
+                        <i class="icon ion-email"></i> Check mail
+                    </a>
+                    <a class="item item-icon-left">
+                        <i class="icon ion-mic-a"></i> Record album
+                        <span class="item-note">
+                            Grammy
+                        </span>
+                    </a>
+                    <a class="item item-icon-left">
+                        <i class="icon ion-person-stalker"></i> Friends
+                        <span class="badge badge-assertive">0</span>
+                    </a>
+                </div>
+
+    <!-- Button List -->
+                <h4 class="border-top"><i class="icon ion-ios-list-outline"></i> Button List</h4>
+                <div class="list">
+                    <div class="item item-button-right">
+                        Mom
+                        <button class="button button-balanced ink">
+                            <i class="icon ion-ios-telephone"></i>
+                        </button>
+                    </div>
+                    <div class="item item-button-right">
+                        Dad
+                        <button class="button button-balanced ink">
+                            <i class="icon ion-ios-telephone"></i>
+                        </button>
+                    </div>
+                    <div class="item item-button-right">
+                        Sis
+                        <button class="button button-balanced ink">
+                            <i class="icon ion-ios-telephone"></i>
+                        </button>
+                    </div>
+                    <div class="item item-button-right">
+                        Bro
+                        <button class="button button-balanced ink">
+                            <i class="icon ion-ios-telephone"></i>
+                        </button>
+                    </div>
+                </div>
+
+    <!-- Avatar List -->
+                <h4 class="border-top"><i class="icon ion-android-happy"></i> Avatar List</h4>
+                <div class="list">
+                    <a class="item item-avatar">
+                        <img src="img/avatar/ben.png">
+                        <h2>Material</h2>
+                        <p>Sheets of paper</p>
+                    </a>
+                    <a class="item item-avatar">
+                        <img src="img/avatar/mike.png">
+                        <h2>Motion</h2>
+                        <p>Accent and bring attention</p>
+                    </a>
+                    <a class="item item-avatar">
+                        <img src="img/avatar/adam.jpg">
+                        <h2>Ink</h2>
+                        <p>Fluidity</p>
+                    </a>
+                </div>
+
+    <!-- Thumbnail List -->
+                <h4 class="border-top"><i class="icon ion-images"></i> Thumbnail List</h4>
+                <div class="list">
+                    <a class="item item-thumbnail-left">
+                        <img src="img/ionic.png">
+                        <h2>Ionic Framework</h2>
+                        <p>A mobile development revolution</p>
+                    </a>
+                    <a class="item item-thumbnail-left">
+                        <img src="img/google-material.png">
+                        <h2>Material Design</h2>
+                        <p>A visual language of design &amp; innovation</p>
+                    </a>
+                    <a class="item item-thumbnail-left">
+                        <img src="img/logo.png">
+                        <h2>Ionic Material</h2>
+                        <p>Their love-child</p>
+                    </a>
+                </div>
+
+    <!-- Inset List -->
+                <h4 class="border-top"><i class="icon ion-arrow-shrink"></i> Inset List</h4>
+                <div class="list list-inset">
+                    <div class="item">
+                        I'm not crazy
+                    </div>
+                    <div class="item">
+                        I'm just...
+                    </div>
+                    <div class="item">
+                        A little inset
+                    </div>
+                </div>
+
+
+    <!-- Cards -->
+        <h4 class="border-top"><i class="icon ion-arrow-shrink"></i> 
+        Cards</h4>
+        
+        <div class="list card light-bg">
+
+            <div class="item item-avatar">
+                <img src="img/avatar/ben.png">
+                <h2>Arya Stark</h2>
+                <p>"Joffrey. Cersei. Ilyn Payne. Hound. Polliver. The Mountain."</p>
+            </div>
+
+            <div class="item item-body">
+                The quickest way to a man's heart is through Arya's needle. She has two speeds: Walk and Kill, and is the reason why Waldo is still hiding.
+                <p>
+                    <a class="subdued">1 Like</a>
+                    <a class="subdued">5 Comments</a>
+                </p>
+            </div>
+            <div class="item tabs tabs-secondary tabs-icon-left">
+                <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5">
+                    <i class="icon ion-thumbsup"></i> Like
+                </a>
+                <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5">
+                    <i class="icon ion-chatbox"></i> Comment
+                </a>
+                <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5">
+                    <i class="icon ion-share"></i> Share
+                </a>
+            </div>
+        </div>                                                                        
+
+        <div class="card">
+            <div class="item item-text-wrap">
+                This is a basic Card which contains an item that has wrapping text. a basic Card which contains an item that has wrapping text.
+            </div>
+        </div>
+
+        <h2>Standard Card with Header and Footer</h2>
+        <div class="card">
+            <div class="item item-divider">
+                <h2>I'm a Header in a Card!</h2>
+            </div>
+            <div class="item item-text-wrap">
+                This is a basic Card with some text.
+            </div>
+            <div class="item item-divider">
+                I'm a Footer in a Card!
+            </div>
+        </div>
+
+        <h2>Expanded Card with Background image</h2>
+        <p>Add <pre>card--expand</pre> class to your card</p>
+        <div class="card card--expand">
+            <div class="item item-divider" style="background: url('http://www.getmdl.io/assets/demos/welcome_card.jpg') center / cover; color: white;">
+                <h2>I'm a Header in a Card!</h2>
+            </div>
+            <div class="item item-text-wrap">
+                This is a basic Card with some text.
+            </div>
+        </div>
+
+        <h2>Expanded Card with Background image and actions</h2>
+        <div class="card card--expand">
+            <div class="item item-divider" style="background: url('http://www.getmdl.io/assets/demos/welcome_card.jpg') center / cover; color: white;">
+                <h2>I'm a Header in a Card!</h2>
+            </div>
+            <div class="item item-text-wrap">
+                This is a basic Card with some text.
+            </div>
+            <div class="item item-divider actions">
+                <button class="button button-clear button-positive">Get Started</button>
+            </div>
+        </div>
+        
+        <h2>Card with avatar and expanded header</h2>
+        <div class="list card">
+            <div class="item item-avatar">
+                <img src="http://ionicframework.com/img/docs/mcfly.jpg">
+                <h2>Marty McFly</h2>
+                <p>November 05, 1955</p>
+            </div>
+        </div>
+
+        <div class="list card">
+            <div class="item item-avatar item-avatar--expand my-amazing-header">
+                <img src="http://ionicframework.com/img/docs/mcfly.jpg">
+                <h2>Marty McFly</h2>
+                <p>November 05, 1955</p>
+            </div>
+        </div>
+        
+        <div class="list card">
+
+            <div class="item item-avatar">
+                <img src="http://ionicframework.com/img/docs/mcfly.jpg">
+                <h2>Marty McFly</h2>
+                <p>November 05, 1955</p>
+            </div>
+
+            <div class="item item-body">
+                <img class="full-image" src="http://ionicframework.com/img/docs/delorean.jpg">
+                <p>
+                    This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
+                    the content is from a card-body consisting of an image and paragraph text. The footer
+                    consists of tabs, icons aligned left, within the card-footer.
+                </p>
+                <p>
+                    <a href="#" class="subdued">1 Like</a>
+                    <a href="#" class="subdued">5 Comments</a>
+                </p>
+            </div>
+
+            <div class="item tabs tabs-secondary tabs-icon-left">
+                <a class="tab-item" href="#">
+                    <button class="button button-outline button-light">Like</button>
+                </a>
+                <a class="tab-item" href="#">
+                    <button class="button button-outline button-light">Comment</button>
+                </a>
+                <a class="tab-item" href="#">
+                    <button class="button button-outline button-light">Share</button>
+                </a>
+            </div>
+        </div>    
+
+
+    <!-- Forms -->
+                <h4 class="border-top"><i class="icon ion-edit"></i> Forms</h4>
+                <div class="list">
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">First Name</span>
+                        <input type="text" placeholder="First Name">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Last Name</span>
+                        <input type="text" placeholder="Last Name">
+                    </label>
+                    <br />
+                    <div class="item item-checkbox">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                        </label>
+                        I read the terms &amp; conditions.
+                    </div>
+                    <div class="item item-checkbox">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                        </label>
+                        Haha, you liar. There are no T&amp;Cs.
+                    </div>
+                    <br />
+                    <label class="item item-radio">
+                        <input type="radio" name="group">
+                        <div class="item-content">
+                            Tap Me
+                        </div>
+                        <i class="radio-icon ion-checkmark"></i>
+                    </label>
+                    <label class="item item-radio">
+                        <input type="radio" name="group">
+                        <div class="item-content">
+                            Or Tap Me
+                        </div>
+                        <i class="radio-icon ion-checkmark"></i>
+                    </label>
+                    <label class="item item-radio">
+                        <input type="radio" name="group">
+                        <div class="item-content">
+                            Or Tap Me
+                        </div>
+                        <i class="radio-icon ion-checkmark"></i>
+                    </label>
+                    <div class="item range range-positive">
+                        <i class="icon ion-ios-sunny-outline"></i>
+                        <input type="range" name="volume" min="0" max="100" value="33">
+                        <i class="icon ion-ios-sunny"></i>
+                    </div>
+                    <label class="item item-input item-select">
+                        <div class="input-label">
+                            Most Influential Teletubby
+                        </div>
+                        <select>
+                            <option>Laa-Laa</option>
+                            <option selected>Tinky Winky</option>
+                            <option>Dipsy</option>
+                            <option>Po</option>
+                            <option>Noo-noo</option>
+                        </select>
+                    </label>
+                    <button class="button button-block button-calm ink" data-ink-color="#9DEAFF" data-ink-opacity="1">
+                        Submit
+                    </button>
+                </div>
+            
+
+        <div class="card">
+            <div class="item">
+                <h1>h1 Title</h1>
+                This is a basic Card which contains an item that has wrapping text. a basic Card which contains an item that has wrapping text.
+            </div>
+        </div>
+        <div class="card">
+            <div class="item">
+                <h2>h2 Title</h2>
+                This is a basic Card which contains an item that has wrapping text. a basic Card which contains an item that has wrapping text.
+            </div>
+        </div>
+        <div class="card">
+            <div class="item">
+                <h3>h3 Title</h3>
+                This is a basic Card which contains an item that has wrapping text. a basic Card which contains an item that has wrapping text.
+            </div>
+        </div>
+        <div class="card">
+            <div class="item">
+                <h4>h4 Title</h4>
+                This is a basic Card which contains an item that has wrapping text. a basic Card which contains an item that has wrapping text.
+            </div>
+        </div>
+        <div class="card">
+            <div class="item">
+                <h5>h5 Title</h5>
+                This is a basic Card which contains an item that has wrapping text. a basic Card which contains an item that has wrapping text.
+            </div>
+        </div>
+        <div class="card">
+            <div class="item">
+                <h6>h6 Title</h6>
+                This is a basic Card which contains an item that has wrapping text. a basic Card which contains an item that has wrapping text.
+            </div>
+        </div>
+
+            <br>
+            <br>
+            <br>
+    </div>
+
+
+  </ion-content>
+</ion-view>

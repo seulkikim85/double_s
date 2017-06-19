@@ -42,6 +42,16 @@ angular.module('starter.router', ['ionic'])
         }
     })
 
+    .state('app.palette', {
+        url : '/palette',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/palette.html',
+                controller: 'paletteCtrl'
+            }
+        }
+    })    
+
     .state('app.weeklyDetail', {
         url : '/weeklyDetail',
         views: {
