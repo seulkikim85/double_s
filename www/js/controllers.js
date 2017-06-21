@@ -87,11 +87,22 @@ angular.module('starter.controllers', [])
     };
 })
 
-.controller('mainCtrl',function() {
+.controller('mainCtrl',function($scope,$state) {
+    $scope.clickLink = function(next) {
+        console.log('Click',next);
+        $state.go(next);
+    }
 
+    $scope.isMain = function() {
+        if($state.current.name == 'app.main.weekly' ||
+            $state.current.name == 'app.main.matching' )
+            return true;
+
+        return false;
+    }
 })
 
-.controller('weeklyCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk) {
+.controller('weeklyCtrl', function($scope, $state, $stateParams, $timeout, ionicMaterialInk) {
 
     // Activate ink for controller
     ionicMaterialInk.displayEffect();
@@ -108,7 +119,10 @@ angular.module('starter.controllers', [])
     
 })
 
-.controller('weeklyDetailCtrl', function() {
+.controller('weeklyDetailCtrl', function($scope) {
+    $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
+        viewData.enableBack = true;
+    });
     
 })
 
@@ -192,6 +206,10 @@ angular.module('starter.controllers', [])
     $scope.isExpanded = true;
     $scope.$parent.setExpanded(true);
     $scope.$parent.setHeaderFab(false);
+
+    $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
+        viewData.enableBack = true;
+    });
 
     // Activate ink for controller
     ionicMaterialInk.displayEffect();

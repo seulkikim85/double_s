@@ -14,8 +14,6 @@ angular.module('starter.router', ['ionic'])
     // Turn off back button text
     $ionicConfigProvider.backButton.previousTitleText(false);
     */
-    // set the tabs at the top
-    $ionicConfigProvider.tabs.position('top');
 
     $stateProvider.state('app', {
         url: '/app',

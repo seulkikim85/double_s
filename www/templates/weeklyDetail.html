@@ -1,35 +1,27 @@
 <ion-view view-title="Detail" name="weeklyDetail-view">
-    
-    <ion-card>
+    <ion-content ng-class="{expanded:isExpanded}" class="has-header">
+   <div class="card">
+   <div class="item item-body">
+      <img class="full-image" src="https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/summer%20look.jpg?alt=media&token=6b0aaf0c-cdbc-4fe6-a276-f8a41d6c0ee4">
+      Summer look is comming....<br>
+      If you would like to be fashion people, you will have to focus on this app!!!<br>
+      you are available to be them!!!
+</div>
 
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="img/jon-snow.jpg">
-            </ion-avatar>
-            <h2>ilovefashion</h2>
-                <p>June 17, 2017</p>
-        </ion-item>
+<ion-row>
+    <ion-col>
+    <button class="button-50 icon icon-left ion-heart">
+     12 Likes
+    </button>
+      
 
-    <img src="img/sansa.jpg">
+    <ion-col>
+    <button class="button-100 icon icon-left ion-chatbubble-working">
+     4 Comments
+    </button>
 
-        <ion-card-content>
-            <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
-        </ion-card-content>
+  </ion-row>
 
-        <ion-row>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="thumbs-up"></ion-icon>
-                        <div>12 Likes</div>
-                </button>
-            </ion-col>
-            <ion-col>
-               <button ion-button icon-left clear small>
-                <ion-icon name="text"></ion-icon>
-                    <div>4 Comments</div>
-                </button>
-            </ion-col>
-        </ion-row>
-
-    </ion-card>
+  
+    </ion-content>
 </ion-view>
