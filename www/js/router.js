@@ -85,6 +85,17 @@ angular.module('starter.router', ['ionic'])
         }
     })
 
+    .state('app.matchDetail', {
+        url : '/matchDetail/:id',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/matchDetail.html',
+                controller: 'matchDetailCtrl'
+            },
+            params : { id : null } // properties MUST be defined in the to state
+        }
+    })
+
     .state('app.intro', {
         url : '/intro',
         views: {
