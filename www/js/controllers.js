@@ -132,7 +132,7 @@ angular.module('starter.controllers', [])
     
 })
 
-.controller('weeklyDetailCtrl', function($scope) {
+.controller('weeklyDetailCtrl', function($scope,$ionicHistory) {
     // force back button
     $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
         var histroyBack = $ionicHistory.backView();
