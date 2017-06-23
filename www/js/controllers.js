@@ -102,10 +102,23 @@ angular.module('starter.controllers', [])
     }
 })
 
-.controller('weeklyCtrl', function($scope, $state, $stateParams, $timeout, ionicMaterialInk) {
+.controller('weeklyCtrl', function($scope, $state, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion   ) {
+
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    $scope.isExpanded = true;
+    $scope.$parent.setExpanded(true);
+    $scope.$parent.setHeaderFab(false);
 
     // Activate ink for controller
     ionicMaterialInk.displayEffect();
+
+    ionicMaterialMotion.pushDown({
+        selector: '.push-down'
+    });
+    ionicMaterialMotion.fadeSlideInRight({
+        selector: '.animate-fade-slide-in .item'
+    });
 
 })
 
@@ -244,8 +257,11 @@ angular.module('starter.controllers', [])
     $scope.$parent.setExpanded(true);
     $scope.$parent.setHeaderFab(false);
 
+    // force back button
     $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
-        viewData.enableBack = true;
+        var histroyBack = $ionicHistory.backView();
+        if(histroyBack && histroyBack.stateName == 'app.main.weekly' )
+            viewData.enableBack = true;        
     });
 
     // Activate ink for controller
