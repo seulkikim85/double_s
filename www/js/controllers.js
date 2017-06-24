@@ -3,9 +3,11 @@
 
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout) {
+.controller('AppCtrl', ['$scope','$ionicModal', '$rootScope', '$ionicLoading', 'UserService',
+ function($scope, $ionicModal, $rootScope, $ionicLoading, UserService) {
     // Form data for the login modal
     $scope.loginData = {};
+    $scope.joinData = {};
     $scope.isExpanded = false;
     $scope.hasHeaderFabLeft = false;
     $scope.hasHeaderFabRight = false;
@@ -85,7 +87,73 @@ angular.module('starter.controllers', [])
             fabs[0].remove();
         }
     };
-})
+
+    ////////////////////////////////////////
+    // Login/Join Methods
+    ////////////////////////////////////////
+
+    $scope.isLogined = function() {
+        return $rootScope.currentUser != undefined;
+    }
+
+    $scope.showJoin = function() {
+        console.log('show Join');
+        if($scope.modalLogin)
+            $scope.modalLogin.hide();
+        $scope.joinData = {};
+        //--------------------------------------------------
+        // Create the login modal that we will use later
+        $ionicModal.fromTemplateUrl('templates/join.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function (modal) {
+            $scope.modalJoin = modal;
+            modal.show();
+        });
+    }    
+    $scope.clickJoin = function(user) {
+        console.log('click Join',user);
+        UserService.createUser(user).then(function(){
+            $scope.modalJoin.hide();
+        });
+    }
+
+    $scope.showLogin = function() {
+        console.log('show login');
+        //--------------------------------------------------
+        // Create the login modal that we will use later
+        $ionicModal.fromTemplateUrl('templates/login.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function (modal) {
+            $scope.modalLogin = modal;
+            modal.show();
+        });
+    }
+    $scope.clickLogin = function(user) {
+        console.log('click Login',user);
+        UserService.login(user).then(function(){
+            $scope.modalLogin.hide();
+        });
+    }
+
+    firebase.auth().onAuthStateChanged(function (authData) {
+        if (authData) {
+            console.log("Logged in as:", authData.uid, authData);
+
+            var ref = firebase.database().ref('/');
+            ref.child("users").child(authData.uid).once('value', function (snapshot) {
+                var user = snapshot.val();
+                console.log("User in :", user);
+                $rootScope.currentUser = user;
+                $scope.loginData = user;
+            });
+
+        } else {
+            console.log("authData is cleared");
+        }
+    });    
+}])
 
 .controller('mainCtrl',function($scope,$state) {
     $scope.clickLink = function(next) {
@@ -188,9 +256,6 @@ angular.module('starter.controllers', [])
     
 
 })
-.controller('joinCtrl', function() {
-    
-})
 
 .controller('weeklyDetailCtrl', function($scope,$ionicHistory) {
     // force back button
@@ -240,13 +305,7 @@ angular.module('starter.controllers', [])
 .controller('introCtrl', function() {
     
 })
-.controller('LoginCtrl', function($scope, $timeout, $stateParams, ionicMaterialInk) {
-    $scope.$parent.clearFabs();
-    $timeout(function() {
-        $scope.$parent.hideHeader();
-    }, 0);
-    ionicMaterialInk.displayEffect();
-})
+
 
 .controller('FriendsCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
     // Set Header

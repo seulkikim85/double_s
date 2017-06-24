@@ -55,16 +55,6 @@ angular.module('starter.router', ['ionic'])
         }
     })
 
-    .state('app.join', {
-        url : '/join',
-        views: {
-            'menuContent': {
-                templateUrl: 'templates/join.html',
-                controller: 'joinCtrl'
-            }
-        }
-    })
-
     .state('app.palette', {
         url : '/palette',
         views: {
@@ -155,19 +145,6 @@ angular.module('starter.router', ['ionic'])
                         document.getElementById('fab-gallery').classList.toggle('on');
                     }, 600);
                 }
-            }
-        }
-    })
-
-    .state('app.login', {
-        url: '/login',
-        views: {
-            'menuContent': {
-                templateUrl: 'templates/login.html',
-                controller: 'LoginCtrl'
-            },
-            'fabContent': {
-                template: ''
             }
         }
     })

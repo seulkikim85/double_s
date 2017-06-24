@@ -1,24 +1,31 @@
-<ion-view view-title="Join" name="join-view">
+<ion-modal-view>
 
-    <ion-content class="padding">
-      
+  <ion-header-bar align-title="center" class="bar-assertive-900 nav-title-slide-ios7">
+    <h1 class="title">Join</h1>
+    <div class="buttons">
+      <button class="button button-icon button-clear ion-close" ng-click="modalJoin.hide()"></button>
+    </div>
+  </ion-header-bar>
+
+  <ion-content class="padding">
+
     <div class="list">
       <label class="item item-input item-floating-label">
       <span class="input-label">Nickname</span>
-   <input type="text" placeholder="Nickname">
+   <input type="text" ng-model="joinData.displayName" placeholder="Nickname">
    </label>
 
-   <label class="item item-input item-floating-label">
+      <label class="item item-input item-floating-label">
    <span class="input-label">Email</span>
-   <input type="email" placeholder="Email">
+   <input type="email" ng-model="joinData.email" placeholder="Email">
    </label>
 
-   <label class="item item-input item-floating-label">
+      <label class="item item-input item-floating-label">
    <span class="input-label">Password</span>
-   <input type="password" placeholder="Password">
+   <input type="password" ng-model="joinData.password" placeholder="Password">
    </label>
-</div>
-      <button class="button button-block button-stable" ng-click="login()">Join</button>
-      
+    </div>
+    <button class="button button-block button-stable" ng-click="clickJoin(joinData)">Join</button>
+
   </ion-content>
-</ion-view>
+</ion-modal-view>

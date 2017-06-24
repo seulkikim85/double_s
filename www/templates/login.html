@@ -1,18 +1,29 @@
-<ion-view view-title="Login" align-title="left">
-    <ion-content style="background: url(https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/mix-match-featured.jpg?alt=media&token=8b6fb077-4ec0-4130-b0ac-ca6623c7d460) center; background-size: cover;">
+<ion-modal-view >
+
+  <ion-header-bar align-title="center" class="bar-assertive-900 nav-title-slide-ios7">
+      <h1 class="title">Login</h1>
+      <div class="buttons">
+          <button class="button button-icon button-clear ion-close" ng-click="modalLogin.hide()"></button>
+      </div>
+  </ion-header-bar>
+
+    <ion-content class="padding has-header" style="background: url(https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/mix-match-featured.jpg?alt=media&token=8b6fb077-4ec0-4130-b0ac-ca6623c7d460) center; background-size: cover;">
         <div class="hero no-header flat">
             <div class="content">
                 <div class="app-icon"></div>
                 <h1>Double_Style</h1>
             </div>
         </div>
-        <div class="list">
-            <ion-md-input placeholder="Email" highlight-color="balanced" type="Email"></ion-md-input>
-            <ion-md-input placeholder="Password" highlight-color="energized" type="password"></ion-md-input>
+        <div class="list padding-right">
+            <ion-md-input ng-model="loginData.email" placeholder="Email" highlight-color="balanced" type="Email"></ion-md-input>
+            <ion-md-input ng-model="loginData.password" placeholder="Password" highlight-color="energized" type="password"></ion-md-input>
         </div>
         <div class="padding">
-            <button ui-sref="app.profile" class="button button-full button-assertive ink">Login</button>
+            <button ng-click="clickLogin(loginData)" class="button button-full button-assertive ink">Login</button>
+        </div>
+        <div class="padding">
+            <button ng-click="showJoin()" class="button button-full button-positive ink">Join</button>
         </div>
         
     </ion-content>
-</ion-view>
+</ion-modal-view >

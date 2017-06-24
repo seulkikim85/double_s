@@ -7,6 +7,7 @@
 var app = angular.module('starter', ['ionic', 
 'starter.controllers', 
 'starter.router',
+'starter.services',
 'ionic-material', 
 'ionMdInput'])
 
