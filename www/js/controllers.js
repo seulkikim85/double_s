@@ -121,11 +121,71 @@ angular.module('starter.controllers', [])
     });
 
 })
+.directive('fileChange', function() {
+    return {
+     restrict: 'A',
+     scope: {
+       handler: '&'
+     },
+     link: function (scope, element) {
+      element.on('change', function (event) {
+        scope.$apply(function(){
+          scope.handler({files: event.target.files});
+        });
+      });
+     }
+    };
+})
+.controller('matchingCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, $ionicLoading) {
+    var storage = firebase.storage();
 
-.controller('matchingCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk) {
-
+    
+    storage.ref("/images/test.jpg").getDownloadURL()
+    .then(function(url) {
+        $scope.bgImg = url;
+        console.log(url);
+    });
     // Activate ink for controller
     ionicMaterialInk.displayEffect();
+
+    $scope.UploadContent = function() {
+        console.log('UploadContent');
+        document.getElementById("idFile").click();
+    }
+
+    $scope.fileSelect = function (files) {
+        var file = files[0];
+        console.log('files',files);
+        var path = (window.URL || window.webkitURL).createObjectURL(file);
+        console.log('path', path,document.getElementById("idFile").value);
+        
+        
+        $ionicLoading.show('uploading..');
+        var uploadTask = storage.ref('/images/test.jpg').put(file);
+
+        uploadTask.on('state_changed', function(snapshot){
+        // Observe state change events such as progress, pause, and resume
+        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log('Upload is ' + progress + '% done');
+        switch (snapshot.state) {
+            case firebase.storage.TaskState.PAUSED: // or 'paused'
+                console.log('Upload is paused');
+            break;
+            case firebase.storage.TaskState.RUNNING: // or 'running'
+                console.log('Upload is running');
+            break;
+        }
+        }, function(error) {
+            // Handle unsuccessful uploads
+        }, function() {
+            // Handle successful uploads on complete
+            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+            $scope.bgImg = uploadTask.snapshot.downloadURL;
+            $ionicLoading.hide();
+        });        
+    }
+    
 
 })
 .controller('joinCtrl', function() {
@@ -151,6 +211,7 @@ angular.module('starter.controllers', [])
     vm.timestamp =  Date.now();
     vm.p = "https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/bag.jpg?alt=media&token=ab5039c3-3aeb-451a-9d3d-b12d379f99fa";
     
+
 })
 
 .controller('matchDetailCtrl', function($scope,$ionicHistory) {
