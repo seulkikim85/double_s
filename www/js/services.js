@@ -5,7 +5,8 @@ function( $q, $ionicLoading, $ionicPopup){
 
     var self = {
         createUser: createUser,
-        login: login
+        login: login,
+        logout: logout
     };
 
     // create User
@@ -59,5 +60,19 @@ function( $q, $ionicLoading, $ionicPopup){
         return deferred.promise;
     }
 
+    function logout() {
+        $ionicLoading.show({
+            template: 'Logging Out...'
+        });
+        firebase.auth().signOut().then(function() {
+            // Sign-out successful.
+            console.log("Sign-out successful");
+            $ionicLoading.hide();
+        }, function(error) {
+            // An error happened.
+            console.error("An error happened",error);
+            $ionicLoading.hide();
+        });                
+    };
     return self;
 }]);

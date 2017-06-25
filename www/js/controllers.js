@@ -3,8 +3,8 @@
 
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', ['$scope','$ionicModal', '$rootScope', '$ionicLoading', 'UserService',
- function($scope, $ionicModal, $rootScope, $ionicLoading, UserService) {
+.controller('AppCtrl', ['$scope','$ionicModal','$ionicPopup', '$rootScope', '$ionicLoading', 'UserService',
+ function($scope, $ionicModal, $ionicPopup, $rootScope, $ionicLoading, UserService) {
     // Form data for the login modal
     $scope.loginData = {};
     $scope.joinData = {};
@@ -151,8 +151,24 @@ angular.module('starter.controllers', [])
 
         } else {
             console.log("authData is cleared");
+            $rootScope.currentUser = undefined;
         }
     });    
+
+    // A confirm dialog - Logout
+    $scope.showLogout = function () {
+        var confirmPopup = $ionicPopup.confirm({
+            title: 'Logout',
+            template: 'Are you sure you want to logout?'
+        });
+
+        confirmPopup.then(function (res) {
+            if (res) {
+                UserService.logout();
+            }
+        });
+    }
+
 }])
 
 .controller('mainCtrl',function($scope,$state) {
