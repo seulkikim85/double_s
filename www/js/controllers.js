@@ -232,6 +232,9 @@ angular.module('starter.controllers', [])
     // Activate ink for controller
     ionicMaterialInk.displayEffect();
 
+    var vm = $scope.vm = {};
+    vm.imgSrc1 = 'https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/bag.jpg?alt=media&token=ab5039c3-3aeb-451a-9d3d-b12d379f99fa';
+    vm.imgSrc2 = 'https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/hat.jpg?alt=media&token=ab768762-f75e-4a47-a269-fb6377342860';
     $scope.UploadContent = function() {
         console.log('UploadContent');
         document.getElementById("idFile").click();

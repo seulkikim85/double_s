@@ -9,9 +9,14 @@
             <div class="card stable-bg ink ink-dark">
                 <div class="item item-text-wrap">
                     <strong>Jon Snow</strong> knows nothing.
-                    <a class="image"><img src="https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/bag.jpg?alt=media&token=ab5039c3-3aeb-451a-9d3d-b12d379f99fa">
-                    </a>
-                    
+                    <div class="row">
+                        <div class="col col-50">
+                        <a class="image"><img ng-src="{{vm.imgSrc1}}"></a>
+                        </div>
+                        <div class="col col-50">
+                        <a class="image"><img ng-src="{{vm.imgSrc2}}"></a>
+                        </div>
+                    </div>                    
                     <div class="card-footer text-right">
                         <i class="icon ion-chatbubbles positive"></i> 6
                         <i class="icon ion-heart assertive"></i> 23
@@ -26,7 +31,7 @@
             <div ui-sref="app.gallery" class="card stable-bg ink ink-dark">
                 <div class="item item-text-wrap">
                     <strong>Tyrion Lannister</strong> {{test_say}}
-                    <a class="image"><img src="https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/hat.jpg?alt=media&token=ab768762-f75e-4a47-a269-fb6377342860">
+                    <a class="image"><img ng-src="{{vm.imgSrc2}}">
                     </a>
                     
                     <div class="card-footer text-right">
