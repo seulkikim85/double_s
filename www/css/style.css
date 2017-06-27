@@ -109,3 +109,10 @@ z-index: 1000;
     margin-top: -20px;
     color: white;
 }
+
+/* profile image change
+==================================*/
+.small_button{
+    line-height: 5px !important;
+    min-height: 20px !important;
+}
