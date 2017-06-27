@@ -298,6 +298,9 @@ angular.module('starter.controllers', [])
 
 })
 
+.controller('weeklysubCtrl', function() {
+    
+})
 .controller('matchDetailCtrl', function($scope,$ionicHistory) {
     // force back button
     $scope.$on('$ionicView.beforeEnter', function (event, viewData) {

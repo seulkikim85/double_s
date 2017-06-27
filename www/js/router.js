@@ -75,6 +75,15 @@ angular.module('starter.router', ['ionic'])
         }
     })
 
+     .state('app.weeklysub', {
+        url : '/weeklysub',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/weeklysub.html',
+                controller: 'weeklysubCtrl'
+            }
+        }
+    })
     .state('app.matchDetail', {
         url : '/matchDetail/:id',
         views: {
