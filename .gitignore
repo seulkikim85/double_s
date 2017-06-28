@@ -5,3 +5,4 @@ node_modules/
 platforms/
 plugins/
 prepros-6.config
+/ionic.config.json
