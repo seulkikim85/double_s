@@ -8,7 +8,7 @@
         <div ui-sref="app.matchDetail" class="item card-item">
             <div class="card stable-bg ink ink-dark">
                 <div class="item item-text-wrap">
-                    <strong>Jon Snow</strong> knows nothing.
+                    <strong>{{vm.writter}}</strong> knows nothing.
                     <div class="row">
                         <div class="col col-50">
                         <a class="image"><img ng-src="https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/style-dress%2FChic.jpg?alt=media&token=8a751291-3a84-4f99-b282-836f20b56364"></a>
@@ -18,8 +18,8 @@
                         </div>
                     </div>                    
                     <div class="card-footer text-right">
-                        <i class="icon ion-chatbubbles positive"></i> 6
-                        <i class="icon ion-heart assertive"></i> 23
+                        <i class="icon ion-chatbubbles positive"></i>{{vm.comments}}
+                        <i class="icon ion-heart assertive"></i>{{vm.likes}}
                         <div class="pull-left">
                             <i class="icon ion-clock"></i> just now
                         </div>
@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="item card-item">
-            <div ui-sref="app.gallery" class="card stable-bg ink ink-dark">
+            <div ui-sref="app.matchDetail" class="card stable-bg ink ink-dark">
                 <div class="item item-text-wrap">
                     <strong>Tyrion Lannister</strong> {{test_say}}
                     <a class="image"><img ng-src="https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/style-dress%2Fhat.jpg?alt=media&token=5814b47a-8b97-4728-9ccf-7b47b51a0e2d">
@@ -45,7 +45,7 @@
             </div>
         </div>
         <div class="item card-item">
-            <div ui-sref="app.gallery" class="card stable-bg ink ink-dark">
+            <div ui-sref="app.matchDetail" class="card stable-bg ink ink-dark">
                 <div class="item item-text-wrap">
                     <strong>Sansa Stark</strong> added a gallery <strong>Pretending to be Anna from Frozen</strong> ...
                     <a class="image"><img src="https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/style-dress%2FChic.jpg?alt=media&token=8a751291-3a84-4f99-b282-836f20b56364">

@@ -117,6 +117,29 @@ angular.module('starter.controllers', [])
             $scope.modalJoin.hide();
         });
     }
+    /////////////////////////show lost password//
+     $scope.showLostPassword = function() {
+        console.log('show LostPassword');
+        if($scope.modalLogin)
+            $scope.modalLogin.hide();
+        $scope.lostPasswordData = {};
+        //--------------------------------------------------
+        // Create the login modal that we will use later
+        $ionicModal.fromTemplateUrl('templates/lostPassword.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function (modal) {
+            $scope.modalLostPassword = modal;
+            modal.show();
+        });
+    }    
+    $scope.clickJoin = function(user) {
+        console.log('click LostPassword',user);
+        UserService.createUser(user).then(function(){
+            $scope.modalLostPassword.hide();
+        });
+    }
+    ///////////////////
 
     $scope.showLogin = function() {
         console.log('show login');
@@ -298,9 +321,14 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('weeklysubCtrl', function() {
-    
+.controller('photoUploadCaption', function($scope,$ionicHistory) {
+      $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
+        var histroyBack = $ionicHistory.backView();
+        if(histroyBack && histroyBack.stateName == 'app.photoUpload' )
+            viewData.enableBack = true;        
+    });
 })
+
 .controller('matchDetailCtrl', function($scope,$ionicHistory) {
     // force back button
     $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
@@ -328,6 +356,9 @@ angular.module('starter.controllers', [])
     
 })
 
+.controller('photoUploadCtrl', function() {
+    
+})
 
 .controller('FriendsCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
     // Set Header

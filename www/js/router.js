@@ -74,13 +74,23 @@ angular.module('starter.router', ['ionic'])
             }
         }
     })
-
-     .state('app.weeklysub', {
-        url : '/weeklysub',
+    .state('app.photoUpload', {
+        url : '/photoUpload',
         views: {
             'menuContent': {
-                templateUrl: 'templates/weeklysub.html',
-                controller: 'weeklysubCtrl'
+                templateUrl: 'templates/photoUpload.html',
+                controller: 'photoUpload'
+            }
+        }
+    })
+
+
+     .state('app.photoUploadCaption', {
+        url : '/photoUploadCaption',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/photoUploadCaption.html',
+                controller: 'photoUploadCaptionCtrl'
             }
         }
     })
