@@ -6,3 +6,4 @@ platforms/
 plugins/
 prepros-6.config
 /ionic.config.json
+/.io-config.json
