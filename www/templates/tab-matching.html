@@ -1,32 +1,35 @@
 <ion-view view-title="Items Matching">
 
   <ion-content class="padding">
-    <div>
-        <img ng-src="{{bgImg}}">
-    </div>
 
-        <div ui-sref="app.matchDetail" class="item card-item">
+        <div ui-sref="app.matchDetail" class="item card-item" ng-repeat="info in vm.list">
             <div class="card stable-bg ink ink-dark">
                 <div class="item item-text-wrap">
-                    <strong>{{vm.writter}}</strong> knows nothing.
+                    <strong>{{info.writter}}</strong> {{info.title}}
                     <div class="row">
                         <div class="col col-50">
-                        <a class="image"><img ng-src="https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/style-dress%2FChic.jpg?alt=media&token=8a751291-3a84-4f99-b282-836f20b56364"></a>
+                        <a class="image"><img ng-src="{{info.img1}}"></a>
                         </div>
                         <div class="col col-50">
-                        <a class="image"><img ng-src="https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/style-dress%2Fbag.jpg?alt=media&token=d917fa38-6ffe-46d3-a5e5-bc94bbb16c73"></a>
+                        <a class="image"><img ng-src="{{info.img2}}"></a>
                         </div>
                     </div>                    
                     <div class="card-footer text-right">
-                        <i class="icon ion-chatbubbles positive"></i>{{vm.comments}}
-                        <i class="icon ion-heart assertive"></i>{{vm.likes}}
+                        <i class="icon ion-chatbubbles positive"></i>{{info.comments.length}}
+                        <i class="icon ion-heart assertive"></i>{{info.likes}}
                         <div class="pull-left">
-                            <i class="icon ion-clock"></i> just now
+                            <i class="icon ion-clock"></i> {{info.timestamp}}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+<!--
+
+    <div>
+        <img ng-src="{{bgImg}}">
+    </div>
+
         <div class="item card-item">
             <div ui-sref="app.matchDetail" class="card stable-bg ink ink-dark">
                 <div class="item item-text-wrap">
@@ -69,7 +72,7 @@
             <button ui-sref="app.profile" class="button">Profile</button>
             <button ui-sref="app.join" class="button">join</button>
             <button ui-sref="app.matchDetail" class="button">Match Detail</button>
-        </div>
+        </div>-->
 
 
   </ion-content>
