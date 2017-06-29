@@ -79,7 +79,7 @@ angular.module('starter.router', ['ionic'])
         views: {
             'menuContent': {
                 templateUrl: 'templates/photoUpload.html',
-                controller: 'photoUpload'
+                controller: 'photoUploadCtrl'
             }
         }
     })

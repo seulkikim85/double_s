@@ -356,13 +356,17 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('photoUploadCaption', function($scope,$ionicHistory) {
+.controller('photoUploadCaptionCtrl', function($scope,$ionicHistory) {
       $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
         var histroyBack = $ionicHistory.backView();
         if(histroyBack && histroyBack.stateName == 'app.photoUpload' )
             viewData.enableBack = true;        
     });
 })
+
+//.controller('photoUploadCaptionCtrl', function() {
+      
+//})
 
 .controller('matchDetailCtrl', function($scope,$ionicHistory) {
     // force back button
