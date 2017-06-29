@@ -364,9 +364,6 @@ angular.module('starter.controllers', [])
     });
 })
 
-//.controller('photoUploadCaptionCtrl', function() {
-      
-//})
 
 .controller('matchDetailCtrl', function($scope,$ionicHistory) {
     // force back button
