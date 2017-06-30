@@ -1,30 +1,43 @@
-<ion-view view-title="Photo Upload">
+<ion-modal-view view-title="Photo Upload">
+
+    <ion-header-bar align-title="center" class="bar-dark nav-title-slide-ios7">
+        <h1 class="title">Upload Content</h1>
+        <div class="buttons">
+            <button class="button button-icon button-clear ion-close" ng-click="closeModal()"></button>
+        </div>
+    </ion-header-bar>
+
     <ion-content ng-class="{expanded:isExpanded}" class="has-header">
-  
-<br>
-<br><br>
 
-<div class="card">
-   <div class="item item-avatar">
-      <img src="https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/avartar%2Fface.jpg?alt=media&token=d0961391-b210-42cc-a012-3245f1587525">
-         <strong>{{vm.writter}}</strong>
-   </div>
+        <div class="card">
+            <div class="item item-avatar">
+                <img src="https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/avartar%2Fface.jpg?alt=media&token=d0961391-b210-42cc-a012-3245f1587525">
+                <strong>{{vm.form.writter}}</strong>
+            </div>
 
-   <div class="item item-body">
-      <img class="full-image" src="{{vm.photo}}">
-   </div>
+            <div class="item item-body">
+                <input style="display:none" id="idFile" name="idFile" type="file" file-change handler="fileSelect(files)" >
+                <img class="full-image" ng-src='{{vm.form.imgPath || "img/upload_bg.jpg"}}' ng-click="vm.selectPhoto()">
+            </div>
 
-<div class="list inset">
-   <label class="item item-input item-stacked-label">
-   <span class="input-label">Title</span>
-   <input type="text" placeholder="Write a title.">
-   </label>
 
-   <label class="item item-input item-stacked-label">
-   <span class="input-label">Caption</span>
-   <input type="text" placeholder="Write a caption.">
-   </label>
-  
-   <br><br>
-</div>
-</ion-view>
+            <div class="list inset">
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Title</span>
+                <input type="text" ng-model="vm.form.title" placeholder="Write a title.">
+                </label>
+
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Caption</span>
+                <input type="text" ng-model="vm.form.caption" placeholder="Write a caption.">
+                </label>
+            </div>
+
+            <div class="item">
+                <button class="button button-positive button-block" ng-click="vm.Submit()">
+                    Submit
+                </button>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>

@@ -1,74 +1,54 @@
 <ion-view view-title="Weekly New">
 
-    <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
-        <div class="list half">
-            <div ui-sref="app.weeklyDetail" class="card card-gallery item item-text-wrap">
+    <ion-content ng-class="{expanded:isExpanded}">
+        <div class="content_left list half">
+
+            <div ui-sref="app.weeklyDetail" class="card card-gallery item item-text-wrap" ng-repeat="info in vm.list_left | orderObjectBy :'sort':true">
                 <div class="ink dark-bg">
-                    <h2>How's a scarf?</h2>
-                    <img class="full-image" src="https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/style-dress%2Fbag.jpg?alt=media&token=d917fa38-6ffe-46d3-a5e5-bc94bbb16c73">
+                    <h2>{{info.title}}</h2>
+                    <img class="full-image" ng-src='{{info.imgPath || "img/mannequin.jpg"}}'>
                 </div>
                 <div class="item tabs tabs-secondary tabs-icon-left">
                     <a class="tab-item stable-bg assertive">
                         <i class="icon ion-heart"></i>
-                        4
+                        {{info.like}}
                     </a>
                     <a class="tab-item stable-bg positive-900">
                         <i class="icon ion-chatbubbles"></i>
-                        2
+                        {{info.comments.length}}
                     </a>
                 </div>
             </div>
-            <div ui-sref="app.weeklyDetail" class="card card-gallery item item-text-wrap">
-                <div class="ink dark-bg">
-                    <h2>Looks so cute!!!</h2>
-                    <img class="full-image" src="https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/style-dress%2Fhat.jpg?alt=media&token=5814b47a-8b97-4728-9ccf-7b47b51a0e2d">
-                </div>
-                <div class="item tabs tabs-secondary tabs-icon-left">
-                    <a class="tab-item stable-bg assertive">
-                        <i class="icon ion-heart"></i>
-                        6
-                    </a>
-                    <a class="tab-item stable-bg positive-900">
-                        <i class="icon ion-chatbubbles"></i>
-                        1
-                    </a>
-                </div>
-            </div>
+
         </div>
-        <div class="list half">
-            <div ui-sref="app.weeklyDetail" class="card card-gallery item item-text-wrap">
+        <div class="list half content_right">
+            <div ui-sref="app.weeklyDetail" class="card card-gallery item item-text-wrap" ng-repeat="info in vm.list_right | orderObjectBy :'sort':true">
                 <div class="ink dark-bg">
-                    <h2>Simmilar but different?</h2>
-                    <img class="full-image" src="https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/style-dress%2Ffour.png?alt=media&token=6f73c251-d543-40d8-96e5-9b1afcd36f62">
+                    <h2>{{info.title}}</h2>
+                    <img class="full-image" ng-src='{{info.imgPath || "img/mannequin.jpg"}}'>
                 </div>
                 <div class="item tabs tabs-secondary tabs-icon-left">
                     <a class="tab-item stable-bg assertive">
                         <i class="icon ion-heart"></i>
-                        22
+                        {{info.like}}
                     </a>
                     <a class="tab-item stable-bg positive-900">
                         <i class="icon ion-chatbubbles"></i>
-                        9
+                        {{info.comments.length}}
                     </a>
                 </div>
             </div>
-            <div ui-sref="app.weeklyDetail" class="card card-gallery item item-text-wrap">
-                <div class="ink dark-bg">
-                    <h2>Awesome!</h2>
-                    <img class="full-image" src="https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/style-dress%2FChic.jpg?alt=media&token=8a751291-3a84-4f99-b282-836f20b56364">
-                </div>
-                <div class="item tabs tabs-secondary tabs-icon-left">
-                    <a class="tab-item stable-bg assertive">
-                        <i class="icon ion-heart"></i>
-                        8
-                    </a>
-                    <a class="tab-item stable-bg positive-900">
-                        <i class="icon ion-chatbubbles"></i>
-                        0
-                    </a>
-                </div>
-            </div>
+            
         </div>
     </ion-content>
+  <div class="float-button">
+      <span class="height-fix">
+
+            <input style="display:none" id="idFile" name="idFile" type="file" file-change handler="fileSelect(files)" >
+            <a class="content">
+                <i class="ion-ios-arrow-up" ng-click="UploadContent()"></i>
+          </a>
+      </span>     
+  </div>
 
 </ion-view>
