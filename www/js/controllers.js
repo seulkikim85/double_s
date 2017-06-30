@@ -11,6 +11,8 @@ angular.module('starter.controllers', [])
     $scope.isExpanded = false;
     $scope.hasHeaderFabLeft = false;
     $scope.hasHeaderFabRight = false;
+    //seulki
+    $scope.weeklyData = {};
 
     var navIcons = document.getElementsByClassName('ion-navicon');
     for (var i = 0; i < navIcons.length; i++) {
@@ -392,8 +394,78 @@ angular.module('starter.controllers', [])
     
 })
 
-.controller('photoUploadCtrl', function() {
+.controller('photoUploadCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, $ionicLoading, $rootScope) {
+
+
+
+        var storage = firebase.storage();
+
+
+    // Activate ink for controller
+    ionicMaterialInk.displayEffect();
+
+    var vm = $scope.vm = {
+        list: []
+    };
+
     
+    $scope.clickWeeklyUpload = function(user) {
+        console.log('click WeeklyUpload',user);
+        
+    }
+
+    // sync list
+    var ref = firebase.database().ref('/');
+    ref.child("weekly").on('child_added', function (snapshot) {
+        var info = snapshot.val();
+        vm.list.push(info);
+    });
+
+    $scope.UploadContent = function() {
+        console.log('UploadContent');
+        //document.getElementById("idFile").click();
+
+
+        var newContent ={
+                owner: $rootScope.currentUser.uid,
+                writter: $rootScope.currentUser.email,
+                title: 'new title',
+                caption: 'new Caption',
+                img1: 'https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/style-dress%2Fhat.jpg?alt=media&token=5814b47a-8b97-4728-9ccf-7b47b51a0e2d',
+        
+                
+                timestamp: Date.now() 
+            };
+
+        var ref = firebase.database().ref('/');
+        ref.child("weekly").push().set(newContent);
+        
+    }
+
+
+        uploadTask.on('state_changed', function(snapshot){
+        // Observe state change events such as progress, pause, and resume
+        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log('Upload is ' + progress + '% done');
+        switch (snapshot.state) {
+            case firebase.storage.TaskState.PAUSED: // or 'paused'
+                console.log('Upload is paused');
+            break;
+            case firebase.storage.TaskState.RUNNING: // or 'running'
+                console.log('Upload is running');
+            break;
+        }
+        }, function(error) {
+            // Handle unsuccessful uploads
+        }, function() {
+            // Handle successful uploads on complete
+            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+            $scope.bgImg = uploadTask.snapshot.downloadURL;
+            $ionicLoading.hide();
+        });        
+    
+ 
 })
 
 .controller('FriendsCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {

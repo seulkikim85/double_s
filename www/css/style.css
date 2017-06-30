@@ -116,3 +116,26 @@ z-index: 1000;
     line-height: 5px !important;
     min-height: 20px !important;
 }
+
+/* File upload
+==================================*/
+
+.grid-full ion-row {
+  height: 100%;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.grid-full ion-col {
+  flex: 0 0 50%;
+  max-width: 50%;
+  text-align: center;
+  padding: 10px 5px;
+}
+
+.cell-1 {
+  background-color: #C5DCFC;
+}
+.cell-2 {
+  background-color: #262B69;
+}

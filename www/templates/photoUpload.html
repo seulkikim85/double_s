@@ -4,27 +4,41 @@
 <br>
 <br><br>
 
+
 <div class="card">
    <div class="item item-avatar">
       <img src="https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/avartar%2Fface.jpg?alt=media&token=d0961391-b210-42cc-a012-3245f1587525">
          <strong>{{vm.writter}}</strong>
    </div>
 
-   <div class="item item-body">
-      <img class="full-image" src="{{vm.photo}}">
-   </div>
+
+
+<ion-content class="grid-full">
+
+  <ion-row>
+    <ion-col-50 class="cell-1">
+      Photo
+    </ion-col>
+    <ion-col-50 class="cell-2">
+      photo
+    </ion-col>
+
+</ion-content>
+ 
 
 <div class="list inset">
    <label class="item item-input item-stacked-label">
    <span class="input-label">Title</span>
-   <input type="text" placeholder="Write a title.">
+   <input type="text" ng-model="weeklyData.weeklyTitle" placeholder="Write a title.">
    </label>
 
    <label class="item item-input item-stacked-label">
    <span class="input-label">Caption</span>
-   <input type="text" placeholder="Write a caption.">
+   <input type="text" ng-model="weeklyData.weeklyCaption"placeholder="Write a caption.">
    </label>
   
    <br><br>
 </div>
+ <button class="button button-block button-stable" ng-click="clickWeeklyUpload(weeklyData)">Save</button>
+
 </ion-view>
