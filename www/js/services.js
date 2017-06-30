@@ -1,5 +1,22 @@
 angular.module('starter.services', [])
 
+//////////////////////////////////////////////////////////////////////////////////
+.filter('orderObjectBy', function () {
+    return function (items, field, ascending) {
+        var filtered = [];
+        angular.forEach(items, function (item) {
+            filtered.push(item);
+        });
+        filtered.sort(function (a, b) {
+            return (a[field] > b[field] ? 1 : -1);
+        });
+        if (!ascending) 
+            filtered.reverse();
+        return filtered;
+    };
+})
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 .factory('UserService',[ '$q', '$ionicLoading', '$ionicPopup'
 ,function( $q, $ionicLoading, $ionicPopup) {
     var ref = firebase.database().ref('/');
@@ -78,7 +95,10 @@ angular.module('starter.services', [])
     return self;
 }])
 
-.factory('WeeklyService',[ '$q', '$ionicLoading', '$ionicPopup'
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+.factory('MatchService',[ '$q', '$ionicLoading', '$ionicPopup'
 ,function( $q, $ionicLoading, $ionicPopup) {
     var ref = firebase.database().ref('/');
 
@@ -91,7 +111,7 @@ angular.module('starter.services', [])
 
 
     function getAll() {
-        ref.child('weekly')
+        ref.child('matching')
         .on('child_added',function(snap){
             self.all[snap.key] = snap.val();
         });
@@ -101,9 +121,53 @@ angular.module('starter.services', [])
 
     }
 }])
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+.factory('WeeklyService',[ '$q', '$ionicLoading', '$ionicPopup'
+,function( $q, $ionicLoading, $ionicPopup) {
+    var ref = firebase.database().ref('/');
+
+    var self = {
+        list_left: [],
+        list_right: [],
+        upload: upload
+    }
+
+    getAll();
 
 
+    function getAll() {
+        ref.child('weekly')
+        .on('child_added',function(snap){
+            var info = snap.val();
+            info.sort = info.key;
+            console.log('weekly item',info);
+            if(self.list_left.length > self.list_right.length)
+                self.list_right.push(info);
+            else
+                self.list_left.push(info);
+        });
+    }
+
+    function upload(form) {
+        var deferred = $q.defer();
+        $ionicLoading.show('Saving...');
+        var ref = firebase.database().ref('/');
+        ref.child("weekly").push().set(form)
+        .then(function(){
+            console.log('save complete');
+            $ionicLoading.hide();
+            deferred.resolve();
+        });
+        return deferred.promise;
+    }
+
+    return self;
+}])
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 .factory('PhotoService',[ '$log','$q','Firebase', '$cordovaCamera','$ionicLoading'
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 ,function PhotoService ($log, $q, Firebase, $cordovaCamera, $ionicLoading) {
         var self = {};
 
