@@ -3,22 +3,7 @@
 
 var ctrlModule = angular.module('starter.controllers', []);
     
-ctrlModule.directive('fileChange', function() {
-    return {
-     restrict: 'A',
-     scope: {
-       handler: '&'
-     },
-     link: function (scope, element) {
-      element.on('change', function (event) {
-        scope.$apply(function(){
-          scope.handler({files: event.target.files});
-        });
-      });
-     }
-    }
-})
-.controller('photoUploadCaptionCtrl', function($scope,$ionicHistory) {
+ctrlModule.controller('photoUploadCaptionCtrl', function($scope,$ionicHistory) {
       $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
         var histroyBack = $ionicHistory.backView();
         if(histroyBack && histroyBack.stateName == 'app.photoUpload' )
