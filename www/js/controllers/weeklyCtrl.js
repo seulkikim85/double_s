@@ -1,10 +1,10 @@
 
 ctrlModule.controller('weeklyCtrl', ['$scope', '$state', '$rootScope','$stateParams', 
     '$timeout', 'ionicMaterialInk', 'ionicMaterialMotion' ,'$ionicModal',
-    '$ionicLoading','$ionicPopup','WeeklyService'
+    '$ionicLoading','$ionicPopup','WeeklyService','PhotoService','Tools','EventTrigger'
 ,function($scope, $state, $rootScope,$stateParams, 
     $timeout, ionicMaterialInk, ionicMaterialMotion,$ionicModal,
-    $ionicLoading, $ionicPopup, WeeklyService) {
+    $ionicLoading, $ionicPopup, WeeklyService, PhotoService, Tools,EventTrigger) {
 
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -23,21 +23,12 @@ ctrlModule.controller('weeklyCtrl', ['$scope', '$state', '$rootScope','$statePar
     // });
     var storage = firebase.storage();
 
-    function guid() {
-        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-            s4() + '-' + s4() + s4() + s4();
-    }
-
-    function s4() {
-        return Math.floor((1 + Math.random()) * 0x10000)
-            .toString(16)
-            .substring(1);
-    }
-
     var vm = $scope.vm = {
         list_left: WeeklyService.list_left,
         list_right: WeeklyService.list_right,
+        previewer: null,
         form: {
+            avatar: null,
             owner: null,
             writter: null,
             title: '',
@@ -53,20 +44,25 @@ ctrlModule.controller('weeklyCtrl', ['$scope', '$state', '$rootScope','$statePar
             },
             timestamp: firebase.database.ServerValue.TIMESTAMP
         },
+        base64img: null,
         Submit: function() {
-            if(!vm.form.imageRef) {
+            if(!vm.base64img) {
                 $ionicPopup.alert({
                     title: 'Fails',
                     template: 'No Image!'
                 });
                 return;
             }
-            WeeklyService.upload(vm.form)
+            WeeklyService.upload(vm.base64img, vm.form)
             .then(function() {
                 vm.modal.hide();
             });
         }
     }
+      EventTrigger.add('loaded-url-weekly',function(){
+          if(!EventTrigger.isRefreshing())
+              $scope.$apply();
+      });      
     //--------------------------------------------------
     $ionicModal.fromTemplateUrl('templates/photoUploadCaption.html', {
         controller: 'photoUploadCaptionCtrl',
@@ -88,11 +84,18 @@ ctrlModule.controller('weeklyCtrl', ['$scope', '$state', '$rootScope','$statePar
             });
             return;
         }
+
+        vm.base64img = null;
+        vm.form.title = "";
+        vm.form.caption = "";
         vm.form.imageRef = null;
         vm.form.imgPath = null;
+        vm.form.avatar = null;
         vm.form.owner = $rootScope.currentUser.uid;
         vm.form.writter = $rootScope.currentUser.email;
         vm.modal.show();
+        vm.previewer = document.getElementById('previewer');
+        vm.previewer.src = "img/upload_bg.jpg";
     }
     vm.selectPhoto = function() {
         console.log('select Photo');
@@ -100,24 +103,28 @@ ctrlModule.controller('weeklyCtrl', ['$scope', '$state', '$rootScope','$statePar
     }
 
     $scope.fileSelect = function (files) {
-        var file = files[0];
-        console.log('files',files);
-        var path = (window.URL || window.webkitURL).createObjectURL(file);
-        console.log('path', path,document.getElementById("idFile").value);
-        
-        $ionicLoading.show('uploading..');
-        vm.form.imageRef = '/images/weekly/'+guid()+'.png';
-        var uploadTask = storage.ref(vm.form.imageRef).put(file);
+        vm.file = files[0];
+        // console.log('files',files);
+        // var path = (window.URL || window.webkitURL).createObjectURL(vm.file);
+        // console.log('path', path,document.getElementById("idFile").value);
+     
+        $ionicLoading.show('image processing..')
+        PhotoService.LoadOrientationImage(vm.file, function (base64img, value) {
+            if(value == 1) {
+                vm.previewer.src = base64img;
+                vm.base64img = base64img;
+                $ionicLoading.hide();
+            }
+            else {
+                Tools.resetOrientation(base64img,value,function(resetBase64Img){
+                    vm.previewer.src = resetBase64Img;
+                    vm.base64img = resetBase64Img;
+                    $ionicLoading.hide();
+                });
+            }
+        });     
 
-        uploadTask.on('state_changed', function(snapshot){
-        }, function(error) {
-            // Handle unsuccessful uploads
-        }, function() {
-            vm.form.imgPath = uploadTask.snapshot.downloadURL;
-            $ionicLoading.hide();
-        });        
     }
-
 
 
 }]);

@@ -3,10 +3,10 @@
     <ion-content ng-class="has-header">
         <div class="content_left list half">
 
-            <div ui-sref="app.weeklyDetail({id:info.key})" class="card card-gallery item item-text-wrap" ng-repeat="info in vm.list_left | orderObjectBy :'key':true">
+            <div ui-sref="app.weeklyDetail({id:info.key})" class="card card-gallery item item-text-wrap" ng-repeat="info in vm.list_left | orderObjectBy :'key':false">
                 <div class="ink dark-bg">
                     <h2>{{info.title}}</h2>
-                    <img class="full-image" ng-src='{{info.imgPath || "img/mannequin.jpg"}}'>
+                    <img class="full-image" ng-src='{{info.imgPath || "img/ImageLoading.png"}}'>
                 </div>
                 <div class="item tabs tabs-secondary tabs-icon-left">
                     <a class="tab-item stable-bg assertive">
@@ -22,10 +22,10 @@
 
         </div>
         <div class="list half content_right">
-            <div ui-sref="app.weeklyDetail({id:info.key})" class="card card-gallery item item-text-wrap" ng-repeat="info in vm.list_right | orderObjectBy :'key':true">
+            <div ui-sref="app.weeklyDetail({id:info.key})" class="card card-gallery item item-text-wrap" ng-repeat="info in vm.list_right | orderObjectBy :'key':false">
                 <div class="ink dark-bg">
                     <h2>{{info.title}}</h2>
-                    <img class="full-image" ng-src='{{info.imgPath || "img/mannequin.jpg"}}'>
+                    <img class="full-image" ng-src='{{info.imgPath || "img/ImageLoading.png"}}'>
                 </div>
                 <div class="item tabs tabs-secondary tabs-icon-left">
                     <a class="tab-item stable-bg assertive">
