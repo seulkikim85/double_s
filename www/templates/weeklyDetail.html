@@ -1,48 +1,29 @@
 <ion-view view-title="Weekly Detail" name="weeklyDetail-view">
-    <ion-content ng-class="{expanded:isExpanded}" class="has-header">
+    <ion-content class="has-header">
 
-        <div class="item card-item">
+        <div>
             <div class="card stable-bg ink ink-dark">
-                <div class="item item-avatar item-text-wrap">
-                    <span class="avatar" style="background-image: url('{{vm.avatar}}');"></span>
-                    <strong>Sansa Stark</strong> added a gallery <strong>She look so nice style and also</strong> ...
-                </div>
-                <div class="item item-text-wrap">
-                    <a class="image"><img src="{{vm.photo}}">
-                    </a>
-                    <strong>{{vm.writter}}</strong> added a weekly <strong>{{vm.description}}</strong> ...
+                <div class="item item-avatar">
+                    <img ng-src="{{vm.avatar}}">
+                    <h2>{{vm.writter}}</h2>
+                    <p>"{{vm.title}}"</p>
+                </div>                
+                <div class="item item-text-wrap" style="padding-top:0">
+                    <img class="full-image" ng-src="{{vm.imgPath}}">
+                    <strong>{{vm.writter}}</strong> added a weekly <strong>{{vm.caption}}</strong> ...
                     <div class="card-footer text-right">
-                        <i class="icon ion-chatbubble positive"></i> {{vm.comments}}
-                        <i class="icon ion-heart assertive"></i> {{vm.likes}}
+                        <i class="icon ion-chatbubble positive"></i> {{vm.comments.length}}
+                        <i class="icon ion-heart assertive"></i> {{vm.likes|| 0}}
                         
                         <div class="pull-left">
-                            <i class="icon ion-clock"></i>{{vm.timestamp}}
+                            <i class="icon ion-clock"></i>{{vm.when}}
                         </div>
                     </div>
                 </div>
 
-                <div class="item card-item" style="background-color:lightgrey">
-                    <a ui-sref="app.friends" class="item item-avatar item-icon-right">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/emma_stone.jpg?alt=media&token=4786b1a5-6904-4bf8-9624-fb0aa45d5e85">
-                        <h2>Jon Snow</h2>
-                        <p>Da illest illegitimate</p>
-                        <i class="icon ion-chatbubble muted"></i>
-                    </a>
-                    <a ui-sref="app.friends" class="item item-avatar item-icon-right">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/lip.jpg?alt=media&token=594726b2-e763-459d-9502-5fd30fc5d88e">
-                        <h2>Sansa Stark</h2>
-                        <p>&amp; Joffrey <strike>sitting</strike> sat in a tree</p>
-                        <i class="icon ion-chatbubble muted"></i>
-                    </a>
-                    <a ui-sref="app.friends" class="item item-avatar item-icon-right">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/images.jpg?alt=media&token=0d98bdb9-e2d2-41e1-89ac-eec4ccb29f22">
-                        <h2>Tyrion Lannister</h2>
-                        <p>B.A.M.F. imp</p>
-                        <i class="icon ion-chatbubble muted"></i>
-                    </a>
+                <div class="list" style="background-color:lightgrey">
+                    <div comment="citem" ng-repeat="citem in vm.comments"></div>        
                 </div>
-
-
             </div>
 
 

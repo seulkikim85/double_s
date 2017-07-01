@@ -49,9 +49,9 @@ ctrlModule.controller('weeklyCtrl', ['$scope', '$state', '$rootScope','$statePar
                 uuid: '123123',
                 writter: 'writter name',
                 content: 'weefefefefef efefef',
-                timestamp: Date.now() 
+                timestamp: firebase.database.ServerValue.TIMESTAMP
             },
-            timestamp: Date.now() 
+            timestamp: firebase.database.ServerValue.TIMESTAMP
         },
         Submit: function() {
             if(!vm.form.imageRef) {

@@ -66,12 +66,13 @@ angular.module('starter.router', ['ionic'])
     })    
 
     .state('app.weeklyDetail', {
-        url : '/weeklyDetail',
+        url : '/weeklyDetail/:id',
         views: {
             'menuContent': {
                 templateUrl: 'templates/weeklyDetail.html',
                 controller: 'weeklyDetailCtrl'
-            }
+            },
+            params : { id : null } // properties MUST be defined in the to state
         }
     })
     .state('app.photoUpload', {
