@@ -165,6 +165,7 @@ angular.module('starter.services', ['ngCordova'])
                 firebase.storage().ref(info.imageRef).getDownloadURL()
                 .then(function(url){
                     info.imgPath = url;
+                    console.log('image url done',url);
                     EventTrigger.event('loaded-url-weekly');
                 });
             }
