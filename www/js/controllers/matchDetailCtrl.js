@@ -1,4 +1,4 @@
-matchDetailCtrl.controller('matchDetailCtrl', function($scope,$ionicHistory) {
+ctrlModule.controller('matchDetailCtrl', function($scope,$ionicHistory) {
     // force back button
     $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
         var histroyBack = $ionicHistory.backView();
