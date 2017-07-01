@@ -130,6 +130,7 @@ angular.module('starter.services', [])
         list_left: [],
         list_right: [],
         upload: upload,
+        remove: remove, 
         getByKey: function(key) {
             for(var item in self.list_left)
                 if(self.list_left[item].key == key)
@@ -155,6 +156,19 @@ angular.module('starter.services', [])
             else
                 self.list_left.push(info);
         });
+        ref.child('weekly')
+        .on('child_removed',function(oldChildSnapshot){
+            for (var item in self.list_left)
+                if (self.list_left[item].key == oldChildSnapshot.key) {
+                    self.list_left.splice(item,1);
+                    return; 
+                }
+            for (var item in self.list_right)
+                if (self.list_right[item].key == oldChildSnapshot.key) {
+                    self.list_right.splice(item,1);
+                    return; 
+                }
+        });
     }
 
     function upload(form) {
@@ -164,6 +178,19 @@ angular.module('starter.services', [])
         ref.child("weekly").push().set(form)
         .then(function(){
             console.log('save complete');
+            $ionicLoading.hide();
+            deferred.resolve();
+        });
+        return deferred.promise;
+    }
+
+    function remove(key) {
+        var deferred = $q.defer();
+        $ionicLoading.show('deleting...');
+        var ref = firebase.database().ref('/');
+        ref.child("weekly").child(key).remove()
+        .then(function(){
+            console.log('remove complete');
             $ionicLoading.hide();
             deferred.resolve();
         });

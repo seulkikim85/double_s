@@ -1,5 +1,5 @@
 
-ctrlModule.controller('weeklyDetailCtrl', function($scope,$ionicHistory,$stateParams,WeeklyService, Tools) {
+ctrlModule.controller('weeklyDetailCtrl', function($scope,$state,$ionicHistory,$stateParams,$ionicPopover,WeeklyService, Tools) {
 
     var vm = $scope.vm = {};
     // force back button
@@ -37,7 +37,7 @@ ctrlModule.controller('weeklyDetailCtrl', function($scope,$ionicHistory,$statePa
 
         console.log('enter',vm);
     });
-    
+
     $scope.$on('$ionicView.afterEnter', function (event, viewData) {
         var info = WeeklyService.getByKey($stateParams.id);  
         if(null != info) {
@@ -47,10 +47,40 @@ ctrlModule.controller('weeklyDetailCtrl', function($scope,$ionicHistory,$statePa
             vm.caption = info.caption;
             vm.title = info.title;
             vm.likes = info.likes;
+            vm.key = info.key;
             vm.when = Tools.time_ago(new Date(Math.abs(info.timestamp)));
             console.log('enter',vm);
             $scope.$apply();
         }
+    }); 
+
+	 ////////////////////////////////////////////////////////////
+	$ionicPopover.fromTemplateUrl('templates/weekly_popover.html', {
+		scope: $scope,
+		animation: 'slide-in-up'
+	}).then(function(popover) {
+		$scope.popover = popover;
+	});
+
+	$scope.openPopover = function($event, item) {
+		$scope.popdata = { 'item': item };
+		$scope.popover.show($event);
+	}
+
+    $scope.closePopover = function () {
+        $scope.popover.hide();
+    };
+    //Cleanup the popover when we're done with it!
+    $scope.$on('$destroy', function () {
+		console.log("destroy popover!!");
+        $scope.popover.remove();
     });    
 
+    $scope.delete = function(item) {
+        console.log("delete !!",item);
+        WeeklyService.remove(item.key)
+        .then(function(){
+            $state.go('app.main.weekly');
+        });
+    }
 });

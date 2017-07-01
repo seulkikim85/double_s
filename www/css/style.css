@@ -139,3 +139,29 @@ z-index: 1000;
 .cell-2 {
   background-color: #262B69;
 }
+
+/* popover ------------------------*/
+ion-popover-view.fit {
+  height: auto;
+  margin-left: 15%;
+  margin-top: 8%;
+  width: 120px;
+}
+ion-popover-view.fit ion-content {
+  position: relative;
+}
+
+.platform-android ion-popover-view.fit {
+  margin-top: 8%;
+}
+.platform-ios ion-popover-view.fit {
+  margin-top: 8%;
+}
+
+ion-popover-view.fit i.icon::before {
+    font-size: 20px;
+}
+
+.popover-arrow {
+  left: 72px;
+}
