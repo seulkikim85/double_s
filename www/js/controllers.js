@@ -21,6 +21,9 @@ ctrlModule.controller('photoUploadCaptionCtrl', function($scope,$ionicHistory) {
 
 })
 
+.controller('adminCtrl', function() {
+    
+})
 
 .controller('GalleryCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
     $scope.$parent.showHeader();

@@ -134,6 +134,16 @@ angular.module('starter.router', ['ionic'])
         }
     })
 
+.state('app.main.admin', {
+        url: '/admin',
+        views: {
+            'weekly-tab': {
+                templateUrl: 'templates/admin.html',
+                controller: 'adminCtrl'
+            }
+        }
+    })
+    
     .state('app.profile', {
         url: '/profile',
         views: {

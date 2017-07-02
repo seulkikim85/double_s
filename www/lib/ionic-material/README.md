@@ -76,7 +76,7 @@ In your controllers:
 - `ionicMaterialMotion.ripple()` (etc.)
 
 ## Sample App
-Ionic demo app "Thronester" is found within './demo' - You can also run 'index.html' locally to view in a webkit browser on a computer.
+Ionic demo app "" is found within './demo' - You can also run 'index.html' locally to view in a webkit browser on a computer.
 
 ## Builds
 Instructions:
