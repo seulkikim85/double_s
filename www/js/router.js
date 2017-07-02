@@ -34,7 +34,16 @@ angular.module('starter.router', ['ionic'])
     })
 
 // Each tab has its own nav history stack:
- 
+ .state('app.main.admin', {
+        url: '/admin',
+        views: {
+            'weekly-tab': {
+                templateUrl: 'templates/admin.html',
+                controller: 'adminCtrl'
+            }
+        }
+    })
+    
     .state('app.main.weekly', {
         url: '/weekly',
         views: {
@@ -134,16 +143,7 @@ angular.module('starter.router', ['ionic'])
         }
     })
 
-.state('app.main.admin', {
-        url: '/admin',
-        views: {
-            'weekly-tab': {
-                templateUrl: 'templates/admin.html',
-                controller: 'adminCtrl'
-            }
-        }
-    })
-    
+
     .state('app.profile', {
         url: '/profile',
         views: {
