@@ -34,16 +34,7 @@ angular.module('starter.router', ['ionic'])
     })
 
 // Each tab has its own nav history stack:
- .state('app.main.admin', {
-        url: '/admin',
-        views: {
-            'weekly-tab': {
-                templateUrl: 'templates/admin.html',
-                controller: 'adminCtrl'
-            }
-        }
-    })
-    
+ 
     .state('app.main.weekly', {
         url: '/weekly',
         views: {
@@ -153,6 +144,24 @@ angular.module('starter.router', ['ionic'])
             },
             'fabContent': {
                 template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-plus"></i></button>',
+                controller: function ($timeout) {
+                    /*$timeout(function () {
+                        document.getElementById('fab-profile').classList.toggle('on');
+                    }, 800);*/
+                }
+            }
+        }
+    })
+
+     .state('app.admin', {
+        url: '/admin',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/admin.html',
+                controller: 'adminCtrl'
+            },
+            'fabContent': {
+                template: '<button id="fab-admin" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-plus"></i></button>',
                 controller: function ($timeout) {
                     /*$timeout(function () {
                         document.getElementById('fab-profile').classList.toggle('on');
