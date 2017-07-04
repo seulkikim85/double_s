@@ -14,11 +14,17 @@
                 <img ng-src='{{vm.form.avatar || "img/avatar/blank.png"}}'>
                 <strong>{{vm.form.writter}}</strong>
             </div>
-
-            <div class="item item-body">
-                <input style="display:none" id="idFile" name="idFile" type="file" file-change handler="fileSelect(files)" >
-                <img class="full-image" id="previewer" ng-src='{{vm.form.imgPath || "img/upload_bg.jpg"}}' ng-click="vm.selectPhoto()">
-            </div>
+           
+           <div class="row">
+                        <div class="col col-50">
+                        <input style="display:none" id="idFile" name="idFile" type="file" file-change handler="fileSelect(files)" >
+                        <img class="full-image" id="previewer" ng-src='{{vm.form.imgPath || "img/upload_bg.jpg"}}' ng-click="vm.selectPhoto()"> 
+                        </div>
+                        <div class="col col-50">
+                        <input style="display:none" id="idFile" name="idFile" type="file" file-change handler="fileSelect(files)" >
+                        <img class="full-image" id="previewer" ng-src='{{vm.form.imgPath || "img/upload_bg.jpg"}}' ng-click="vm.selectPhoto()"> 
+                        </div>
+                    </div>    
 
 
             <div class="list inset">

@@ -136,7 +136,7 @@ angular.module('starter.services', ['ngCordova'])
         .on('child_added',function(snap){
         var info = snap.val();
             info.key = snap.key;
-            //console.log('weekly item',info);
+           
             if(info.imageRef && !info.imgPath) {
                 firebase.storage().ref(info.imageRef).getDownloadURL()
                 .then(function(url){
