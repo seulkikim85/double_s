@@ -1,90 +1,120 @@
-ctrlModule.controller('matchingCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, $ionicLoading, $rootScope) {
-    var storage = firebase.storage();
+ctrlModule.controller('matchingCtrl', ['$scope', '$state', '$rootScope','$stateParams', 
+    '$timeout', 'ionicMaterialInk', 'ionicMaterialMotion' ,'$ionicModal',
+    '$ionicLoading','$ionicPopup','WeeklyService','PhotoService','Tools','EventTrigger'
 
-    
-    storage.ref("/images/test.jpg").getDownloadURL()
-    .then(function(url) {
-        $scope.bgImg = url;
-        console.log(url);
-    });
+, function($scope, $state, $rootScope, $stateParams, $timeout, ionicMaterialInk, $ionicMaterialMotion, $ionicModal,$ionicLoading,$ionicPopup, WeeklyService, PhotoService, Tools,EventTrigger)  {
 
-    // Activate ink for controller
+
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    $scope.isExpanded = true;
+    $scope.$parent.setExpanded(true);
+    $scope.$parent.setHeaderFab(false);
+
     ionicMaterialInk.displayEffect();
 
-    var vm = $scope.vm = {
-        list: []
-    };
+    var storage = firebase.storage();
 
-    // sync list
-    var ref = firebase.database().ref('/');
-    ref.child("matching").on('child_added', function (snapshot) {
-        var info = snapshot.val();
-        vm.list.push(info);
+     var vm = $scope.vm = {
+        list_left: MatchService.list_left,
+        list_right: MatchService.list_right,
+        previewer: null,
+        form: {
+            avatar: null,
+            owner: null,
+            writter: null,
+            title: '',
+            caption: '',
+            imageRef: null,
+            imgPath: null,
+            like2: 0,
+            comments: {
+                uuid: '123123',
+                writter: 'writter name',
+                content: 'weefefefefef efefef',
+                timestamp: firebase.database.ServerValue.TIMESTAMP
+            },
+            timestamp: firebase.database.ServerValue.TIMESTAMP
+        },
+        base64img: null,
+        Submit: function() {
+            if(!vm.base64img) {
+                $ionicPopup.alert({
+                    title: 'Fails',
+                    template: 'No Image!'
+                });
+                return;
+            }
+            MatchService.upload(vm.base64img, vm.form)
+            .then(function() {
+                vm.modal.hide();
+            });
+        }
+    }
+      EventTrigger.add('loaded-url-matching',function(){
+          if(!EventTrigger.isRefreshing())
+              $scope.$apply();
+      });   
+
+     //-----------------------------------------------------
+
+      $ionicModal.fromTemplateUrl('templates/photoUpload.html', {
+        controller: 'photoUploadCtrl',
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function(modal) {
+        vm.modal = modal;
     });
-
+    
+    $scope.closeModal = function() {
+        vm.modal.hide();
+    }
     $scope.UploadContent = function() {
         console.log('UploadContent');
-        //document.getElementById("idFile").click();
-
         if(!$rootScope.currentUser) {
-            alert('Need Login');
+            $ionicPopup.alert({
+                title: 'Required Authentication!!',
+                template: 'Log in Please!!'
+            });
             return;
         }
 
-        var newContent ={
-                owner: $rootScope.currentUser.uid,
-                writter: $rootScope.currentUser.email,
-                title: 'new title',
-                caption: 'new Caption',
-                img1: 'https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/style-dress%2Fhat.jpg?alt=media&token=5814b47a-8b97-4728-9ccf-7b47b51a0e2d',
-                img2: 'https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/style-dress%2Fbag.jpg?alt=media&token=d917fa38-6ffe-46d3-a5e5-bc94bbb16c73',
-                like2: 0,
-                comments: {
-                    uuid: '123123',
-                    writter: 'writter name',
-                    content: 'weefefefefef efefef',
-                    timestamp: Date.now() 
-                },
-                timestamp: Date.now() 
-            };
-
-        var ref = firebase.database().ref('/');
-        ref.child("matching").push().set(newContent);
-        
+        vm.base64img = null;
+        vm.form.title = "";
+        vm.form.caption = "";
+        vm.form.imageRef = null;
+        vm.form.imgPath = null;
+        vm.form.avatar = null;
+        vm.form.owner = $rootScope.currentUser.uid;
+        vm.form.writter = $rootScope.currentUser.email;
+        vm.modal.show();
+        vm.previewer = document.getElementById('previewer');
+        vm.previewer.src = "img/upload_bg.jpg";
+    }
+    vm.selectPhoto = function() {
+        console.log('select Photo');
+        document.getElementById("idFile").click();
     }
 
     $scope.fileSelect = function (files) {
-        var file = files[0];
-        console.log('files',files);
-        var path = (window.URL || window.webkitURL).createObjectURL(file);
-        console.log('path', path,document.getElementById("idFile").value);
-        
-        
-        $ionicLoading.show('uploading..');
-        var uploadTask = storage.ref('/images/test.jpg').put(file);
+        vm.file = files[0];
+      
+        $ionicLoading.show('image processing..')
+        PhotoService.LoadOrientationImage(vm.file, function (base64img, value) {
+            if(value == 1) {
+                vm.previewer.src = base64img;
+                vm.base64img = base64img;
+                $ionicLoading.hide();
+            }
+            else {
+                Tools.resetOrientation(base64img,value,function(resetBase64Img){
+                    vm.previewer.src = resetBase64Img;
+                    vm.base64img = resetBase64Img;
+                    $ionicLoading.hide();
+                });
+            }
+        });     
 
-        uploadTask.on('state_changed', function(snapshot){
-        // Observe state change events such as progress, pause, and resume
-        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log('Upload is ' + progress + '% done');
-        switch (snapshot.state) {
-            case firebase.storage.TaskState.PAUSED: // or 'paused'
-                console.log('Upload is paused');
-            break;
-            case firebase.storage.TaskState.RUNNING: // or 'running'
-                console.log('Upload is running');
-            break;
-        }
-        }, function(error) {
-            // Handle unsuccessful uploads
-        }, function() {
-            // Handle successful uploads on complete
-            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-            $scope.bgImg = uploadTask.snapshot.downloadURL;
-            $ionicLoading.hide();
-        });        
     }
-    
 
-});
+}]);

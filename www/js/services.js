@@ -108,13 +108,24 @@ angular.module('starter.services', ['ngCordova'])
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
-.factory('MatchService',[ '$q', '$ionicLoading', '$ionicPopup'
-,function( $q, $ionicLoading, $ionicPopup) {
+.factory('MatchService',[ '$q', '$ionicLoading', '$ionicPopup', 'PhotoService', 'EventTrigger'
+,function( $q, $ionicLoading, $ionicPopup, PhotoService, EventTrigger) {
     var ref = firebase.database().ref('/');
 
     var self = {
-        all: {},
-        upload: upload
+        list_left: [],
+        list_right: [],
+        upload: upload,
+        remove: remove, 
+        getByKey: function(key) {
+            for(var item in self.list_left)
+                if(self.list_left[item].key == key)
+                    return self.list_left[item];
+            for(var item in self.list_right)
+                if(self.list_right[item].key == key)
+                    return self.list_right[item];
+            return null;
+        }
     }
 
     getAll();
@@ -123,13 +134,79 @@ angular.module('starter.services', ['ngCordova'])
     function getAll() {
         ref.child('matching')
         .on('child_added',function(snap){
-            self.all[snap.key] = snap.val();
+        var info = snap.val();
+            info.key = snap.key;
+            //console.log('weekly item',info);
+            if(info.imageRef && !info.imgPath) {
+                firebase.storage().ref(info.imageRef).getDownloadURL()
+                .then(function(url){
+                    info.imgPath = url;
+                    console.log('image url done',url);
+                    EventTrigger.event('loaded-url-matching');
+                });
+            }
+            if(self.list_left.length > self.list_right.length)
+                self.list_right.push(info);
+            else
+                self.list_left.push(info);
+        });
+
+        ref.child('matching')
+        .on('child_removed',function(oldChildSnapshot){
+            for (var item in self.list_left)
+                if (self.list_left[item].key == oldChildSnapshot.key) {
+                    self.list_left.splice(item,1);
+                    return; 
+                }
+            for (var item in self.list_right)
+                if (self.list_right[item].key == oldChildSnapshot.key) {
+                    self.list_right.splice(item,1);
+                    return; 
+                }
         });
     }
 
-    function upload() {
+    function upload(base64img, form) {
+
+         var deferred = $q.defer();
+
+        form.imageRef = '/images/matching/'+guid()+'.jpg';
+
+        $ionicLoading.show('Image uploading..')
+        PhotoService.UpdateImageFromBase64(form.imageRef,base64img.split(',')[1])
+        .then(function(){
+            $ionicLoading.hide();
+
+            $ionicLoading.show('Saving...');
+            var ref = firebase.database().ref('/');
+            ref.child("matching").push().set(form)
+            .then(function(){
+                console.log('save complete');
+                $ionicLoading.hide();
+                deferred.resolve();
+            });
+
+        });
+        
+        return deferred.promise;
 
     }
+
+     function remove(key) {
+        var deferred = $q.defer();
+        $ionicLoading.show('deleting...');
+        var ref = firebase.database().ref('/');
+        ref.child("matching").child(key).remove()
+        .then(function(){
+            console.log('remove complete');
+            $ionicLoading.hide();
+            deferred.resolve();
+        });
+        return deferred.promise;
+    }
+
+    return self;
+
 }])
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 .factory('WeeklyService',[ '$q', '$ionicLoading', '$ionicPopup','PhotoService','EventTrigger'
