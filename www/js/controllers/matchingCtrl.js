@@ -1,6 +1,6 @@
 ctrlModule.controller('matchingCtrl', ['$scope', '$state', '$rootScope','$stateParams', 
     '$timeout', 'ionicMaterialInk', 'ionicMaterialMotion' ,'$ionicModal',
-    '$ionicLoading','$ionicPopup','WeeklyService','PhotoService','Tools','EventTrigger'
+    '$ionicLoading','$ionicPopup','MatchService','PhotoService','Tools','EventTrigger'
 
 , function($scope, $state, $rootScope, $stateParams, $timeout, ionicMaterialInk, $ionicMaterialMotion, $ionicModal,$ionicLoading,$ionicPopup, WeeklyService, PhotoService, Tools,EventTrigger)  {
 
@@ -25,8 +25,10 @@ ctrlModule.controller('matchingCtrl', ['$scope', '$state', '$rootScope','$stateP
             writter: null,
             title: '',
             caption: '',
-            imageRef: null,
-            imgPath: null,
+            image1Ref: null,
+            img1Path: null,
+            image2Ref: null,
+            img2Path: null,
             like2: 0,
             comments: {
                 uuid: '123123',
