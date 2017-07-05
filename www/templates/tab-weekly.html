@@ -1,7 +1,7 @@
 <ion-view view-title="Weekly New">
 
-    <ion-content ng-class="has-header">
-        <div class="content_left list half">
+    <ion-content ng-class="has-header" has-bouncing="true">
+        <div class="list half">
 
             <div ui-sref="app.weeklyDetail({id:info.key})" class="card card-gallery item item-text-wrap" ng-repeat="info in vm.list_left | orderObjectBy :'key':false">
                 <div class="ink dark-bg">
