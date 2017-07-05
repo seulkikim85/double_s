@@ -109,7 +109,7 @@ ctrlModule.controller('matchingCtrl', ['$scope','MatchService','EventTrigger','$
 
         $ionicLoading.show('image processing..')
         PhotoService.LoadOrientationImage(vm.file1, function (base64img, value) {
-            if (value == 1) {
+            if (value == 1 || true) {
                 vm.previewer1.src = base64img;
                 vm.base64img1 = base64img;
                 $ionicLoading.hide();
@@ -130,7 +130,7 @@ ctrlModule.controller('matchingCtrl', ['$scope','MatchService','EventTrigger','$
 
         $ionicLoading.show('image processing..')
         PhotoService.LoadOrientationImage(vm.file2, function (base64img, value) {
-            if (value == 1) {
+            if (value == 1 || true) {
                 vm.previewer2.src = base64img;
                 vm.base64img2 = base64img;
                 $ionicLoading.hide();
