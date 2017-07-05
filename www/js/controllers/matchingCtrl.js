@@ -1,7 +1,7 @@
 ctrlModule.controller('matchingCtrl', ['$scope','MatchService','EventTrigger','$ionicModal'
-,'$rootScope','PhotoService','$ionicLoading','$ionicPopup'
+,'$rootScope','PhotoService','$ionicLoading','$ionicPopup', 'Tools'
 , function($scope,MatchService,EventTrigger,$ionicModal,$rootScope
-, PhotoService,$ionicLoading,$ionicPopup ) {
+, PhotoService,$ionicLoading,$ionicPopup,Tools ) {
 
     // $scope.$parent.showHeader();
     // $scope.$parent.clearFabs();
