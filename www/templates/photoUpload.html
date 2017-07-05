@@ -17,12 +17,12 @@
            
            <div class="row">
                         <div class="col col-50">
-                        <input style="display:none" id="idFile" name="idFile" type="file" file-change handler="fileSelect(files)" >
-                        <img class="full-image" id="previewer" ng-src='{{vm.form.imgPath || "img/upload_bg.jpg"}}' ng-click="vm.selectPhoto()"> 
+                        <input style="display:none" id="idFile1" name="idFile1" type="file" file-change handler="fileSelect1(files)" >
+                        <img class="full-image" id="previewer1" ng-src='{{vm.form.imgPath1 || "img/upload_bg.jpg"}}' ng-click="vm.selectPhoto('idFile1')"> 
                         </div>
                         <div class="col col-50">
-                        <input style="display:none" id="idFile" name="idFile" type="file" file-change handler="fileSelect(files)" >
-                        <img class="full-image" id="previewer" ng-src='{{vm.form.imgPath || "img/upload_bg.jpg"}}' ng-click="vm.selectPhoto()"> 
+                        <input style="display:none" id="idFile2" name="idFile2" type="file" file-change handler="fileSelect2(files)" >
+                        <img class="full-image" id="previewer2" ng-src='{{vm.form.imgPath2 || "img/upload_bg.jpg"}}' ng-click="vm.selectPhoto('idFile2')"> 
                         </div>
                     </div>    
 

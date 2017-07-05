@@ -8,10 +8,10 @@
                     <strong>{{info.writter}}</strong> {{info.title}}
                     <div class="row">
                         <div class="col col-50">
-                        <a class="image"><img ng-src="{{info.img1}}"></a>
+                        <a class="image"><img ng-src='{{info.imgPath1 || "img/ImageLoading.png"}}'></a>
                         </div>
                         <div class="col col-50">
-                        <a class="image"><img ng-src="{{info.img2}}"></a>
+                        <a class="image"><img ng-src='{{info.imgPath2 || "img/ImageLoading.png"}}'></a>
                         </div>
                     </div>                    
                     <div class="card-footer text-right">

@@ -113,17 +113,13 @@ angular.module('starter.services', ['ngCordova'])
     var ref = firebase.database().ref('/');
 
     var self = {
-        list_left: [],
-        list_right: [],
+        list: [],
         upload: upload,
         remove: remove, 
         getByKey: function(key) {
-            for(var item in self.list_left)
-                if(self.list_left[item].key == key)
-                    return self.list_left[item];
-            for(var item in self.list_right)
-                if(self.list_right[item].key == key)
-                    return self.list_right[item];
+            for(var item in self.list)
+                if(self.list[item].key == key)
+                    return self.list[item];
             return null;
         }
     }
@@ -137,57 +133,60 @@ angular.module('starter.services', ['ngCordova'])
         var info = snap.val();
             info.key = snap.key;
            
-            if(info.imageRef && !info.imgPath) {
-                firebase.storage().ref(info.imageRef).getDownloadURL()
+            if(info.imageRef1 && !info.imgPath1) {
+                firebase.storage().ref(info.imageRef1).getDownloadURL()
                 .then(function(url){
-                    info.imgPath = url;
+                    info.imgPath1 = url;
                     console.log('image url done',url);
                     EventTrigger.event('loaded-url-matching');
                 });
             }
-            if(self.list_left.length > self.list_right.length)
-                self.list_right.push(info);
-            else
-                self.list_left.push(info);
+            if(info.imageRef2 && !info.imgPath2) {
+                firebase.storage().ref(info.imageRef2).getDownloadURL()
+                .then(function(url){
+                    info.imgPath2 = url;
+                    console.log('image url done',url);
+                    EventTrigger.event('loaded-url-matching');
+                });
+            }
+            self.list.push(info);
         });
 
         ref.child('matching')
         .on('child_removed',function(oldChildSnapshot){
-            for (var item in self.list_left)
-                if (self.list_left[item].key == oldChildSnapshot.key) {
-                    self.list_left.splice(item,1);
-                    return; 
-                }
-            for (var item in self.list_right)
-                if (self.list_right[item].key == oldChildSnapshot.key) {
-                    self.list_right.splice(item,1);
+            for (var item in self.list)
+                if (self.list[item].key == oldChildSnapshot.key) {
+                    self.list.splice(item,1);
                     return; 
                 }
         });
     }
 
-    function upload(base64img, form) {
+    function upload(base64img1,base64img2, form) {
 
          var deferred = $q.defer();
 
-        form.imageRef = '/images/matching/'+guid()+'.jpg';
+        form.imageRef1 = '/images/matching/'+guid()+'.jpg';
+        form.imageRef2 = '/images/matching/'+guid()+'.jpg';
 
         $ionicLoading.show('Image uploading..')
-        PhotoService.UpdateImageFromBase64(form.imageRef,base64img.split(',')[1])
+        PhotoService.UpdateImageFromBase64(form.imageRef1,base64img1.split(',')[1])
         .then(function(){
-            $ionicLoading.hide();
-
-            $ionicLoading.show('Saving...');
-            var ref = firebase.database().ref('/');
-            ref.child("matching").push().set(form)
+            PhotoService.UpdateImageFromBase64(form.imageRef2,base64img2.split(',')[1])
             .then(function(){
-                console.log('save complete');
                 $ionicLoading.hide();
-                deferred.resolve();
-            });
 
+                $ionicLoading.show('Saving...');
+                var ref = firebase.database().ref('/');
+                ref.child("matching").push().set(form)
+                .then(function(){
+                    console.log('save complete');
+                    $ionicLoading.hide();
+                    deferred.resolve();
+                });
+
+            });
         });
-        
         return deferred.promise;
 
     }

@@ -14,9 +14,9 @@ ctrlModule.controller('matchingCtrl', ['$scope','MatchService','EventTrigger','$
     var storage = firebase.storage();
 
     var vm = $scope.vm = {
-        list_left: MatchService.list_left,
-        list_right: MatchService.list_right,
-        previewer: null,
+        list: MatchService.list,
+        previewer1: null,
+        previewer2: null,
         form: {
             avatar: null,
             owner: null,
@@ -36,16 +36,17 @@ ctrlModule.controller('matchingCtrl', ['$scope','MatchService','EventTrigger','$
             },
             timestamp: firebase.database.ServerValue.TIMESTAMP
         },
-        base64img: null,
+        base64img1: null,
+        base64img2: null,
         Submit: function () {
-            if (!vm.base64img) {
+            if (!vm.base64img1 || !vm.base64img2) {
                 $ionicPopup.alert({
                     title: 'Fails',
                     template: 'No Image!'
                 });
                 return;
             }
-            MatchService.upload(vm.base64img, vm.form)
+            MatchService.upload(vm.base64img1,vm.base64img2, vm.form)
                 .then(function () {
                     vm.modal.hide();
                 });
@@ -79,37 +80,65 @@ ctrlModule.controller('matchingCtrl', ['$scope','MatchService','EventTrigger','$
             return;
         }
 
-        vm.base64img = null;
+        vm.base64img1 = null;
+        vm.base64img2 = null;
+
         vm.form.title = "";
         vm.form.caption = "";
-        vm.form.imageRef = null;
-        vm.form.imgPath = null;
+        vm.form.imageRef1 = null;
+        vm.form.imgPath1 = null;
+        vm.form.imageRef2 = null;
+        vm.form.imgPath2 = null;
         vm.form.avatar = null;
         vm.form.owner = $rootScope.currentUser.uid;
         vm.form.writter = $rootScope.currentUser.email;
         vm.modal.show();
-        vm.previewer = document.getElementById('previewer');
-        vm.previewer.src = "img/upload_bg.jpg";
+
+        vm.previewer1 = document.getElementById('previewer1');
+        vm.previewer1.src = "img/upload_bg.jpg";
+        vm.previewer2 = document.getElementById('previewer2');
+        vm.previewer2.src = "img/upload_bg.jpg";
     }
-    vm.selectPhoto = function () {
+    vm.selectPhoto = function (id) {
         console.log('select Photo');
-        document.getElementById("idFile").click();
+        document.getElementById(id).click();
     }
 
-    $scope.fileSelect = function (files) {
-        vm.file = files[0];
+    $scope.fileSelect1 = function (files) {
+        vm.file1 = files[0];
 
         $ionicLoading.show('image processing..')
-        PhotoService.LoadOrientationImage(vm.file, function (base64img, value) {
+        PhotoService.LoadOrientationImage(vm.file1, function (base64img, value) {
             if (value == 1) {
-                vm.previewer.src = base64img;
-                vm.base64img = base64img;
+                vm.previewer1.src = base64img;
+                vm.base64img1 = base64img;
                 $ionicLoading.hide();
             }
             else {
                 Tools.resetOrientation(base64img, value, function (resetBase64Img) {
-                    vm.previewer.src = resetBase64Img;
-                    vm.base64img = resetBase64Img;
+                    vm.previewer1.src = resetBase64Img;
+                    vm.base64img1 = resetBase64Img;
+                    $ionicLoading.hide();
+                });
+            }
+        });
+
+    }
+
+    $scope.fileSelect2 = function (files) {
+        vm.file2 = files[0];
+
+        $ionicLoading.show('image processing..')
+        PhotoService.LoadOrientationImage(vm.file2, function (base64img, value) {
+            if (value == 1) {
+                vm.previewer2.src = base64img;
+                vm.base64img2 = base64img;
+                $ionicLoading.hide();
+            }
+            else {
+                Tools.resetOrientation(base64img, value, function (resetBase64Img) {
+                    vm.previewer2.src = resetBase64Img;
+                    vm.base64img2 = resetBase64Img;
                     $ionicLoading.hide();
                 });
             }
