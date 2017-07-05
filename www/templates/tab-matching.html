@@ -2,7 +2,7 @@
 
   <ion-content class="padding">
 
-        <div ui-sref="app.matchDetail" class="item card-item" ng-repeat="info in vm.list | orderObjectBy :'key':false">
+        <div ui-sref="app.matchDetail({id:info.key})" class="item card-item" ng-repeat="info in vm.list | orderObjectBy :'key':false">
             <div class="card stable-bg ink ink-dark">
                 <div class="item item-text-wrap">
                     <strong>{{info.writter}}</strong> {{info.title}}
