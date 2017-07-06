@@ -3,7 +3,7 @@
 
 var ctrlModule = angular.module('starter.controllers', []);
     
-ctrlModule.controller('photoUploadCaptionCtrl', function($scope,$ionicHistory) {
+ctrlModule.controller('weeklyPhotoUploadCtrl', function($scope,$ionicHistory) {
       $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
         var histroyBack = $ionicHistory.backView();
         if(histroyBack && histroyBack.stateName == 'app.photoUpload' )
@@ -17,7 +17,7 @@ ctrlModule.controller('photoUploadCaptionCtrl', function($scope,$ionicHistory) {
     
 })
 
-.controller('photoUploadCtrl', function() {
+.controller('matchPhotoUploadCtrl', function() {
 
 })
 
