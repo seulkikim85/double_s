@@ -1,4 +1,4 @@
-ctrlModule.controller('matchDetailCtrl', function($scope,$ionicHistory,$stateParams,MatchService,Tools ) {
+ctrlModule.controller('matchDetailCtrl', function($scope,$ionicHistory,$stateParams,MatchService,Tools,$ionicPopover,$state ) {
     // force back button
     $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
         var histroyBack = $ionicHistory.backView();
@@ -9,14 +9,6 @@ ctrlModule.controller('matchDetailCtrl', function($scope,$ionicHistory,$statePar
 
 
     var vm = $scope.vm = {};
-
-    // vm.avatar =  'https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/face.jpg?alt=media&token=260d326c-0b63-4eaf-9a31-897ab5747f39';
-    // vm.photo = 'https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/bag.jpg?alt=media&token=ab5039c3-3aeb-451a-9d3d-b12d379f99fa';
-    // vm.writter = 'Sansa Stark';
-    // vm.likes = 6;
-    // vm.comments = 5;
-    // vm.timestamp =  Date.now();
-    // vm.p = "https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/bag.jpg?alt=media&token=ab5039c3-3aeb-451a-9d3d-b12d379f99fa";
 
     $scope.$on('$ionicView.afterEnter', function (event, viewData) {
         var info = MatchService.getByKey($stateParams.id);  
@@ -34,4 +26,34 @@ ctrlModule.controller('matchDetailCtrl', function($scope,$ionicHistory,$statePar
             $scope.$apply();
         }
     });     
+
+	 ////////////////////////////////////////////////////////////
+	$ionicPopover.fromTemplateUrl('templates/weekly_popover.html', {
+		scope: $scope,
+		animation: 'slide-in-up'
+	}).then(function(popover) {
+		$scope.popover = popover;
+	});
+
+	$scope.openPopover = function($event, item) {
+		$scope.popdata = { 'item': item };
+		$scope.popover.show($event);
+	}
+
+    $scope.closePopover = function () {
+        $scope.popover.hide();
+    };
+    //Cleanup the popover when we're done with it!
+    $scope.$on('$destroy', function () {
+		console.log("destroy popover!!");
+        $scope.popover.remove();
+    });    
+
+    $scope.delete = function(item) {
+        console.log("delete !!",item);
+        MatchService.remove(item.key)
+        .then(function(){
+            $state.go('app.main.matching');
+        });
+    }    
 });

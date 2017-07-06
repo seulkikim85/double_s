@@ -59,8 +59,8 @@ ctrlModule.controller('matchingCtrl', ['$scope','MatchService','EventTrigger','$
 
     // //-----------------------------------------------------
 
-    $ionicModal.fromTemplateUrl('templates/photoUpload.html', {
-        controller: 'photoUploadCtrl',
+    $ionicModal.fromTemplateUrl('templates/matchPhotoUpload.html', {
+        controller: 'matchPhotoUploadCtrl',
         scope: $scope,
         animation: 'slide-in-up'
     }).then(function (modal) {

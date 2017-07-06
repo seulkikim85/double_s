@@ -8,17 +8,17 @@
                     <strong>{{info.writter}}</strong> {{info.title}}
                     <div class="row">
                         <div class="col col-50">
-                        <a class="image"><img ng-src='{{info.imgPath1 || "img/ImageLoading.png"}}'></a>
+                        <img style="width:100%" ng-src='{{info.imgPath1 || "img/ImageLoading.png"}}'>
                         </div>
                         <div class="col col-50">
-                        <a class="image"><img ng-src='{{info.imgPath2 || "img/ImageLoading.png"}}'></a>
+                        <img style="width:100%"ng-src='{{info.imgPath2 || "img/ImageLoading.png"}}'>
                         </div>
                     </div>                    
                     <div class="card-footer text-right">
                         <i class="icon ion-chatbubbles positive"></i>{{info.comments.length}}
                         <i class="icon ion-heart assertive"></i>{{info.likes}}
                         <div class="pull-left">
-                            <i class="icon ion-clock"></i> {{info.timestamp}}
+                            <i class="icon ion-clock"></i> {{info.when}}
                         </div>
                     </div>
                 </div>

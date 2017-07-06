@@ -64,8 +64,8 @@ ctrlModule.controller('weeklyCtrl', ['$scope', '$state', '$rootScope','$statePar
               $scope.$apply();
       });      
     //--------------------------------------------------
-    $ionicModal.fromTemplateUrl('templates/photoUploadCaption.html', {
-        controller: 'photoUploadCaptionCtrl',
+    $ionicModal.fromTemplateUrl('templates/weeklyPhotoUpload.html', {
+        controller: 'weeklyPhotoUploadCtrl',
         scope: $scope,
         animation: 'slide-in-up'
     }).then(function(modal) {

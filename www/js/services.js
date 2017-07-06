@@ -108,8 +108,8 @@ angular.module('starter.services', ['ngCordova'])
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
-.factory('MatchService',[ '$q', '$ionicLoading', '$ionicPopup', 'PhotoService', 'EventTrigger'
-,function( $q, $ionicLoading, $ionicPopup, PhotoService, EventTrigger) {
+.factory('MatchService',[ '$q', '$ionicLoading', '$ionicPopup', 'PhotoService', 'EventTrigger','Tools'
+,function( $q, $ionicLoading, $ionicPopup, PhotoService, EventTrigger,Tools) {
     var ref = firebase.database().ref('/');
 
     var self = {
@@ -149,11 +149,13 @@ angular.module('starter.services', ['ngCordova'])
                     EventTrigger.event('loaded-url-matching');
                 });
             }
+            info.when = Tools.time_ago(new Date(Math.abs(info.timestamp)));
             self.list.push(info);
         });
 
         ref.child('matching')
         .on('child_removed',function(oldChildSnapshot){
+            console.log('removed',oldChildSnapshot);
             for (var item in self.list)
                 if (self.list[item].key == oldChildSnapshot.key) {
                     self.list.splice(item,1);
