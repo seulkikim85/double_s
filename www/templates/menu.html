@@ -37,15 +37,16 @@
                 <ion-item nav-clear menu-close ui-sref="app.palette">
                     Design Palette
                 </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.admin">
+                    About us
+                </ion-item>
                 <ion-item nav-clear menu-close ng-click="showLogin()" ng-show="!isLogined()">
                     Login
                 </ion-item>
                 <ion-item nav-clear menu-close ng-click="showLogout()" ng-show="isLogined()">
                     Logout
                 </ion-item>
-                <ion-item nav-clear menu-close ui-sref="app.admin">
-                    Admin
-                </ion-item>
+                
             </ion-list>
         </ion-content>
     </ion-side-menu>

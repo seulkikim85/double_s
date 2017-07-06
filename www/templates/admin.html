@@ -33,9 +33,18 @@
                 <br><br>
              You can contact us through :
             <br></br>
-            <button class='button button-center color="light" small_button'>facebook</button> 
-            <button class='button button-center color="light" small_button'>Insta</button>
-            <button class='button button-center color="light" small_button'>Twit</button>   
+           <div class="item">
+                <input style="display:none" id="idFile" name="idFile" type="file" file-change handler="fileSelect(files)" >
+                <img class="image" id="previewer" ng-src='https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/else%2FFacebook_icon.svg.png?alt=media&token=5780161f-fc1d-477e-95df-612d94b3534c' ng-click="vm.selectPhoto()">
+            </div>
+            <div class="item">
+                <input style="display:none" id="idFile" name="idFile" type="file" file-change handler="fileSelect(files)" >
+                <img class="image" id="previewer" ng-src='https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/else%2Finstagram-icon_1057-2227.jpg?alt=media&token=605f1274-781a-4b7e-a267-1d09332678bf' ng-click="vm.selectPhoto()">
+            </div>
+            <div class="item">
+                <input style="display:none" id="idFile" name="idFile" type="file" file-change handler="fileSelect(files)" >
+                <img class="image" id="previewer" ng-src='https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/else%2F%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C.jpg?alt=media&token=459ad739-0ec8-4f7c-9152-6b37c5255777' ng-click="vm.selectPhoto()">
+            </div>
             </div>
 
 
