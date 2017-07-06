@@ -60,6 +60,11 @@ p {
     content: "\f2ca";
 }
 
+.tab-title {
+    font-size: 14px;
+    margin-top: -34px !important;
+    /*display: block;*/
+}
 
 /* Login
 ==================================*/
