@@ -32,9 +32,11 @@ angular.module('starter.services', ['ngCordova'])
     var ref = firebase.database().ref('/');
 
     var self = {
+        users: [],
         createUser: createUser,
         login: login,
-        logout: logout
+        logout: logout,
+        findUser: findUser
     };
 
     // create User
@@ -69,7 +71,6 @@ angular.module('starter.services', ['ngCordova'])
 
     function login(user) {
         var deferred = $q.defer();
-        var self = this;
         $ionicLoading.show({
             template: 'Signing In...'
         });
@@ -102,6 +103,10 @@ angular.module('starter.services', ['ngCordova'])
             $ionicLoading.hide();
         });                
     };
+
+    function findUser(uuid) {
+
+    }
     return self;
 }])
 
@@ -346,22 +351,17 @@ angular.module('starter.services', ['ngCordova'])
                 data: {},
                 get: getImage,
             },
+            Avatars: {
+                data: {},
+                get: getAvatar,
+            },
             takeImage: takeImage,
-            UpdateImageFromBase64: UpdateImageFromBase64,
+            UpdateImageFromBase64: UploadImageBase64,
             LoadOrientationImage: LoadOrientationImage,
         });
 
         // load profile image from server
         var ref = firebase.storage().ref('/');
-
-        function UpdateImageFromBase64(refPath,imageBase64) {
-            var deferred = $q.defer();
-            UploadImageBase64(refPath,imageBase64)
-                .then(function (downloadURL) {
-                    deferred.resolve(downloadURL);
-                });
-            return deferred.promise;
-        }
         
         function UploadImage(refPath,file) {
             var deferred = $q.defer();
@@ -558,6 +558,55 @@ angular.module('starter.services', ['ngCordova'])
             fileReader.readAsArrayBuffer(file);
         }
 
+        function findAvatar(uuid) {
+            for(var obj in self.Avatars.data)
+                if(self.Avatars.data[obj] && self.Avatars.data[obj].uuid == uuid)
+                    return self.Avatars.data[obj];
+            return null;
+        }
+        function getAvatar(uuid) {
+            var found = findAvatar(uuid);
+            if(!found) {
+                found = {
+                    uuid: uuid,
+                    url: null,
+                    error: 'object_not_found',
+                }
+                self.Avatars.data[uuid] = found;
+            }            
+            if(uuid && !found.url && found.error) {
+                found.error = null;
+                ref.child('users/'+uuid+'/profile.jpg')
+                .getDownloadURL().then(function(url){
+                    $log.debug('uuid',url);
+                    found.url = url;
+                    EventTrigger.event('loaded-url',url);
+                })
+                .catch(function(error) {
+                    found.error = error.code;
+                    $log.error(error.code,error);
+                    switch (error.code) {
+                        case 'storage/object_not_found':
+                        // File doesn't exist
+                        break;
+
+                        case 'storage/unauthorized':
+                        // User doesn't have permission to access the object
+                        break;
+
+                        case 'storage/canceled':
+                        // User canceled the upload
+                        break;
+
+                        case 'storage/unknown':
+                        // Unknown error occurred, inspect the server response
+                        break;
+                    }
+                });
+            }
+            return found;
+
+        }
         return self;        
 }])
 
