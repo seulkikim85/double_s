@@ -144,6 +144,64 @@ z-index: 1000;
 .cell-2 {
   background-color: #262B69;
 }
+/* ---------- footter ----------------------- */
+.footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;  
+  padding: 0 2px;
+  margin: 0;
+}
+.footer .row {
+  /*background-color:beige;*/
+  margin: 0;
+  }
+.footer .col{
+  padding: 5px 2px 5px 2px;
+  margin: 0;
+}
+
+.footer .button{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.chat-input {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 10;
+  background: #f2f2f2;
+  border-top: 1px solid #c9c8c7; }
+  .chat-input .input-area {
+    margin: 8px;
+    height: 30px; }
+    .chat-input .input-area input {
+      float: left;
+      width: 80%;
+      height: 30px;
+      outline: none;
+      border-radius: 2px;
+      padding-left: 6px;
+      display: inline-block;
+      border: 1px solid #c9c8c7;
+      border-radius: 5px; }
+    .chat-input .input-area .send-msg-btn {
+      float: right;
+      width: 18%;
+      height: 30px;
+      line-height: 30px;
+      border: none;
+      background: #53a4da;
+      border-radius: 5px;
+      position: relative;
+      top: 0;
+      color: #fff;
+      outline: none;
+      text-align: center; }
 
 /* popover ------------------------*/
 ion-popover-view.fit {

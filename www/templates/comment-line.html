@@ -1,7 +1,11 @@
-<a ui-sref="app.friends" class="item item-avatar item-icon-right" style="border:1px white solid;" ng-click="vm.clickComment()">
-    <img ng-src="{{data.avatar}}">
+<a ui-sref="app.friends" class="item item-avatar" style="border:1px white solid;" ng-click="vm.clickComment()">
+    <img ng-src='{{data.avatar || "img/avatar/blank.png"}}'>
+    <div class=" item-icon-right">
     <h2>{{data.writter}}</h2>
     <p>{{data.caption}}</p>
-    <p>{{data.when}}</p>
     <i class="icon ion-chatbubble muted"></i>
+    </div>
+    <p style="font-size: 90%">
+        <i class="icon ion-clock"></i>{{data.when}}
+    </p>
 </a>

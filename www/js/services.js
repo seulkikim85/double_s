@@ -210,8 +210,8 @@ angular.module('starter.services', ['ngCordova'])
 
 }])
 //////////////////////////////////////////////////////////////////////////////////////////////////////
-.factory('WeeklyService',[ '$q', '$ionicLoading', '$ionicPopup','PhotoService','EventTrigger'
-,function( $q, $ionicLoading, $ionicPopup,PhotoService,EventTrigger) {
+.factory('WeeklyService',[ '$q', '$ionicLoading', '$ionicPopup','PhotoService','EventTrigger','Tools'
+,function( $q, $ionicLoading, $ionicPopup,PhotoService,EventTrigger,Tools) {
     var ref = firebase.database().ref('/');
 
     var self = {
@@ -227,26 +227,35 @@ angular.module('starter.services', ['ngCordova'])
                 if(self.list_right[item].key == key)
                     return self.list_right[item];
             return null;
-        }        
+        },
+        addComment: addComment      
     }
 
     getAll();
 
 
+    function refactory(key,val,callback) {
+        var info = val;
+        info.key = key;
+        info.when = Tools.time_ago(new Date(Math.abs(val.timestamp)));
+
+        if(info.imageRef && !info.imgPath) {
+            firebase.storage().ref(info.imageRef).getDownloadURL()
+            .then(function(url){
+                info.imgPath = url;
+                callback(url);
+            });
+        }
+        return info;
+    }
     function getAll() {
         ref.child('weekly')
         .on('child_added',function(snap){
-            var info = snap.val();
-            info.key = snap.key;
             //console.log('weekly item',info);
-            if(info.imageRef && !info.imgPath) {
-                firebase.storage().ref(info.imageRef).getDownloadURL()
-                .then(function(url){
-                    info.imgPath = url;
-                    console.log('image url done',url);
-                    EventTrigger.event('loaded-url-weekly');
-                });
-            }
+            var info = refactory(snap.key,snap.val(),function(url){
+                console.log('image url done',url);
+                EventTrigger.event('loaded-url-weekly');
+            });
             if(self.list_left.length > self.list_right.length)
                 self.list_right.push(info);
             else
@@ -265,6 +274,18 @@ angular.module('starter.services', ['ngCordova'])
                     return; 
                 }
         });
+        ref.child('weekly')
+        .on('child_changed',function(oldChildSnapshot,snapkey){
+            console.log('changed:'+oldChildSnapshot.key,oldChildSnapshot.val());
+            var newOne = oldChildSnapshot.val();
+            var find = self.getByKey(oldChildSnapshot.key);
+            if(find) {
+                // console.log('replace1',find);
+                find.comments = newOne.comments;
+                // console.log('replace1',find);
+                EventTrigger.event('changed-comments',find);
+            }
+        });
     }
 
     function upload(base64img, form) {
@@ -278,7 +299,6 @@ angular.module('starter.services', ['ngCordova'])
             $ionicLoading.hide();
 
             $ionicLoading.show('Saving...');
-            var ref = firebase.database().ref('/');
             ref.child("weekly").push().set(form)
             .then(function(){
                 console.log('save complete');
@@ -294,7 +314,6 @@ angular.module('starter.services', ['ngCordova'])
     function remove(key) {
         var deferred = $q.defer();
         $ionicLoading.show('deleting...');
-        var ref = firebase.database().ref('/');
         ref.child("weekly").child(key).remove()
         .then(function(){
             console.log('remove complete');
@@ -302,6 +321,14 @@ angular.module('starter.services', ['ngCordova'])
             deferred.resolve();
         });
         return deferred.promise;
+    }
+
+    function addComment(key, commentInfo) {
+        ref.child("weekly").child(key+'/comments').push().set(commentInfo)
+        .then(function(){
+            console.log('save complete',key,commentInfo);
+        });
+
     }
 
     return self;

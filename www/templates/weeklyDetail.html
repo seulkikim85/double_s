@@ -8,30 +8,30 @@
       </span>     
   </div>
     
-    <ion-content class="has-header">
+    <ion-content class="has-header" has-bouncing="true">
 
         <div>
             <div class="card stable-bg ink ink-dark">
                 <div class="item item-avatar">
-                    <img ng-src='{{vm.avatar || "img/avatar/blank.png"}}'>
-                    <h2>{{vm.writter}}</h2>
-                    <p>"{{vm.title}}"</p>
+                    <img ng-src='{{vm.info.avatar || "img/avatar/blank.png"}}'>
+                    <h2>{{vm.info.writter}}</h2>
+                    <p>"{{vm.info.title}}"</p>
                 </div>                
                 <div class="item item-text-wrap" style="padding-top:0">
-                    <img class="full-image" ng-src="{{vm.imgPath}}">
-                    <strong>{{vm.writter}}</strong> added a weekly <strong>{{vm.caption}}</strong> ...
+                    <img class="full-image" ng-src="{{vm.info.imgPath}}">
+                    <strong>{{vm.info.writter}}</strong> added a weekly <strong>{{vm.info.content}}</strong> ...
                     <div class="card-footer text-right">
-                        <i class="icon ion-chatbubble positive"></i> {{vm.comments.length}}
-                        <i class="icon ion-heart assertive"></i> {{vm.likes|| 0}}
+                        <i class="icon ion-chatbubble positive"></i> {{vm.count_comments()|| 0}}
+                        <i class="icon ion-heart assertive"></i> {{vm.info.likes|| 0}}
                         
                         <div class="pull-left">
-                            <i class="icon ion-clock"></i>{{vm.when}}
+                            <i class="icon ion-clock"></i>{{vm.info.when}}
                         </div>
                     </div>
                 </div>
 
                 <div class="list" style="background-color:lightgrey">
-                    <div comment="citem" ng-repeat="citem in vm.comments"></div>        
+                    <div comment="vm.ConvertComment(citem)" ng-repeat="citem in vm.info.comments"></div>        
                 </div>
             </div>
 
@@ -40,4 +40,18 @@
         
   
     </ion-content>
+<ion-footer-bar class="bar-assertive">
+    <form name="commentForm">
+      <div class="chat-input">
+        <div class="input-area">
+          <input type="text" ng-model="vm.newComment" placeholder="Type in your comment..." required>
+          <button class="send-msg-btn"
+            ng-disabled="!commentForm.$valid"
+            ng-click="vm.sendComment(vm.newComment)"> Submit
+          </button>
+        </div>
+      </div>
+    </form>
+
+</ion-footer-bar>    
 </ion-view>
