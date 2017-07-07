@@ -26,13 +26,13 @@ ctrlModule.controller('weeklyDetailCtrl', function($scope,$state,$rootScope,$ion
         vm.sendComment = function(comment) {
             var newComment = {
                 uuid: $rootScope.currentUser.uid,
+                writter: $rootScope.currentUser.email,
                 caption: comment,
                 timestamp: firebase.database.ServerValue.TIMESTAMP
             }            
             WeeklyService.addComment(vm.info.key,newComment);
         }
         vm.ConvertComment= function(val) {
-            val.writter = val.uuid; 
             val.when = Tools.time_ago(new Date(Math.abs(val.timestamp)));
             return val;
         }
