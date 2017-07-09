@@ -6,38 +6,47 @@
                 <h3><a class="light">scalet</a></h3>
                 <h4>Elegance</h4>
             </div>
+            <div class="float-button">
+      <span class="height-fix">
+
+            <input style="display:none" id="idFile" name="idFile" type="file" file-change handler="fileSelect(files)" >
+            <a class="content">
+                <i class="ion-ios-arrow-up" ng-click="UploadContent()"></i>
+          </a>
+      </span>     
+  </div>
+    <br>
+    <br><br>
         </div>
-        <div class="tabs tabs-dark tabs-icon-top static">
-            <a ui-sref="app.activity" class="tab-item">
-                <i class="icon ion-arrow-graph-up-right"></i> Activity
-            </a>
-            <a ui-sref="app.friends" class="tab-item">
-                <i class="icon ion-android-people"></i> Friends
-            </a>
-            <a ui-sref="app.gallery" class="tab-item">
-                <i class="icon ion-images"></i> Photos
-            </a>
+         <div class="list padding-right">
+             <div class = "row">
+                <div class = "col"></div>
+                <div class = "col"></div>
+                <ion-md-input ng-model="profileData.nickname" placeholder="Nickname" highlight-color="energized" type="Text"></ion-md-input>
+                <div class = "col"></div>
+                <div class = "col"></div>
+            </div>
+             <div class = "row">
+                <div class = "col"></div>
+                <div class = "col"></div>
+                <ion-md-input ng-model="profileData.email" placeholder="Email" highlight-color="energized" type="Email"></ion-md-input>
+                <div class = "col"></div>
+                <div class = "col"></div>
+            </div>
+             <div class = "row">
+                <div class = "col"></div>
+                <div class = "col"></div>
+                <ion-md-input ng-model="profileData.password" placeholder="Password Change" highlight-color="energized" type="password"></ion-md-input>
+                <div class = "col"></div>
+                <div class = "col"></div>
+            </div>
         </div>
-        <h4 class="content padding double-padding-x">Following</h4>
-        <div class="list animate-fade-slide-in-right">
-            <a ui-sref="app.friends" class="item item-avatar item-icon-right">
-                <img src="https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/avartar%2Fimages.jpg?alt=media&token=016a120c-d520-4612-85ba-b52cf2cd5486">
-                <h2>Jon Snow</h2>
-                <p>Da illest illegitimate</p>
-                <i class="icon ion-chatbubble muted"></i>
-            </a>
-            <a ui-sref="app.friends" class="item item-avatar item-icon-right">
-                <img src="https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/avartar%2Flip.jpg?alt=media&token=c0bdf11a-2184-4a77-a10e-0da87cde8d9f">
-                <h2>Sansa Stark</h2>
-                <p>&amp; Joffrey <strike>sitting</strike> sat in a tree</p>
-                <i class="icon ion-chatbubble muted"></i>
-            </a>
-            <a ui-sref="app.friends" class="item item-avatar item-icon-right">
-                <img src="https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/avartar%2Femma_stone.jpg?alt=media&token=0a6f027a-8dc7-47f6-8c12-f55d4d717e6f">
-                <h2>Tyrion Lannister</h2>
-                <p>B.A.M.F. imp</p>
-                <i class="icon ion-chatbubble muted"></i>
-            </a>
+        <div class = "row">
+        <div class = "col col-top"></div>
+        <button ng-click="showSave()" class="button button-positive ink">Save</button>
+        <div class = "col col-bottom"></div>
+        </div>
+   
         </div>
     </ion-content>
 </ion-view>
