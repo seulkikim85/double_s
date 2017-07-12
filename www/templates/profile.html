@@ -2,16 +2,17 @@
     <ion-content ng-class="{expanded:$scope.isExpanded}">
         <div class="hero slide-up" style="background-image: url('https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/else%2Fdream.jpg?alt=media&token=03f742bd-c45b-4e4f-937e-0a6e412c5b82">
             <div class="content">
-                <div class="avatar" style="background-image: url('https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/avartar%2Fscalet.jpg?alt=media&token=818ad792-061a-4580-a202-8835a1be812c"></div>
+                <img class="avatar" ng-src='{{vm.myAvatarImg || "img/avatar/blank.png"}}'></img>
+                <!--<div class="avatar" ng-src='{{vm.myAvatarImg || "img/avatar/blank.png"}}'></div>-->
                 <h3><a class="light">scalet</a></h3>
                 <h4>Elegance</h4>
             </div>
             <div class="float-button">
       <span class="height-fix">
 
-            <input style="display:none" id="idFile" name="idFile" type="file" file-change handler="fileSelect(files)" >
+            <input style="display:none" id="idFile" name="idFile" type="file" file-change handler="vm.fileSelect(files)" >
             <a class="content">
-                <i class="ion-ios-arrow-up" ng-click="UploadContent()"></i>
+                <i class="ion-ios-arrow-up" ng-click="vm.UploadContent()"></i>
           </a>
       </span>     
   </div>
@@ -22,7 +23,7 @@
                 <div class = "col"></div>
                 <div class = "col"></div>
                 <div class='item-md-label'>
-                <input ng-model="profileData.nickname" class="hightlight-energized" placeholder="Nickname" type="Text"></input>
+                <input ng-model="vm.user.displayName" class="hightlight-energized" placeholder="Nickname" type="Text"></input>
                 </div> 
                 <div class = "col"></div>
                 <div class = "col"></div>
