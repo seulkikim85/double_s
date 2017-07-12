@@ -3,6 +3,7 @@ ctrlModule.controller('AppCtrl', ['$scope','$ionicModal','$ionicPopup', '$rootSc
     // Form data for the login modal
     $scope.loginData = {};
     $scope.joinData = {};
+    $scope.myAvatarImg = UserService.loadMyAvatar();
     $scope.isExpanded = false;
     $scope.hasHeaderFabLeft = false;
     $scope.hasHeaderFabRight = false;
@@ -160,6 +161,7 @@ ctrlModule.controller('AppCtrl', ['$scope','$ionicModal','$ionicPopup', '$rootSc
     firebase.auth().onAuthStateChanged(function (authData) {
         if (authData) {
             console.log("Logged in as:", authData.uid, authData);
+            $scope.myAvatarImg = UserService.loadMyAvatar();
 
             var ref = firebase.database().ref('/');
             ref.child("users").child(authData.uid).once('value', function (snapshot) {
