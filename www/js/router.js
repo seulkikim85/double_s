@@ -75,26 +75,8 @@ angular.module('starter.router', ['ionic'])
             params : { id : null } // properties MUST be defined in the to state
         }
     })
-    .state('app.photoUpload', {
-        url : '/photoUpload',
-        views: {
-            'menuContent': {
-                templateUrl: 'templates/photoUpload.html',
-                controller: 'photoUploadCtrl'
-            }
-        }
-    })
+   
 
-
-     .state('app.photoUploadCaption', {
-        url : '/photoUploadCaption',
-        views: {
-            'menuContent': {
-                templateUrl: 'templates/photoUploadCaption.html',
-                controller: 'photoUploadCaptionCtrl'
-            }
-        }
-    })
     .state('app.matchDetail', {
         url : '/matchDetail/:id',
         views: {

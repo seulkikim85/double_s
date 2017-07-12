@@ -130,7 +130,7 @@ ctrlModule.controller('AppCtrl', ['$scope','$ionicModal','$ionicPopup', '$rootSc
             modal.show();
         });
     }    
-    $scope.clickJoin = function(user) {
+    $scope.clickLostPassword = function(user) {
         console.log('click LostPassword',user);
         UserService.createUser(user).then(function(){
             $scope.modalLostPassword.hide();
@@ -153,7 +153,7 @@ ctrlModule.controller('AppCtrl', ['$scope','$ionicModal','$ionicPopup', '$rootSc
     $scope.clickLogin = function(user) {
         console.log('click Login',user);
         UserService.login(user).then(function(){
-            $scope.modalLogin.hide();
+         $scope.modalLogin.hide();
         });
     }
 
