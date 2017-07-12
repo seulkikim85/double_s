@@ -36,7 +36,10 @@ angular.module('starter.services', ['ngCordova'])
         createUser: createUser,
         login: login,
         logout: logout,
-        findUser: findUser
+        findUser: findUser,
+        myAvatar: null,
+        saveMyAvatar: saveMyAvatar,
+        loadMyAvatar: loadMyAvatar
     };
 
     // create User
@@ -107,6 +110,18 @@ angular.module('starter.services', ['ngCordova'])
     function findUser(uuid) {
 
     }
+
+    function saveMyAvatar(base64img) {
+        myAvatar = base64img;
+        localStorage.setItem("avatar.base64img", base64img);
+    }
+
+    function loadMyAvatar() {
+        if(self.myAvatar != null)
+            return self.myAvatar;
+        self.myAvatar = localStorage.getItem("avatar.base64img");
+        return self.myAvatar;
+    }    
     return self;
 }])
 
@@ -354,6 +369,7 @@ angular.module('starter.services', ['ngCordova'])
             Avatars: {
                 data: {},
                 get: getAvatar,
+                put: putAvatar,
             },
             takeImage: takeImage,
             UpdateImageFromBase64: UploadImageBase64,
@@ -558,6 +574,13 @@ angular.module('starter.services', ['ngCordova'])
             fileReader.readAsArrayBuffer(file);
         }
 
+        function putAvatar(uuid, base64img) {
+            $ionicLoading.show('Image uploading..')
+            self.UpdateImageFromBase64('users/'+uuid+'/profile.jpg',base64img.split(',')[1])
+            .then(function(){
+                $ionicLoading.hide();
+            });
+        }
         function findAvatar(uuid) {
             for(var obj in self.Avatars.data)
                 if(self.Avatars.data[obj] && self.Avatars.data[obj].uuid == uuid)
