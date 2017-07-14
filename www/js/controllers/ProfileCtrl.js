@@ -1,16 +1,9 @@
 
-ctrlModule.controller('ProfileCtrl', function($scope, $rootScope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk
-,$ionicPopup ,$ionicLoading, PhotoService, UserService  ) {
-    // Set Ink
-    ionicMaterialInk.displayEffect();
-    var vm = $scope.vm = {
-        user: {
-            displayName: '',
-            email: ''
-        },
-        myAvatarImg: null
+ctrlModule.controller('ProfileCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+    // Set Header
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
 
-    };
     // Set Motion
     $timeout(function() {
         ionicMaterialMotion.slideUp({
@@ -18,39 +11,32 @@ ctrlModule.controller('ProfileCtrl', function($scope, $rootScope, $stateParams, 
         });
     }, 300);
 
-    vm.isLogined = function() {
-        return $rootScope.currentUser != undefined;
-    }    
-    vm.user = $rootScope.currentUser;
-
-    $scope.$on('$ionicView.enter', function(e) {
-        vm.myAvatarImg = UserService.loadMyAvatar();
-    });
-    console.log('user',$rootScope.currentUser);
-
-    vm.UploadContent = function() {
-        console.log('select Photo');
-        if(!vm.isLogined()) {
-            $ionicPopup.alert({
-                title: 'Fails',
-                template: 'Not Login User'
-            });
-            return;
-        }
-        document.getElementById("idFile").click();
-    }
-    vm.fileSelect = function (files) {
-        vm.file = files[0];
-        // console.log('files',files);
-        // var path = (window.URL || window.webkitURL).createObjectURL(vm.file);
-        // console.log('path', path,document.getElementById("idFile").value);
-     
-        $ionicLoading.show('image processing..')
-        PhotoService.LoadOrientationImage(vm.file, function (base64img, value) {
-            UserService.saveMyAvatar(base64img);
-            vm.myAvatarImg = base64img;
-            PhotoService.Avatars.put($rootScope.currentUser.uid,base64img);
-        });     
-
-    }
+    // Set Ink
+    ionicMaterialInk.displayEffect();
 });
+.service('EventTrigger', function ($log, $rootScope) {
+    var self = this;
+    self = {
+        subscribers: {},    // listener for notification
+        add: awaitUpdate,
+        event: notifySubscribers,
+        isRefreshing: function () { return $rootScope.$root.$$phase; }
+    }
+    ////////////////////////////////////////////////
+    // listener for notification
+    ////////////////////////////////////////////////
+    function awaitUpdate(key, callback) {
+        self.subscribers[key] = callback;
+    }
+    // distiributer
+    function notifySubscribers(notifyKey, param) {
+        angular.forEach(self.subscribers,
+            function (callback, key) {
+                if (notifyKey == key)
+                    callback(param);
+            });
+    }
+
+    return self;
+});   
+;
