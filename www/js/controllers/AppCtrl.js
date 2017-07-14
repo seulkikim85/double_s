@@ -131,11 +131,22 @@ ctrlModule.controller('AppCtrl', ['$scope','$ionicModal','$ionicPopup', '$rootSc
             modal.show();
         });
     }    
-    $scope.clickLostPassword = function(user) {
-        console.log('click LostPassword',user);
-        UserService.createUser(user).then(function(){
+    $scope.clickLostPassword = function(loginData) {
+        console.log('click LostPassword',loginData);
+        var auth = firebase.auth();
+        auth.sendPasswordResetEmail(loginData.email).then(function () {
+            $ionicPopup.alert({
+                title: 'Reset Email Password',
+                template: 'Send complete'
+            });
             $scope.modalLostPassword.hide();
-        });
+        }, function (error) {
+            $ionicPopup.alert({
+                title: 'Fail Send Email',
+                template: error
+            });
+        });        
+
     }
     ///////////////////
 
