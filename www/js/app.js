@@ -12,7 +12,7 @@ var app = angular.module('starter', ['ionic',
 'ionic-material', 
 'ionMdInput'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform,$ionicScrollDelegate) {
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -23,6 +23,8 @@ var app = angular.module('starter', ['ionic',
             // org.apache.cordova.statusbar required
             StatusBar.styleDefault();
         }
+        $ionicScrollDelegate.scrollTop();
+
     });
 })
 ;
