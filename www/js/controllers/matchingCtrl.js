@@ -89,7 +89,7 @@ ctrlModule.controller('matchingCtrl', ['$scope','MatchService','EventTrigger','$
         vm.form.imgPath1 = null;
         vm.form.imageRef2 = null;
         vm.form.imgPath2 = null;
-        vm.form.avatar = null;
+        vm.form.avatar = PhotoService.Avatars.get($rootScope.currentUser.uid);
         vm.form.owner = $rootScope.currentUser.uid;
         vm.form.writter = $rootScope.currentUser.email;
         vm.modal.show();

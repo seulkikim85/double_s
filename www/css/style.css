@@ -1,5 +1,6 @@
 /* General
 ==================================*/
+
 h1 {
     color: #fff;
     text-shadow: 0 1px 0px #000;
@@ -9,6 +10,7 @@ h1 {
 
 /* Utilities
 ==================================*/
+
 .title-bordered {
     border-top: solid 2px #bbb;
     padding-top: 30px;
@@ -26,6 +28,7 @@ p {
 
 /* Menu
 ==================================*/
+
 .menu .bar.bar-header.expanded {
     transition: all .5s ease-in-out;
 }
@@ -66,8 +69,10 @@ p {
     /*display: block;*/
 }
 
+
 /* Login
 ==================================*/
+
 .app-icon {
     background-color: #fff;
     background: url('../img/crown.jpg') center;
@@ -82,26 +87,28 @@ p {
     position: fixed;
     bottom: 0;
 }
+
+
 /* Login
 ==================================*/
+
 .float-button {
-background-color:#303f9f;
-opacity: 0.9;
-color: white;
-border-radius: 50%;
-width: 30px;
-padding: 25px;
-font-size: 40px;
-position: fixed;
-bottom: 5%;
-right: 5%;
-z-index: 1000;
+    background-color: #303f9f;
+    opacity: 0.9;
+    color: white;
+    border-radius: 50%;
+    width: 30px;
+    padding: 25px;
+    font-size: 40px;
+    position: fixed;
+    bottom: 5%;
+    right: 5%;
+    z-index: 1000;
 }
 
 .float-button .height_fix {
     margin-top: 100%;
     border: 1px solid red;
-
 }
 
 .float-button .content {
@@ -115,119 +122,140 @@ z-index: 1000;
     color: white;
 }
 
+
 /* profile image change
 ==================================*/
-.small_button{
+
+.small_button {
     line-height: 5px !important;
     min-height: 20px !important;
 }
+
 
 /* File upload
 ==================================*/
 
 .grid-full ion-row {
-  height: 100%;
-  padding: 0;
-  flex-wrap: wrap;
+    height: 100%;
+    padding: 0;
+    flex-wrap: wrap;
 }
 
 .grid-full ion-col {
-  flex: 0 0 50%;
-  max-width: 50%;
-  text-align: center;
-  padding: 10px 5px;
+    flex: 0 0 50%;
+    max-width: 50%;
+    text-align: center;
+    padding: 10px 5px;
 }
 
 .cell-1 {
-  background-color: #C5DCFC;
-}
-.cell-2 {
-  background-color: #262B69;
-}
-.strokeme
-{
-    color: white;
-    text-shadow:
-    -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-    1px 1px 0 #000;  
-}
-/* ---------- footter ----------------------- */
-.footer {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;  
-  padding: 0 2px;
-  margin: 0;
-}
-.footer .row {
-  /*background-color:beige;*/
-  margin: 0;
-  }
-.footer .col{
-  padding: 5px 2px 5px 2px;
-  margin: 0;
+    background-color: #C5DCFC;
 }
 
-.footer .button{
-  margin-top: 0px;
-  margin-bottom: 0px;
+.cell-2 {
+    background-color: #262B69;
+}
+
+.strokeme {
+    color: white;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.avatarTitle {
+    padding: 5px 5px 5px 50px;
+    min-height: 40px;
+}
+
+
+/* ---------- footter ----------------------- */
+
+.footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0 2px;
+    margin: 0;
+}
+
+.footer .row {
+    /*background-color:beige;*/
+    margin: 0;
+}
+
+.footer .col {
+    padding: 5px 2px 5px 2px;
+    margin: 0;
+}
+
+.footer .button {
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 .chat-input {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  z-index: 10;
-  background: #f2f2f2;
-  border-top: 1px solid #c9c8c7; }
-  .chat-input .input-area {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 10;
+    background: #f2f2f2;
+    border-top: 1px solid #c9c8c7;
+}
+
+.chat-input .input-area {
     margin: 8px;
-    height: 30px; }
-    .chat-input .input-area input {
-      float: left;
-      width: 80%;
-      height: 30px;
-      outline: none;
-      border-radius: 2px;
-      padding-left: 6px;
-      display: inline-block;
-      border: 1px solid #c9c8c7;
-      border-radius: 5px; }
-    .chat-input .input-area .send-msg-btn {
-      float: right;
-      width: 18%;
-      height: 30px;
-      line-height: 30px;
-      border: none;
-      background: #53a4da;
-      border-radius: 5px;
-      position: relative;
-      top: 0;
-      color: #fff;
-      outline: none;
-      text-align: center; }
+    height: 30px;
+}
+
+.chat-input .input-area input {
+    float: left;
+    width: 80%;
+    height: 30px;
+    outline: none;
+    border-radius: 2px;
+    padding-left: 6px;
+    display: inline-block;
+    border: 1px solid #c9c8c7;
+    border-radius: 5px;
+}
+
+.chat-input .input-area .send-msg-btn {
+    float: right;
+    width: 18%;
+    height: 30px;
+    line-height: 30px;
+    border: none;
+    background: #53a4da;
+    border-radius: 5px;
+    position: relative;
+    top: 0;
+    color: #fff;
+    outline: none;
+    text-align: center;
+}
+
 
 /* popover ------------------------*/
+
 ion-popover-view.fit {
-  height: auto;
-  margin-left: 15%;
-  margin-top: 8%;
-  width: 120px;
+    height: auto;
+    margin-left: 15%;
+    margin-top: 8%;
+    width: 120px;
 }
+
 ion-popover-view.fit ion-content {
-  position: relative;
+    position: relative;
 }
 
 .platform-android ion-popover-view.fit {
-  margin-top: 8%;
+    margin-top: 8%;
 }
+
 .platform-ios ion-popover-view.fit {
-  margin-top: 8%;
+    margin-top: 8%;
 }
 
 ion-popover-view.fit i.icon::before {
@@ -235,5 +263,5 @@ ion-popover-view.fit i.icon::before {
 }
 
 .popover-arrow {
-  left: 72px;
+    left: 72px;
 }

@@ -355,10 +355,10 @@ angular.module('starter.services', ['ngCordova'])
 }])
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
-.factory('PhotoService',[ '$log','$q', '$cordovaCamera','$ionicLoading'
+.factory('PhotoService',[ '$log','$q', '$cordovaCamera','$ionicLoading','EventTrigger'
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
-,function PhotoService ($log, $q,  $cordovaCamera, $ionicLoading) {
+,function PhotoService ($log, $q,  $cordovaCamera, $ionicLoading,EventTrigger) {
         var self = {};
 
         angular.extend(self,{
