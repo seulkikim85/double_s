@@ -10,7 +10,6 @@ ctrlModule.controller('ProfileCtrl', function($scope, $rootScope, $stateParams, 
         },
         newPassword: '',
         myAvatarImg: null
-
     };
     // Set Motion
     $timeout(function() {
@@ -39,9 +38,7 @@ ctrlModule.controller('ProfileCtrl', function($scope, $rootScope, $stateParams, 
                 title: 'Fails',
                 template: 'Not Login User'
             });
-            return;
         }
-        document.getElementById("idFile").click();
     }
     vm.fileSelect = function (files) {
         vm.file = files[0];
