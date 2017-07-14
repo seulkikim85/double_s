@@ -8,6 +8,7 @@ ctrlModule.controller('ProfileCtrl', function($scope, $rootScope, $stateParams, 
             displayName: '',
             email: ''
         },
+        newPassword: '',
         myAvatarImg: null
 
     };
@@ -25,6 +26,9 @@ ctrlModule.controller('ProfileCtrl', function($scope, $rootScope, $stateParams, 
 
     $scope.$on('$ionicView.enter', function(e) {
         vm.myAvatarImg = UserService.loadMyAvatar();
+        vm.user = $rootScope.currentUser;
+        if(!$rootScope.$root.$$phase)
+            $scope.$apply();
     });
     console.log('user',$rootScope.currentUser);
 
@@ -51,6 +55,36 @@ ctrlModule.controller('ProfileCtrl', function($scope, $rootScope, $stateParams, 
             vm.myAvatarImg = base64img;
             PhotoService.Avatars.put($rootScope.currentUser.uid,base64img);
         });     
+    }
 
+    vm.SavePassword = function() {
+        var auth = firebase.auth();
+
+        auth.currentUser.updatePassword(vm.newPassword).then(function () {
+            vm.newPassword = '';
+            $ionicPopup.alert({
+                title: 'Change Paasword',
+                template: 'complete'
+            });
+        }, function (error) {
+            $ionicPopup.alert({
+                title: 'Change Error',
+                template: error
+            });
+        });
+        var isWantToUseEmail = false;
+        if(isWantToUseEmail) {
+            auth.sendPasswordResetEmail($rootScope.currentUser.email).then(function () {
+                $ionicPopup.alert({
+                    title: 'Reset Email Password',
+                    template: 'Send complete'
+                });
+            }, function (error) {
+                $ionicPopup.alert({
+                    title: 'Fail Send Email',
+                    template: error
+                });
+            });        
+        }
     }
 });

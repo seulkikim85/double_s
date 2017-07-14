@@ -31,17 +31,8 @@
             </div>
              <div class = "row">
                 <div class = "col"></div>
-                <div class = "col"></div>
                 <div class='item-md-label'>
-                <input ng-model="profileData.email" class="hightlight-energized" placeholder="Email" type="Email"></input>
-                </div>
-                <div class = "col"></div>
-                <div class = "col"></div>
-            </div>
-             <div class = "row">
-                <div class = "col"></div>
-                <div class='item-md-label'>
-                <input ng-model="profileData.password" class="hightlight-royal" placeholder="Password Change" type="password change"></input>
+                <input ng-model="vm.newPassword" class="hightlight-royal" placeholder="Password Change" type="password"></input>
                 </div>
                 <div class = "col"></div>
             </div>
@@ -50,7 +41,7 @@
         <br></br>
         <div class = "row">
         <div class = "col col-top"></div>
-        <button ng-click="showSave()" class="button button-positive ink">Save</button>
+        <button ng-click="vm.SavePassword()" class="button button-positive ink">Save</button>
         <div class = "col col-bottom"></div>
         </div>
    
