@@ -5,7 +5,8 @@ ctrlModule.controller('ProfileCtrl', function($scope, $rootScope, $stateParams, 
     ionicMaterialInk.displayEffect();
     var vm = $scope.vm = {
         user: {
-            displayName: ''
+            displayName: '',
+            email: ''
         },
         myAvatarImg: null
 
@@ -48,7 +49,7 @@ ctrlModule.controller('ProfileCtrl', function($scope, $rootScope, $stateParams, 
         PhotoService.LoadOrientationImage(vm.file, function (base64img, value) {
             UserService.saveMyAvatar(base64img);
             vm.myAvatarImg = base64img;
-            PhotoService.Avatars.put($rootScope.currentUser.uuid,base64img);
+            PhotoService.Avatars.put($rootScope.currentUser.uid,base64img);
         });     
 
     }

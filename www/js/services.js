@@ -152,7 +152,7 @@ angular.module('starter.services', ['ngCordova'])
         .on('child_added',function(snap){
         var info = snap.val();
             info.key = snap.key;
-           
+            info.avatar = PhotoService.Avatars.get(info.owner); 
             if(info.imageRef1 && !info.imgPath1) {
                 firebase.storage().ref(info.imageRef1).getDownloadURL()
                 .then(function(url){

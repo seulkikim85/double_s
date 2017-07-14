@@ -5,7 +5,11 @@
         <div ui-sref="app.matchDetail({id:info.key})" class="card-item" ng-repeat="info in vm.list | orderObjectBy :'key':false">
             <div class="card stable-bg ink ink-dark">
                 <div class="item item-text-wrap">
+                    <div class="item-avatar" style="padding: 5px 5px 5px 50px ;
+                                                    min-height: 40px;">
+                    <img ng-src='{{info.avatar.url || "img/avatar/blank.png"}}'>
                     <strong>{{info.writter}}</strong> {{info.title}}
+                    </div>
                     <div class="row">
                         <div class="col col-50">
                         <img style="width:100%" ng-src='{{info.imgPath1 || "img/ImageLoading.png"}}'>
