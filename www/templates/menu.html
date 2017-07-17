@@ -31,7 +31,7 @@
                 <!--<ion-item nav-clear menu-close ui-sref="app.login">
                     Login
                 </ion-item>-->
-                <ion-item nav-clear menu-close ui-sref="app.profile" ng-show="isLogined()">
+                <ion-item nav-clear menu-close ng-show="isLogined()" ng-click="go('app.profile')">
                     Profile
                 </ion-item>
                 <ion-item nav-clear menu-close ui-sref="app.palette">
