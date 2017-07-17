@@ -1,5 +1,5 @@
-ctrlModule.controller('AppCtrl', ['$scope','$ionicModal','$ionicPopup', '$rootScope', '$ionicLoading', 'UserService',
- function($scope, $ionicModal, $ionicPopup, $rootScope, $ionicLoading, UserService) {
+ctrlModule.controller('AppCtrl', ['$scope','$ionicModal','$ionicPopup', '$rootScope', '$ionicLoading', 'UserService','$state',
+ function($scope, $ionicModal, $ionicPopup, $rootScope, $ionicLoading, UserService,$state) {
     // Form data for the login modal
     $scope.loginData = {};
     $scope.joinData = {};
@@ -17,6 +17,13 @@ ctrlModule.controller('AppCtrl', ['$scope','$ionicModal','$ionicPopup', '$rootSc
         });
     }
 
+    $rootScope.$on('$stateChangeSuccess', function (event, to, toParams, from, fromParams) {
+        //save the previous state in a rootScope variable so that it's accessible from everywhere
+        $rootScope.previousState = from;
+    });
+    $scope.go = function(next) {
+        $state.go(next);
+    }
     ////////////////////////////////////////
     // Layout Methods
     ////////////////////////////////////////
@@ -129,7 +136,7 @@ ctrlModule.controller('AppCtrl', ['$scope','$ionicModal','$ionicPopup', '$rootSc
         }).then(function (modal) {
             $scope.modalLostPassword = modal;
             modal.show();
-        });
+        }); 
     }    
     $scope.clickLostPassword = function(loginData) {
         console.log('click LostPassword',loginData);
