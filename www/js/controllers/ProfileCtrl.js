@@ -46,16 +46,17 @@ ctrlModule.controller('ProfileCtrl', function($scope, $rootScope, $stateParams, 
 
     vm.UploadContent = function() {
         console.log('select Photo');
-        if(!vm.isLogined()) {
+        if(!$scope.$parent.isLogined()) {
             $ionicPopup.alert({
                 title: 'Fails',
                 template: 'Not Login User'
             });
         }
+        document.getElementById("idFile").click();
     }
     vm.fileSelect = function (files) {
         vm.file = files[0];
-        // console.log('files',files);
+        console.log('files',files);
         // var path = (window.URL || window.webkitURL).createObjectURL(vm.file);
         // console.log('path', path,document.getElementById("idFile").value);
      

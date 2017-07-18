@@ -579,6 +579,7 @@ angular.module('starter.services', ['ngCordova'])
             self.UpdateImageFromBase64('users/'+uuid+'/profile.jpg',base64img.split(',')[1])
             .then(function(){
                 $ionicLoading.hide();
+                console.log('upload avatar done');
             });
         }
         function findAvatar(uuid) {

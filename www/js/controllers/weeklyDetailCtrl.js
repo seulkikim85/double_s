@@ -1,6 +1,6 @@
 
 ctrlModule.controller('weeklyDetailCtrl', function($scope,$state,$rootScope,$ionicHistory,$stateParams,
-    $ionicPopover,$ionicPopup,WeeklyService, Tools,EventTrigger,$ionicScrollDelegate,$timeout) {
+    $ionicPopover,$ionicPopup,WeeklyService, Tools,EventTrigger,$ionicScrollDelegate,$timeout,PhotoService) {
 
     var vm = $scope.vm = {
         info: {}
@@ -45,6 +45,7 @@ ctrlModule.controller('weeklyDetailCtrl', function($scope,$state,$rootScope,$ion
             },100);
         }
         vm.ConvertComment= function(val) {
+            val.avatar = PhotoService.Avatars.get(val.uuid);
             val.when = Tools.time_ago(new Date(Math.abs(val.timestamp)));
             return val;
         }
