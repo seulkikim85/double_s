@@ -3,38 +3,38 @@
     <ion-content ng-class="has-header" has-bouncing="true">
         <div class="list half">
 
-            <div ui-sref="app.weeklyDetail({id:info.key})" class="card card-gallery item item-text-wrap" ng-repeat="info in vm.list_left | orderObjectBy :'key':false">
-                <div class="ink dark-bg">
+            <div class="card card-gallery item item-text-wrap" ng-repeat="info in vm.list_left | orderObjectBy :'key':false">
+                <div ui-sref="app.weeklyDetail({id:info.key})" class="ink dark-bg">
                     <h2>{{info.title}}</h2>
                     <img class="full-image" ng-src='{{info.imgPath || "img/ImageLoading.png"}}'>
                 </div>
                 <div class="item tabs tabs-secondary tabs-icon-left">
                     <a class="tab-item stable-bg assertive">
                         <i class="icon ion-heart"></i>
-                        {{info.like}}
+                        <span>{{info.likes||0}}</span>
                     </a>
-                    <a class="tab-item stable-bg positive-900">
+                    <a ui-sref="app.weeklyDetail({id:info.key})" class="tab-item stable-bg positive-900">
                         <i class="icon ion-chatbubbles"></i>
-                        {{info.comments.length}}
+                        <span>{{vm.count_comments(info.comments)}}</span>
                     </a>
                 </div>
             </div>
 
         </div>
         <div class="list half content_right">
-            <div ui-sref="app.weeklyDetail({id:info.key})" class="card card-gallery item item-text-wrap" ng-repeat="info in vm.list_right | orderObjectBy :'key':false">
-                <div class="ink dark-bg">
+            <div class="card card-gallery item item-text-wrap" ng-repeat="info in vm.list_right | orderObjectBy :'key':false">
+                <div ui-sref="app.weeklyDetail({id:info.key})" class="ink dark-bg">
                     <h2>{{info.title}}</h2>
                     <img class="full-image" ng-src='{{info.imgPath || "img/ImageLoading.png"}}'>
                 </div>
                 <div class="item tabs tabs-secondary tabs-icon-left">
                     <a class="tab-item stable-bg assertive">
                         <i class="icon ion-heart"></i>
-                        {{info.like}}
+                        <span>{{info.likes||0}}</span>
                     </a>
-                    <a class="tab-item stable-bg positive-900">
+                    <a ui-sref="app.weeklyDetail({id:info.key})" class="tab-item stable-bg positive-900">
                         <i class="icon ion-chatbubbles"></i>
-                        {{info.comments.length}}
+                        <span>{{vm.count_comments(info.comments)}}</span>
                     </a>
                 </div>
             </div>

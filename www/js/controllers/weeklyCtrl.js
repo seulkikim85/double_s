@@ -35,7 +35,7 @@ ctrlModule.controller('weeklyCtrl', ['$scope', '$state', '$rootScope','$statePar
             caption: '',
             imageRef: null,
             imgPath: null,
-            like2: 0,
+            likes: 0,
             timestamp: firebase.database.ServerValue.TIMESTAMP
         },
         base64img: null,
@@ -66,6 +66,12 @@ ctrlModule.controller('weeklyCtrl', ['$scope', '$state', '$rootScope','$statePar
         vm.modal = modal;
     });
     
+    vm.count_comments = function(comments) {
+        if(!comments)
+            return 0;
+        return Object.keys(comments).length;
+    }
+
     $scope.closeModal = function() {
         vm.modal.hide();
     }
