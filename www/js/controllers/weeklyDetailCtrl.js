@@ -1,5 +1,6 @@
 
-ctrlModule.controller('weeklyDetailCtrl', function($scope,$state,$rootScope,$ionicHistory,$stateParams,$ionicPopover,WeeklyService, Tools,EventTrigger) {
+ctrlModule.controller('weeklyDetailCtrl', function($scope,$state,$rootScope,$ionicHistory,$stateParams,
+    $ionicPopover,WeeklyService, Tools,EventTrigger,$ionicScrollDelegate,$timeout) {
 
     var vm = $scope.vm = {
         info: {}
@@ -31,6 +32,10 @@ ctrlModule.controller('weeklyDetailCtrl', function($scope,$state,$rootScope,$ion
                 timestamp: firebase.database.ServerValue.TIMESTAMP
             }            
             WeeklyService.addComment(vm.info.key,newComment);
+            vm.newComment = '';
+            $timeout(function() {
+                 $ionicScrollDelegate.scrollBottom();
+            },100);
         }
         vm.ConvertComment= function(val) {
             val.when = Tools.time_ago(new Date(Math.abs(val.timestamp)));
