@@ -11,63 +11,47 @@
         <div class="item card-item">
             <div class="card stable-bg ink ink-dark">
                 <div class="item item-avatar">
-                    <img ng-src='{{vm.avatar.url || "img/avatar/blank.png"}}'>
-                    <h2>{{vm.writter}}</h2>
-                    <p>"{{vm.title}}"</p>
+                    <img ng-src='{{vm.info.avatar.url || "img/avatar/blank.png"}}'>
+                    <h2>{{vm.info.writter}}</h2>
+                    <p>"{{vm.info.title}}"</p>
                 </div>
                 <div class="item item-text-wrap" style="padding-top:0" >
                     <div class="row">
                         <div class="col col-50">
-                            <img style="width:100%" ng-src='{{vm.imgPath1 || "img/ImageLoading.png"}}'>
+                            <img style="width:100%" ng-src='{{vm.info.imgPath1 || "img/ImageLoading.png"}}'>
                         </div>
                         <div class="col col-50">
-                            <img style="width:100%" ng-src='{{vm.imgPath2 || "img/ImageLoading.png"}}'>
+                            <img style="width:100%" ng-src='{{vm.info.imgPath2 || "img/ImageLoading.png"}}'>
                         </div>
                     </div>                    
                     
-                    <strong>{{vm.writter}}</strong> added a match item <strong>{{vm.caption}}</strong> ...
+                    <strong>{{vm.info.writter}}</strong> added a match item <strong>{{vm.info.caption}}</strong> ...
                     <div class="card-footer text-right">
-                        <i class="icon ion-chatbubble positive"></i> {{vm.comments}}
-                        <i class="icon ion-heart assertive"></i> {{vm.likes}}
+                        <i class="icon ion-chatbubble positive"></i> {{vm.count_comments()|| 0}}
+                        <i class="icon ion-heart assertive"></i> {{vm.info.likes|| 0}}
                         
                         <div class="pull-left">
-                            <i class="icon ion-clock"></i> {{vm.when}}
+                            <i class="icon ion-clock"></i> {{vm.info.when}}
                         </div>
                     </div>
+
+                </div>
+                <div class="list" style="background-color:lightgrey">
+                    <div comment="vm.ConvertComment(citem)" ng-repeat="citem in vm.info.comments"></div>        
                 </div>
             </div>
         </div>
 
-        <div class="list animate-fade-slide-in-right">
-            <a ui-sref="app.friends" class="item item-avatar item-icon-right">
-                <img src="https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/emma_stone.jpg?alt=media&token=4786b1a5-6904-4bf8-9624-fb0aa45d5e85">
-                <h2>Jon Snow</h2>
-                <p>Da illest illegitimate</p>
-                <i class="icon ion-chatbubble muted"></i>
-            </a>
-            <a ui-sref="app.friends" class="item item-avatar item-icon-right">
-                <img src="https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/lip.jpg?alt=media&token=594726b2-e763-459d-9502-5fd30fc5d88e">
-                <h2>Sansa Stark</h2>
-                <p>&amp; Joffrey <strike>sitting</strike> sat in a tree</p>
-                <i class="icon ion-chatbubble muted"></i>
-            </a>
-            <a ui-sref="app.friends" class="item item-avatar item-icon-right">
-                <img src="https://firebasestorage.googleapis.com/v0/b/capstone-project-a56d3.appspot.com/o/images.jpg?alt=media&token=0d98bdb9-e2d2-41e1-89ac-eec4ccb29f22">
-                <h2>Tyrion Lannister</h2>
-                <p>B.A.M.F. imp</p>
-                <i class="icon ion-chatbubble muted"></i>
-            </a>
-        </div>
-  
+
     </ion-content>
     <ion-footer-bar class="bar-assertive">
     <form name="commentForm">
       <div class="chat-input">
         <div class="input-area">
-          <input type="text" ng-model="vm.newComment" placeholder="Type in your comment..." required>
+          <input type="text" ng-model="vm.info.newComment" placeholder="Type in your comment..." required>
           <button class="send-msg-btn"
             ng-disabled="!commentForm.$valid"
-            ng-click="vm.sendComment(vm.newComment)"> Submit
+            ng-click="vm.info.sendComment(vm.info.newComment)"> Submit
           </button>
         </div>
       </div>

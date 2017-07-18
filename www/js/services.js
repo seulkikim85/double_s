@@ -157,7 +157,7 @@ angular.module('starter.services', ['ngCordova'])
                 firebase.storage().ref(info.imageRef1).getDownloadURL()
                 .then(function(url){
                     info.imgPath1 = url;
-                    console.log('image url done',url);
+                    //console.log('image url done',url);
                     EventTrigger.event('loaded-url-matching');
                 });
             }
@@ -165,7 +165,7 @@ angular.module('starter.services', ['ngCordova'])
                 firebase.storage().ref(info.imageRef2).getDownloadURL()
                 .then(function(url){
                     info.imgPath2 = url;
-                    console.log('image url done',url);
+                    //console.log('image url done',url);
                     EventTrigger.event('loaded-url-matching');
                 });
             }
@@ -273,7 +273,7 @@ angular.module('starter.services', ['ngCordova'])
         .on('child_added',function(snap){
             //console.log('weekly item',info);
             var info = refactory(snap.key,snap.val(),function(url){
-                console.log('image url done',url);
+                //console.log('image url done',url);
                 EventTrigger.event('loaded-url-weekly');
             });
             if(self.list_left.length > self.list_right.length)

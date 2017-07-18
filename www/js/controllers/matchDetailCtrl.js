@@ -1,29 +1,16 @@
-ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistory,$stateParams,MatchService,Tools,$ionicPopover,$state, $WeeklyService,$Tools,$EventTrigger ) {
+ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistory,$stateParams,MatchService,Tools,$ionicPopover,$state ,EventTrigger ) {
+    
+    var vm = $scope.vm = {
+        info: {}
+    };
+
     // force back button
     $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
         var histroyBack = $ionicHistory.backView();
         if(histroyBack && histroyBack.stateName == 'app.main.matching' )
             viewData.enableBack = true;        
-    });
 
-
-
-    var vm = $scope.vm = {};
-
-    $scope.$on('$ionicView.afterEnter', function (event, viewData) {
-        var info = MatchService.getByKey($stateParams.id);  
-        if(null != info) {
-            vm.imgPath1 = info.imgPath1;
-            vm.imgPath2 = info.imgPath2;
-            vm.avatar = info.avatar;
-            vm.writter = info.writter;
-            vm.caption = info.caption;
-            vm.title = info.title;
-            vm.likes = info.likes;
-            vm.key = info.key;
-            vm.when = Tools.time_ago(new Date(Math.abs(info.timestamp)));
-
-              vm.count_comments = function() {
+        vm.count_comments = function() {
             if(!vm.info.comments)
                 return 0;
             return Object.keys(vm.info.comments).length;
@@ -40,10 +27,10 @@ ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistor
         vm.ConvertComment= function(val) {
             val.when = Tools.time_ago(new Date(Math.abs(val.timestamp)));
             return val;
-        }
+        }        
+    });
 
-        console.log('before enter',vm);
-    };
+
 
     $scope.$on('$ionicView.afterEnter', function (event, viewData) {
         var info = MatchService.getByKey($stateParams.id);  
@@ -64,7 +51,7 @@ ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistor
     );     
 
 	 ////////////////////////////////////////////////////////////
-	$ionicPopover.fromTemplateUrl('templates/Match_popover.html', {
+	$ionicPopover.fromTemplateUrl('templates/weekly_popover.html', {
 		scope: $scope,
 		animation: 'slide-in-up'
 	}).then(function(popover) {
