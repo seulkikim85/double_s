@@ -1,6 +1,6 @@
 
 ctrlModule.controller('weeklyDetailCtrl', function($scope,$state,$rootScope,$ionicHistory,$stateParams,
-    $ionicPopover,WeeklyService, Tools,EventTrigger,$ionicScrollDelegate,$timeout) {
+    $ionicPopover,$ionicPopup,WeeklyService, Tools,EventTrigger,$ionicScrollDelegate,$timeout) {
 
     var vm = $scope.vm = {
         info: {}
@@ -25,6 +25,13 @@ ctrlModule.controller('weeklyDetailCtrl', function($scope,$state,$rootScope,$ion
             return Object.keys(vm.info.comments).length;
         }
         vm.sendComment = function(comment) {
+            if(!$scope.$parent.isLogined()) {
+                $ionicPopup.alert({
+                    title: 'Member Only',
+                    template: 'You need to login'
+                });
+                return;
+            }
             var newComment = {
                 uuid: $rootScope.currentUser.uid,
                 writter: $rootScope.currentUser.email,
