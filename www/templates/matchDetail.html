@@ -60,5 +60,18 @@
         </div>
   
     </ion-content>
+    <ion-footer-bar class="bar-assertive">
+    <form name="commentForm">
+      <div class="chat-input">
+        <div class="input-area">
+          <input type="text" ng-model="vm.newComment" placeholder="Type in your comment..." required>
+          <button class="send-msg-btn"
+            ng-disabled="!commentForm.$valid"
+            ng-click="vm.sendComment(vm.newComment)"> Submit
+          </button>
+        </div>
+      </div>
+    </form>
 
+</ion-footer-bar>  
 </ion-view>
