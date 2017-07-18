@@ -9,9 +9,9 @@
                     <img class="full-image" ng-src='{{info.imgPath || "img/ImageLoading.png"}}'>
                 </div>
                 <div class="item tabs tabs-secondary tabs-icon-left">
-                    <a class="tab-item stable-bg assertive">
+                    <a class="tab-item stable-bg assertive" ng-click="vm.toggleLikes(info.key)">
                         <i class="icon ion-heart"></i>
-                        <span>{{info.likes||0}}</span>
+                        <span>{{info.likeCount||0}}</span>
                     </a>
                     <a ui-sref="app.weeklyDetail({id:info.key})" class="tab-item stable-bg positive-900">
                         <i class="icon ion-chatbubbles"></i>
@@ -28,9 +28,9 @@
                     <img class="full-image" ng-src='{{info.imgPath || "img/ImageLoading.png"}}'>
                 </div>
                 <div class="item tabs tabs-secondary tabs-icon-left">
-                    <a class="tab-item stable-bg assertive">
+                    <a class="tab-item stable-bg assertive" ng-click="vm.toggleLikes(info.key)">
                         <i class="icon ion-heart"></i>
-                        <span>{{info.likes||0}}</span>
+                        <span>{{info.likeCount||0}}</span>
                     </a>
                     <a ui-sref="app.weeklyDetail({id:info.key})" class="tab-item stable-bg positive-900">
                         <i class="icon ion-chatbubbles"></i>

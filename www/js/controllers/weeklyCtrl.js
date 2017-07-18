@@ -35,7 +35,7 @@ ctrlModule.controller('weeklyCtrl', ['$scope', '$state', '$rootScope','$statePar
             caption: '',
             imageRef: null,
             imgPath: null,
-            likes: 0,
+            likeCount: 0,
             timestamp: firebase.database.ServerValue.TIMESTAMP
         },
         base64img: null,
@@ -53,10 +53,11 @@ ctrlModule.controller('weeklyCtrl', ['$scope', '$state', '$rootScope','$statePar
             });
         }
     }
-      EventTrigger.add('loaded-url-weekly',function(){
-          if(!EventTrigger.isRefreshing())
-              $scope.$apply();
-      });      
+    EventTrigger.add('loaded-url-weekly',function(info){
+        if(!EventTrigger.isRefreshing())
+            $scope.$apply();
+    });
+              
     //--------------------------------------------------
     $ionicModal.fromTemplateUrl('templates/weeklyPhotoUpload.html', {
         controller: 'weeklyPhotoUploadCtrl',
@@ -72,18 +73,30 @@ ctrlModule.controller('weeklyCtrl', ['$scope', '$state', '$rootScope','$statePar
         return Object.keys(comments).length;
     }
 
-    $scope.closeModal = function() {
-        vm.modal.hide();
+    vm.toggleLikes = function (key) {
+        if(!CheckLogin())
+            return;        
+        WeeklyService.toggleLikes(key,$rootScope.currentUser.uid);
     }
-    $scope.UploadContent = function() {
-        console.log('UploadContent');
+
+    function CheckLogin() {
         if(!$rootScope.currentUser) {
             $ionicPopup.alert({
                 title: 'Required Authentication!!',
                 template: 'Log in Please!!'
             });
-            return;
+            return false;
         }
+        return true;
+    }
+
+    $scope.closeModal = function() {
+        vm.modal.hide();
+    }
+    $scope.UploadContent = function() {
+        console.log('UploadContent');
+        if(!CheckLogin())
+            return;
 
         vm.base64img = null;
         vm.form.title = "";

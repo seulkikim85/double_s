@@ -248,7 +248,8 @@ angular.module('starter.services', ['ngCordova'])
                     return self.list_right[item];
             return null;
         },
-        addComment: addComment      
+        addComment: addComment,
+        toggleLikes: toggleLikes,    
     }
 
     getAll();
@@ -300,11 +301,12 @@ angular.module('starter.services', ['ngCordova'])
             var newOne = oldChildSnapshot.val();
             var find = self.getByKey(oldChildSnapshot.key);
             if(find) {
+                find.likeCount = newOne.likeCount;
                 // console.log('replace1',find);
                 find.comments = newOne.comments;
                 // console.log('replace1',find);
                 EventTrigger.event('changed-comments',find);
-            }
+            } 
         });
     }
 
@@ -351,6 +353,26 @@ angular.module('starter.services', ['ngCordova'])
         });
 
     }
+
+    function toggleLikes(key,uid) {
+        ref.child("weekly").child(key).transaction(function (post) {
+            if (post) {
+                if (post.likes && post.likes[uid]) {
+                    post.likeCount--;
+                    post.likes[uid] = null;
+                } else {
+                    if(post.likeCount == undefined)
+                        post.likeCount = 0;
+                    post.likeCount++;
+                    if (!post.likes) {
+                        post.likes = {};
+                    }
+                    post.likes[uid] = true;
+                }
+            }
+            return post;
+        });
+    }    
 
     return self;
 }])
