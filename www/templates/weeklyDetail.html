@@ -1,6 +1,6 @@
 <ion-view view-title="Weekly Detail" name="weeklyDetail-view">
 
-  <div ng-show="isLogined()" class="float-button" style="top:10%;height: 30px;" ng-click="openPopover($event,vm)">
+  <div ng-show="isOwner()" class="float-button" style="top:10%;height: 30px;" ng-click="openPopover($event,vm)">
       <span class="height-fix">
             <a class="content">
                 <i class="ion-android-more-vertical"></i>
@@ -13,7 +13,7 @@
         <div>
             <div class="card stable-bg ink ink-dark">
                 <div class="item item-avatar">
-                    <img ng-src='{{vm.info.avatar || "img/avatar/blank.png"}}'>
+                    <img ng-src='{{vm.info.avatar.url || "img/avatar/blank.png"}}'>
                     <h2>{{vm.info.writter}}</h2>
                     <p>"{{vm.info.title}}"</p>
                 </div>                

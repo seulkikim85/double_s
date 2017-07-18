@@ -57,6 +57,7 @@ ctrlModule.controller('weeklyDetailCtrl', function($scope,$state,$rootScope,$ion
         var info = WeeklyService.getByKey($stateParams.id);  
         if(null != info) {
             vm.info = info;
+            vm.info.avatar = PhotoService.Avatars.get(info.owner);
             console.log('after enter',vm);
             $scope.$apply();
         }
@@ -67,6 +68,9 @@ ctrlModule.controller('weeklyDetailCtrl', function($scope,$state,$rootScope,$ion
             $scope.$apply();
     });      
 
+    $scope.isOwner = function() {
+        return ($rootScope.currentUser && $rootScope.currentUser.uid == vm.info.owner);
+    }
 	 ////////////////////////////////////////////////////////////
 	$ionicPopover.fromTemplateUrl('templates/weekly_popover.html', {
 		scope: $scope,
@@ -95,7 +99,7 @@ ctrlModule.controller('weeklyDetailCtrl', function($scope,$state,$rootScope,$ion
     }
     $scope.delete = function(item) {
         console.log("delete !!",item);
-        WeeklyService.remove(item.key)
+        WeeklyService.remove(item.info.key)
         .then(function(){
             $state.go('app.main.weekly');
         });

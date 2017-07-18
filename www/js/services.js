@@ -332,6 +332,7 @@ angular.module('starter.services', ['ngCordova'])
     }
 
     function remove(key) {
+        console.log('removing',key);
         var deferred = $q.defer();
         $ionicLoading.show('deleting...');
         ref.child("weekly").child(key).remove()
