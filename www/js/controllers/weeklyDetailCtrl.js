@@ -68,7 +68,7 @@ ctrlModule.controller('weeklyDetailCtrl', function($scope,$state,$rootScope,$ion
             $scope.$apply();
     });      
 
-    $scope.isOwner = function() {
+    $scope.isOwner = function () {
         return ($rootScope.currentUser && $rootScope.currentUser.uid == vm.info.owner);
     }
 	 ////////////////////////////////////////////////////////////
