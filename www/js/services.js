@@ -141,7 +141,8 @@ angular.module('starter.services', ['ngCordova'])
                 if(self.list[item].key == key)
                     return self.list[item];
             return null;
-        }
+        },
+        addComment: addComment,
     }
 
     getAll();
@@ -224,6 +225,14 @@ angular.module('starter.services', ['ngCordova'])
             deferred.resolve();
         });
         return deferred.promise;
+    }
+
+    function addComment(key, commentInfo) {
+        ref.child("matching").child(key+'/comments').push().set(commentInfo)
+        .then(function(){
+            console.log('save complete',key,commentInfo);
+        });
+
     }
 
     return self;

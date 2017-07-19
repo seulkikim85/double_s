@@ -51,7 +51,7 @@
           <input type="text" ng-model="vm.info.newComment" placeholder="Type in your comment..." required>
           <button class="send-msg-btn"
             ng-disabled="!commentForm.$valid"
-            ng-click="vm.info.sendComment(vm.info.newComment)"> Submit
+            ng-click="vm.sendComment(vm.info.newComment)"> Submit
           </button>
         </div>
       </div>

@@ -21,7 +21,8 @@ ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistor
                 writter: $rootScope.currentUser.email,
                 caption: comment,
                 timestamp: firebase.database.ServerValue.TIMESTAMP
-            }            
+            }           
+            console.log('send comment'); 
             MatchService.addComment(vm.info.key,newComment);
         }
         vm.ConvertComment= function(val) {
