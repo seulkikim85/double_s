@@ -142,7 +142,7 @@ angular.module('starter.services', ['ngCordova'])
                     return self.list[item];
             return null;
         },
-        addComment: addComment,
+         addComment: addComment
     }
 
     getAll();
@@ -158,7 +158,7 @@ angular.module('starter.services', ['ngCordova'])
                 firebase.storage().ref(info.imageRef1).getDownloadURL()
                 .then(function(url){
                     info.imgPath1 = url;
-                    //console.log('image url done',url);
+                    console.log('image url done',url);
                     EventTrigger.event('loaded-url-matching');
                 });
             }
@@ -166,7 +166,7 @@ angular.module('starter.services', ['ngCordova'])
                 firebase.storage().ref(info.imageRef2).getDownloadURL()
                 .then(function(url){
                     info.imgPath2 = url;
-                    //console.log('image url done',url);
+                    console.log('image url done',url);
                     EventTrigger.event('loaded-url-matching');
                 });
             }
@@ -183,6 +183,19 @@ angular.module('starter.services', ['ngCordova'])
                     return; 
                 }
         });
+        ref.child('matching')
+        .on('child_changed',function(oldChildSnapshot,snapkey){
+            console.log('changed:'+oldChildSnapshot.key,oldChildSnapshot.val());
+            var newOne = oldChildSnapshot.val();
+            var find = self.getByKey(oldChildSnapshot.key);
+            if(find) {
+                // console.log('replace1',find);
+                find.comments = newOne.comments;
+                // console.log('replace1',find);
+                EventTrigger.event('changed-comments',find);
+            }
+        });
+        
     }
 
     function upload(base64img1,base64img2, form) {
@@ -226,15 +239,13 @@ angular.module('starter.services', ['ngCordova'])
         });
         return deferred.promise;
     }
-
-    function addComment(key, commentInfo) {
+function addComment(key, commentInfo) {
         ref.child("matching").child(key+'/comments').push().set(commentInfo)
         .then(function(){
             console.log('save complete',key,commentInfo);
         });
 
     }
-
     return self;
 
 }])
@@ -258,8 +269,8 @@ angular.module('starter.services', ['ngCordova'])
             return null;
         },
         addComment: addComment,
-        toggleLikes: toggleLikes,    
-    }
+        toggleLikes: toggleLikes,       
+        }
 
     getAll();
 
@@ -283,7 +294,7 @@ angular.module('starter.services', ['ngCordova'])
         .on('child_added',function(snap){
             //console.log('weekly item',info);
             var info = refactory(snap.key,snap.val(),function(url){
-                //console.log('image url done',url);
+                console.log('image url done',url);
                 EventTrigger.event('loaded-url-weekly');
             });
             if(self.list_left.length > self.list_right.length)
@@ -310,12 +321,11 @@ angular.module('starter.services', ['ngCordova'])
             var newOne = oldChildSnapshot.val();
             var find = self.getByKey(oldChildSnapshot.key);
             if(find) {
-                find.likeCount = newOne.likeCount;
                 // console.log('replace1',find);
                 find.comments = newOne.comments;
                 // console.log('replace1',find);
                 EventTrigger.event('changed-comments',find);
-            } 
+            }
         });
     }
 
@@ -343,7 +353,6 @@ angular.module('starter.services', ['ngCordova'])
     }
 
     function remove(key) {
-        console.log('removing',key);
         var deferred = $q.defer();
         $ionicLoading.show('deleting...');
         ref.child("weekly").child(key).remove()
@@ -362,26 +371,6 @@ angular.module('starter.services', ['ngCordova'])
         });
 
     }
-
-    function toggleLikes(key,uid) {
-        ref.child("weekly").child(key).transaction(function (post) {
-            if (post) {
-                if (post.likes && post.likes[uid]) {
-                    post.likeCount--;
-                    post.likes[uid] = null;
-                } else {
-                    if(post.likeCount == undefined)
-                        post.likeCount = 0;
-                    post.likeCount++;
-                    if (!post.likes) {
-                        post.likes = {};
-                    }
-                    post.likes[uid] = true;
-                }
-            }
-            return post;
-        });
-    }    
 
     return self;
 }])
@@ -611,7 +600,6 @@ angular.module('starter.services', ['ngCordova'])
             self.UpdateImageFromBase64('users/'+uuid+'/profile.jpg',base64img.split(',')[1])
             .then(function(){
                 $ionicLoading.hide();
-                console.log('upload avatar done');
             });
         }
         function findAvatar(uuid) {

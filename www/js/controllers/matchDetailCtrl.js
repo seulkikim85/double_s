@@ -16,6 +16,13 @@ ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistor
             return Object.keys(vm.info.comments).length;
         }
         vm.sendComment = function(comment) {
+             if(!$scope.$parent.isLogined()) {
+                $ionicPopup.alert({
+                    title: 'Member Only',
+                    template: 'You need to login'
+                });
+                return;
+            }
             var newComment = {
                 uuid: $rootScope.currentUser.uid,
                 writter: $rootScope.currentUser.email,
@@ -24,11 +31,17 @@ ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistor
             }           
             console.log('send comment'); 
             MatchService.addComment(vm.info.key,newComment);
+            vm.newComment = '';
+            $timeout(function() {
+                 $ionicScrollDelegate.scrollBottom();
+            },100);
         }
         vm.ConvertComment= function(val) {
+            val.avatar = PhotoService.Avatars.get(val.uuid);
             val.when = Tools.time_ago(new Date(Math.abs(val.timestamp)));
             return val;
-        }        
+        }       
+        console.log('before enter',vm); 
     });
 
 
@@ -73,6 +86,10 @@ ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistor
         $scope.popover.remove();
     });    
 
+    $scope.reset = function (item) {
+        console.log("modify !!",item);
+        firebase.database().ref('/weekly').child(item.info.key+'/comments').remove();
+    }
     $scope.delete = function(item) {
         console.log("delete !!",item);
         MatchService.remove(item.key)
