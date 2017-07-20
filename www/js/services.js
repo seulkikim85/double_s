@@ -239,11 +239,12 @@ angular.module('starter.services', ['ngCordova'])
         });
         return deferred.promise;
     }
-function addComment(key, commentInfo) {
-        ref.child("matching").child(key+'/comments').push().set(commentInfo)
-        .then(function(){
-            console.log('save complete',key,commentInfo);
-        });
+
+    function addComment(key, commentInfo) {
+        ref.child("matching").child(key + '/comments').push().set(commentInfo)
+            .then(function () {
+                console.log('save complete', key, commentInfo);
+            });
 
     }
     return self;
@@ -371,6 +372,26 @@ function addComment(key, commentInfo) {
         });
 
     }
+    
+    function toggleLikes(key,uid) {
+        ref.child("weekly").child(key).transaction(function (post) {
+            if (post) {
+                if (post.likes && post.likes[uid]) {
+                    post.likeCount--;
+                    post.likes[uid] = null;
+                } else {
+                    if(post.likeCount == undefined)
+                        post.likeCount = 0;
+                    post.likeCount++;
+                    if (!post.likes) {
+                        post.likes = {};
+                    }
+                    post.likes[uid] = true;
+                }
+            }
+            return post;
+        });
+    }    
 
     return self;
 }])

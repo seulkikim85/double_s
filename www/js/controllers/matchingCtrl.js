@@ -27,13 +27,6 @@ ctrlModule.controller('matchingCtrl', ['$scope','MatchService','EventTrigger','$
             img1Path: null,
             image2Ref: null,
             img2Path: null,
-            like2: 0,
-            comments: {
-                uuid: '123123',
-                writter: 'writter name',
-                content: 'weefefefefef efefef',
-                timestamp: firebase.database.ServerValue.TIMESTAMP
-            },
             timestamp: firebase.database.ServerValue.TIMESTAMP
         },
         base64img1: null,

@@ -1,4 +1,5 @@
-ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistory,$stateParams,MatchService,Tools,$ionicPopover,$state ,EventTrigger ) {
+ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistory,
+    $stateParams,MatchService,Tools,$ionicPopover,$state ,EventTrigger, PhotoService ) {
     
     var vm = $scope.vm = {
         info: {}
@@ -51,15 +52,13 @@ ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistor
         if(null != info) {
             vm.info = info;
             console.log('after enter',vm);
-            $scope.$apply();
+            if(!EventTrigger.isRefreshing())
+                $scope.$apply();
         }
     }); 
     EventTrigger.add('changed-comments',function(info){
         vm.info = info;
         if(!EventTrigger.isRefreshing())
-            $scope.$apply();
-    
-            console.log('enter',vm);
             $scope.$apply();
         }
     );     
@@ -88,11 +87,11 @@ ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistor
 
     $scope.reset = function (item) {
         console.log("modify !!",item);
-        firebase.database().ref('/weekly').child(item.info.key+'/comments').remove();
+        firebase.database().ref('/matching').child(item.info.key+'/comments').remove();
     }
     $scope.delete = function(item) {
         console.log("delete !!",item);
-        MatchService.remove(item.key)
+        MatchService.remove(item.info.key)
         .then(function(){
             $state.go('app.main.matching');
         });
