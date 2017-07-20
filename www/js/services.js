@@ -239,11 +239,12 @@ angular.module('starter.services', ['ngCordova'])
         });
         return deferred.promise;
     }
-function addComment(key, commentInfo) {
-        ref.child("matching").child(key+'/comments').push().set(commentInfo)
-        .then(function(){
-            console.log('save complete',key,commentInfo);
-        });
+
+    function addComment(key, commentInfo) {
+        ref.child("matching").child(key + '/comments').push().set(commentInfo)
+            .then(function () {
+                console.log('save complete', key, commentInfo);
+            });
 
     }
     return self;
@@ -371,6 +372,10 @@ function addComment(key, commentInfo) {
         });
 
     }
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 1e2925c293ec15161190b753f4a7166bba0532b3
     function toggleLikes(key,uid) {
         ref.child("weekly").child(key).transaction(function (post) {
             if (post) {
