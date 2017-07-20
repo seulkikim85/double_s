@@ -1,4 +1,4 @@
-ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistory,
+ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistory,$timeout,$ionicScrollDelegate,
     $stateParams,MatchService,Tools,$ionicPopover,$state ,EventTrigger, PhotoService ) {
     
     var vm = $scope.vm = {
