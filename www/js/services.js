@@ -372,10 +372,6 @@ angular.module('starter.services', ['ngCordova'])
         });
 
     }
-<<<<<<< HEAD
-=======
-    
->>>>>>> 1e2925c293ec15161190b753f4a7166bba0532b3
     function toggleLikes(key,uid) {
         ref.child("weekly").child(key).transaction(function (post) {
             if (post) {
