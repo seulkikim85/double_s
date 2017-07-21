@@ -101,6 +101,11 @@ ctrlModule.controller('AppCtrl', ['$scope','$ionicModal','$ionicPopup', '$rootSc
         return $rootScope.currentUser != undefined;
     }
 
+    /////Set a limited on Weekly fileupload
+    $scope.onlyAdminAccess = function() {
+        return $rootScope.currentUser = 'babe7961@gmail.com';
+    }
+
     $scope.showJoin = function() {
         console.log('show Join');
         if($scope.modalLogin)

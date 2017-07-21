@@ -41,7 +41,7 @@
             
         </div>
     </ion-content>
-  <div class="float-button">
+  <div class="float-button" ng-show="isLogined()"&&"onlyAdminAccess()">
       <span class="height-fix">
 
             <input style="display:none" id="idFile" name="idFile" type="file" file-change handler="fileSelect(files)" >
