@@ -2,7 +2,8 @@ ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistor
     $stateParams,MatchService,Tools,$ionicPopover,$state ,EventTrigger, PhotoService ) {
     
     var vm = $scope.vm = {
-        info: {}
+        info: {},
+        edit: {}
     };
 
     // force back button
@@ -82,7 +83,7 @@ ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistor
     );     
 
 	 ////////////////////////////////////////////////////////////
-	$ionicPopover.fromTemplateUrl('templates/weekly_popover.html', {
+	$ionicPopover.fromTemplateUrl('templates/match_popover.html', {
 		scope: $scope,
 		animation: 'slide-in-up'
 	}).then(function(popover) {
@@ -107,6 +108,23 @@ ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistor
         console.log("modify !!",item);
         firebase.database().ref('/matching').child(item.info.key+'/comments').remove();
     }
+    $scope.edit = function (item) {
+        console.log("edit !!",item);
+        vm.isEditMode = true;
+        vm.edit.title = item.info.title;
+        vm.edit.caption = item.info.caption;
+        $scope.popover.hide();
+    }
+    $scope.updateContent = function(edit) {
+        console.log("updateContent !!",edit);
+        MatchService.updateContent(vm.info.key,edit)
+        .then(function(){
+            vm.isEditMode = false;
+            vm.info.title = edit.title;
+            vm.info.caption = edit.caption;
+        });
+    }
+    
     $scope.delete = function(item) {
         console.log("delete !!",item);
         MatchService.remove(item.info.key)

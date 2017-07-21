@@ -15,11 +15,22 @@
                 <div class="item item-avatar">
                     <img ng-src='{{vm.info.avatar.url || "img/avatar/blank.png"}}'>
                     <h2>{{vm.info.writter}}</h2>
-                    <p>"{{vm.info.title}}"</p>
+                    <p ng-show="!vm.isEditMode">"{{vm.info.title}}"</p>
+                    <div ng-show="vm.isEditMode"> 
+                        <input class="item-input-wrapper full-image" type="text" ng-model="vm.edit.title" placeholder="Write a title.">
+                    </div>
                 </div>                
                 <div class="item item-text-wrap" style="padding-top:0">
                     <img class="full-image" ng-src="{{vm.info.imgPath}}">
-                    <strong>{{vm.info.writter}}</strong> added a weekly <strong>{{vm.info.content}}</strong> ...
+                    <div ng-show="!vm.isEditMode">
+                    <strong >{{vm.info.writter}}</strong> added a weekly <strong>{{vm.info.caption}}</strong> ...</div>
+                    <div ng-show="vm.isEditMode" class="item"> 
+                        <input class="item-input-wrapper full-image" type="text" ng-model="vm.edit.caption" placeholder="Write a title.">
+                        <div class="item">
+                        <button class="button button-small button-full button-positive"
+                            ng-click="updateContent(vm.edit)"> Update
+                        </button></div>
+                    </div>
                     <div class="card-footer text-right">
                         <i class="icon ion-chatbubble positive"></i> {{vm.count_comments()|| 0}}
                         <i class="icon ion-heart assertive"></i> {{vm.info.likeCount|| 0}}

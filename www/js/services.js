@@ -142,8 +142,9 @@ angular.module('starter.services', ['ngCordova'])
                     return self.list[item];
             return null;
         },
-         addComment: addComment,
-         toggleLikes: toggleLikes,
+        addComment: addComment,
+        toggleLikes: toggleLikes,
+        updateContent: updateContent,     
     }
 
     getAll();
@@ -159,7 +160,7 @@ angular.module('starter.services', ['ngCordova'])
                 firebase.storage().ref(info.imageRef1).getDownloadURL()
                 .then(function(url){
                     info.imgPath1 = url;
-                    console.log('image url done',url);
+                    //console.log('image url done',url);
                     EventTrigger.event('loaded-url-matching');
                 });
             }
@@ -167,7 +168,7 @@ angular.module('starter.services', ['ngCordova'])
                 firebase.storage().ref(info.imageRef2).getDownloadURL()
                 .then(function(url){
                     info.imgPath2 = url;
-                    console.log('image url done',url);
+                    //console.log('image url done',url);
                     EventTrigger.event('loaded-url-matching');
                 });
             }
@@ -228,6 +229,22 @@ angular.module('starter.services', ['ngCordova'])
 
     }
 
+    function updateContent(key,edit) {
+        var deferred = $q.defer();
+        $ionicLoading.show('updating...');
+
+        var updates = {};
+        // Update push_id
+        updates['matching/'+key+'/title'] = edit.title;
+        updates['matching/'+key+'/caption'] = edit.caption;
+        ref.update(updates).then(function(){
+            console.log('update complete');
+            $ionicLoading.hide();
+            deferred.resolve();
+        });
+        return deferred.promise;
+    }
+    
      function remove(key) {
         var deferred = $q.defer();
         $ionicLoading.show('deleting...');
@@ -291,8 +308,9 @@ angular.module('starter.services', ['ngCordova'])
             return null;
         },
         addComment: addComment,
-        toggleLikes: toggleLikes,       
-        }
+        toggleLikes: toggleLikes,
+        updateContent: updateContent,     
+    }
 
     getAll();
 
@@ -316,7 +334,7 @@ angular.module('starter.services', ['ngCordova'])
         .on('child_added',function(snap){
             //console.log('weekly item',info);
             var info = refactory(snap.key,snap.val(),function(url){
-                console.log('image url done',url);
+                //console.log('image url done',url);
                 EventTrigger.event('loaded-url-weekly');
             });
             if(self.list_left.length > self.list_right.length)
@@ -371,6 +389,22 @@ angular.module('starter.services', ['ngCordova'])
 
         });
         
+        return deferred.promise;
+    }
+
+    function updateContent(key,edit) {
+        var deferred = $q.defer();
+        $ionicLoading.show('updating...');
+
+        var updates = {};
+        // Update push_id
+        updates['weekly/'+key+'/title'] = edit.title;
+        updates['weekly/'+key+'/caption'] = edit.caption;
+        ref.update(updates).then(function(){
+            console.log('update complete');
+            $ionicLoading.hide();
+            deferred.resolve();
+        });
         return deferred.promise;
     }
 

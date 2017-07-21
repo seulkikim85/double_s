@@ -3,7 +3,8 @@ ctrlModule.controller('weeklyDetailCtrl', function($scope,$state,$rootScope,$ion
     $ionicPopover,$ionicPopup,WeeklyService, Tools,EventTrigger,$ionicScrollDelegate,$timeout,PhotoService) {
 
     var vm = $scope.vm = {
-        info: {}
+        info: {},
+        edit: {}
     };
     // force back button
     $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
@@ -11,6 +12,7 @@ ctrlModule.controller('weeklyDetailCtrl', function($scope,$state,$rootScope,$ion
         if(histroyBack && histroyBack.stateName == 'app.main.weekly' )
             viewData.enableBack = true;   
 
+        vm.isEditMode = false;
         vm.info.avatar =  'img/avatar/blank.png';
         vm.info.imgPath = 'img/mannequin.jpg';
         vm.info.caption = 'She look so nice style and also ...';
@@ -96,6 +98,22 @@ ctrlModule.controller('weeklyDetailCtrl', function($scope,$state,$rootScope,$ion
     $scope.reset = function (item) {
         console.log("modify !!",item);
         firebase.database().ref('/weekly').child(item.info.key+'/comments').remove();
+    }
+    $scope.edit = function (item) {
+        console.log("edit !!",item);
+        vm.isEditMode = true;
+        vm.edit.title = item.info.title;
+        vm.edit.caption = item.info.caption;
+        $scope.popover.hide();
+    }
+    $scope.updateContent = function(edit) {
+        console.log("updateContent !!",edit);
+        WeeklyService.updateContent(vm.info.key,edit)
+        .then(function(){
+            vm.isEditMode = false;
+            vm.info.title = edit.title;
+            vm.info.caption = edit.caption;
+        });
     }
     $scope.delete = function(item) {
         console.log("delete !!",item);
