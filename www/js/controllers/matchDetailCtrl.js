@@ -47,7 +47,7 @@ ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistor
         vm.toggleLikes = function (key) {
         if(!CheckLogin())
             return;        
-        WeeklyService.toggleLikes(key,$rootScope.currentUser.uid);
+        MatchService.toggleLikes(key,$rootScope.currentUser.uid);
     }
     function CheckLogin() {
         if(!$rootScope.currentUser) {
@@ -60,7 +60,7 @@ ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistor
         return true;
     }
 
-    
+
     });
 
 
