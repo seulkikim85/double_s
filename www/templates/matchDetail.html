@@ -19,16 +19,24 @@
                     <div class="row">
                         <div class="col col-50">
                             <img style="width:100%" ng-src='{{vm.info.imgPath1 || "img/ImageLoading.png"}}'>
+                            <a class="tab-item stable-bg assertive" ng-click="vm.toggleLikes(info.key)">
+                                <i class="icon ion-heart"></i>
+                                <span>{{info.likeCount||0}}</span>
+                            </a>
                         </div>
                         <div class="col col-50">
                             <img style="width:100%" ng-src='{{vm.info.imgPath2 || "img/ImageLoading.png"}}'>
+                            <a class="tab-item stable-bg assertive" ng-click="vm.toggleLikes(info.key)">
+                                 <i class="icon ion-heart"></i>
+                                 <span>{{info.likeCount||0}}</span>
+                             </a>
                         </div>
                     </div>                    
                     
                     <strong>{{vm.info.writter}}</strong> added a match item <strong>{{vm.info.caption}}</strong> ...
                     <div class="card-footer text-right">
                         <i class="icon ion-chatbubble positive"></i> {{vm.count_comments()|| 0}}
-                        <i class="icon ion-heart assertive"></i> {{vm.info.likes|| 0}}
+                        
                         
                         <div class="pull-left">
                             <i class="icon ion-clock"></i> {{vm.info.when}}

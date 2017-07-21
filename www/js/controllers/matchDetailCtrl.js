@@ -43,6 +43,13 @@ ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistor
             return val;
         }       
         console.log('before enter',vm); 
+
+        vm.toggleLikes = function (key) {
+        if(!CheckLogin())
+            return;        
+        WeeklyService.toggleLikes(key,$rootScope.currentUser.uid);
+    }
+    
     });
 
 

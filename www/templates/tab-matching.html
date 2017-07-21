@@ -12,14 +12,21 @@
                     <div class="row">
                         <div class="col col-50">
                         <img style="width:100%" ng-src='{{info.imgPath1 || "img/ImageLoading.png"}}'>
+                        <a class="tab-item stable-bg assertive" ng-click="vm.info.Likes(info.key)">
+                        <i class="icon ion-heart"></i>
+                        <span>{{vm.info.likeCount||0}}</span>
+                        </a>
                         </div>
                         <div class="col col-50">
                         <img style="width:100%"ng-src='{{info.imgPath2 || "img/ImageLoading.png"}}'>
+                        <a class="tab-item stable-bg assertive" ng-click="vm.info.Likes(info.key)">
+                        <i class="icon ion-heart"></i>
+                        <span>{{vm.info.likeCount||0}}</span>
+                        </a>
                         </div>
                     </div>                    
                     <div class="card-footer text-right">
                         <i class="icon ion-chatbubbles positive"></i>{{info.comments.length}}
-                        <i class="icon ion-heart assertive"></i>{{info.likes}}
                         <div class="pull-left">
                             <i class="icon ion-clock"></i> {{info.when}}
                         </div>
