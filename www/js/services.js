@@ -689,12 +689,13 @@ angular.module('starter.services', ['ngCordova'])
                 found = {
                     uuid: uuid,
                     url: null,
-                    error: 'object_not_found',
+                    error: null,
                 }
                 self.Avatars.data[uuid] = found;
             }            
-            if(uuid && !found.url && found.error) {
-                found.error = null;
+            if(uuid && !found.url && found.error === null) {
+                console.log('query avatar',found);
+                found.error = '';
                 ref.child('users/'+uuid+'/profile.jpg')
                 .getDownloadURL().then(function(url){
                     $log.debug('uuid',url);
