@@ -98,9 +98,9 @@ ctrlModule.controller('matchingCtrl', ['$scope','MatchService','EventTrigger','$
     }
 
     vm.count_comments = function() {
-            if(!vm.comments)
+            if(!vm.info.comments)
                 return 0;
-            return Object.keys(vm.comments).length;
+            return Object.keys(vm.info.comments).length;
         }
 
     $scope.fileSelect1 = function (files) {

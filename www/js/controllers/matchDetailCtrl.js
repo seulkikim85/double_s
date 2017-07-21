@@ -49,6 +49,17 @@ ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistor
             return;        
         WeeklyService.toggleLikes(key,$rootScope.currentUser.uid);
     }
+    function CheckLogin() {
+        if(!$rootScope.currentUser) {
+            $ionicPopup.alert({
+                title: 'Required Authentication!!',
+                template: 'Log in Please!!'
+            });
+            return false;
+        }
+        return true;
+    }
+
     
     });
 
