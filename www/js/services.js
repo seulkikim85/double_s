@@ -112,7 +112,7 @@ angular.module('starter.services', ['ngCordova'])
     }
 
     function saveMyAvatar(base64img) {
-        myAvatar = base64img;
+        self.myAvatar = base64img;
         localStorage.setItem("avatar.base64img", base64img);
     }
 

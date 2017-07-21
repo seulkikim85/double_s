@@ -10,7 +10,7 @@ ctrlModule.controller('ProfileCtrl', function($scope, $rootScope, $stateParams, 
             email: ''
         },
         newPassword: '',
-        myAvatarImg: null
+        myAvatarImg: UserService.loadMyAvatar
     };
     vm.user = $rootScope.currentUser;
     
@@ -26,7 +26,6 @@ ctrlModule.controller('ProfileCtrl', function($scope, $rootScope, $stateParams, 
     }    
 
     $scope.$on('$ionicView.enter', function(e,v,a) {
-        vm.myAvatarImg = UserService.loadMyAvatar();
         vm.user = $rootScope.currentUser;
         if(!$rootScope.$root.$$phase)
             $scope.$apply();
@@ -63,7 +62,7 @@ ctrlModule.controller('ProfileCtrl', function($scope, $rootScope, $stateParams, 
         $ionicLoading.show('image processing..')
         PhotoService.LoadOrientationImage(vm.file, function (base64img, value) {
             UserService.saveMyAvatar(base64img);
-            vm.myAvatarImg = base64img;
+            // vm.myAvatarImg = base64img;
             PhotoService.Avatars.put($rootScope.currentUser.uid,base64img);
         });     
     }
