@@ -44,10 +44,10 @@ ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistor
         }       
         console.log('before enter',vm); 
 
-        vm.toggleLikes = function (key) {
+        vm.info.toggleLikes = function (key) {
         if(!CheckLogin())
             return;        
-        MatchService.toggleLikes(key,$rootScope.currentUser.uid);
+        MatchService.info.toggleLikes(key,$rootScope.currentUser.uid);
     }
     function CheckLogin() {
         if(!$rootScope.currentUser) {
