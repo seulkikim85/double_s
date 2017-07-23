@@ -25,6 +25,10 @@ ctrlModule.controller('weeklyPhotoUploadCtrl', function($scope,$ionicHistory) {
     
 })
 
+.controller('contactUsCtrl', function() {
+    
+})
+
 .controller('GalleryCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
