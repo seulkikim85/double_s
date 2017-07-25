@@ -152,7 +152,7 @@ angular.module('starter.router', ['ionic'])
             }
         }
     })
-    ;
+    
      .state('app.contactUs', {
         url: '/contactUs',
         views: {
