@@ -105,6 +105,7 @@ ctrlModule.controller('AppCtrl', ['$scope','$ionicModal','$ionicPopup', '$rootSc
     $scope.isAdmin = function() {
         if($rootScope.currentUser="babe7961@gmail.com")
         return true;
+        else false;
         //return $rootScope.currentUser = 'babe7961@gmail.com';
     }
 
