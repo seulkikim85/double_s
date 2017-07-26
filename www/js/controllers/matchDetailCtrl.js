@@ -46,7 +46,12 @@ ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistor
         console.log('before enter',vm); 
 
         vm.info.toggleLikes = function (key) {
-        if(!CheckLogin())
+        if(!CheckLogin()) {
+            $ionicPopup.alert({
+                 title: 'Required Authentication!!',
+                template: 'Log in Please!!'
+            });
+        }
             return;        
         MatchService.info.toggleLikes(key,$rootScope.currentUser.uid);
     }
