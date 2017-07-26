@@ -152,24 +152,6 @@ angular.module('starter.router', ['ionic'])
             }
         }
     })
-    
-     .state('app.contactUs', {
-        url: '/contactUs',
-        views: {
-            'menuContent': {
-                templateUrl: 'templates/contactUs.html', 
-                controller: 'ContactUsCtrl'
-            },
-            'fabContent': {
-                template: '<button id="fab-contactUs" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-plus"></i></button>',
-                controller: function ($timeout) {
-                    /*$timeout(function () {
-                        document.getElementById('fab-profile').classList.toggle('on');
-                    }, 800);*/
-                }
-            }
-        }
-    })
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/main/weekly');
 });
