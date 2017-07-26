@@ -50,7 +50,7 @@ ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistor
             if (!CheckLogin()) 
                 return ture;
             
-            MatchService.info.toggleLikes(key, $rootScope.currentUser.uid);
+            MatchService.toggleLikes(key, $rootScope.currentUser.uid);
         }
 
     function CheckLogin() {
