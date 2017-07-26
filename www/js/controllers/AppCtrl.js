@@ -102,10 +102,12 @@ ctrlModule.controller('AppCtrl', ['$scope','$ionicModal','$ionicPopup', '$rootSc
     }
 
     /////Set a limited on Weekly menu
-    $scope.isAdmin = function() {
-        if($rootScope.currentUser="babe7961@gmail.com")
-        return true;
-        else false;
+    $scope.isAdmin = function () {
+        if ($rootScope.currentUser = "babe7961@gmail.com")
+            return true;
+
+
+        return false;
         //return $rootScope.currentUser = 'babe7961@gmail.com';
     }
 
