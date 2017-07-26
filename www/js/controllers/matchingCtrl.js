@@ -97,10 +97,10 @@ ctrlModule.controller('matchingCtrl', ['$scope','MatchService','EventTrigger','$
         document.getElementById(id).click();
     }
 
-    vm.count_comments = function() {
-            if(!vm.info.comments)
+    vm.count_comments = function( comments) {
+            if(!comments)
                 return 0;
-            return Object.keys(vm.info.comments).length;
+            return Object.keys(comments).length;
         }
 
     $scope.fileSelect1 = function (files) {
