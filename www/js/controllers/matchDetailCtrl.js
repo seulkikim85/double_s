@@ -1,5 +1,5 @@
 ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistory,$timeout,$ionicScrollDelegate,
-    $stateParams,MatchService,Tools,$ionicPopover,$state ,EventTrigger, PhotoService ) {
+    $stateParams,MatchService,Tools,$ionicPopup,$ionicPopover,$state ,EventTrigger, PhotoService ) {
     
     var vm = $scope.vm = {
         info: {},
@@ -11,7 +11,8 @@ ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistor
         var histroyBack = $ionicHistory.backView();
         if(histroyBack && histroyBack.stateName == 'app.main.matching' )
             viewData.enableBack = true;        
-
+       console.log('before enter',vm); 
+    });
         vm.count_comments = function() {
             if(!vm.info.comments)
                 return 0;
@@ -43,18 +44,15 @@ ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistor
             val.when = Tools.time_ago(new Date(Math.abs(val.timestamp)));
             return val;
         }       
-        console.log('before enter',vm); 
-
-        vm.info.toggleLikes = function (key) {
-        if(!CheckLogin()) {
-            $ionicPopup.alert({
-                 title: 'Required Authentication!!',
-                template: 'Log in Please!!'
-            });
+ 
+        vm.toggleLikes = function () {
+            console.log('seulki');
+            if (!CheckLogin()) 
+                return ture;
+            
+            MatchService.info.toggleLikes(key, $rootScope.currentUser.uid);
         }
-            return;        
-        MatchService.info.toggleLikes(key,$rootScope.currentUser.uid);
-    }
+
     function CheckLogin() {
         if(!$rootScope.currentUser) {
             $ionicPopup.alert({
@@ -65,11 +63,6 @@ ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistor
         }
         return true;
     }
-
-
-    });
-
-
 
     $scope.$on('$ionicView.afterEnter', function (event, viewData) {
         var info = MatchService.getByKey($stateParams.id);  
