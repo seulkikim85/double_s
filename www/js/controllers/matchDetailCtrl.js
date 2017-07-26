@@ -47,13 +47,9 @@ ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistor
  
         vm.toggleLikes = function () {
             console.log('seulki');
-            if (!CheckLogin()) {
-                $ionicPopup.alert({
-                    title: 'Required Authentication!!',
-                    template: 'Log in Please!!'
-                });
-            }
-            return;
+            if (!CheckLogin()) 
+                return ture;
+            
             MatchService.info.toggleLikes(key, $rootScope.currentUser.uid);
         }
 
