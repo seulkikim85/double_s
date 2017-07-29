@@ -193,6 +193,7 @@ angular.module('starter.services', ['ngCordova'])
             if(find) {
                 // console.log('replace1',find);
                 find.comments = newOne.comments;
+                find.likeCount = newOne.likeCount;
                 // console.log('replace1',find);
                 EventTrigger.event('changed-comments',find);
             }
@@ -363,6 +364,7 @@ angular.module('starter.services', ['ngCordova'])
             if(find) {
                 // console.log('replace1',find);
                 find.comments = newOne.comments;
+                find.likeCount = newOne.likeCount;
                 // console.log('replace1',find);
                 EventTrigger.event('changed-comments',find);
             }
@@ -428,6 +430,7 @@ angular.module('starter.services', ['ngCordova'])
 
     }
     function toggleLikes(key,uid) {
+        console.log("toggle likes",key,uid);
         ref.child("weekly").child(key).transaction(function (post) {
             if (post) {
                 if (post.likes && post.likes[uid]) {
