@@ -63,13 +63,12 @@ ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistor
         return val;
     }
 
-    vm.toggleLikes = function () {
-        console.log('seulki');
+    vm.toggleLikes = function (no,key) {
+        console.log('seulki',no);
         if (!CheckLogin())
             return ture;
-
-        MatchService.toggleLikes(vm.info.key, $rootScope.currentUser.uid);
-    }
+        MatchService.toggleLikes(no,key, $rootScope.currentUser.uid);
+    }  
 
     function CheckLogin() {
         if(!$rootScope.currentUser) {

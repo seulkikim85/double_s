@@ -193,7 +193,12 @@ angular.module('starter.services', ['ngCordova'])
             if(find) {
                 // console.log('replace1',find);
                 find.comments = newOne.comments;
-                find.likeCount = newOne.likeCount;
+                if(newOne.i1 == undefined)
+                    newOne.i1 = {likeCount:0}
+                find.i1 = newOne.i1;
+                if(newOne.i2 == undefined)
+                    newOne.i2 = {likeCount:0}
+                find.i2 = newOne.i2;
                 // console.log('replace1',find);
                 EventTrigger.event('changed-comments',find);
             }
@@ -267,20 +272,27 @@ angular.module('starter.services', ['ngCordova'])
 
     }
 
-      function toggleLikes(key,uid) {
+      function toggleLikes(no,key,uid) {
         ref.child("matching").child(key).transaction(function (post) {
             if (post) {
-                if (post.likes && post.likes[uid]) {
-                    post.likeCount--;
-                    post.likes[uid] = null;
+                if(!post.i1)
+                    post.i1 = { likes:[]};
+                if(!post.i2)
+                    post.i2 = { likes:[]};
+
+                item = (no == '1')? post.i1 : post.i2;
+                
+                if (item.likes && item.likes[uid]) {
+                    item.likeCount--;
+                    item.likes[uid] = null;
                 } else {
-                    if(post.likeCount == undefined)
-                        post.likeCount = 0;
-                    post.likeCount++;
-                    if (!post.likes) {
-                        post.likes = {};
+                    if(item.likeCount == undefined)
+                        item.likeCount = 0;
+                    item.likeCount++;
+                    if (item.likes == undefined) {
+                        item.likes = {};
                     }
-                    post.likes[uid] = true;
+                    item.likes[uid] = true;
                 }
             }
             return post;
