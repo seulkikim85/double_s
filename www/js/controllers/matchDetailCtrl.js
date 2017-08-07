@@ -66,7 +66,7 @@ ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistor
     vm.toggleLikes = function (no,key) {
         console.log('seulki',no);
         if (!CheckLogin())
-            return ture;
+            return;
         MatchService.toggleLikes(no,key, $rootScope.currentUser.uid);
     }  
 
