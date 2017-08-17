@@ -13,57 +13,6 @@ ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistor
             viewData.enableBack = true;        
        console.log('before enter',vm); 
     });
-        vm.count_comments = function() {
-            if(!vm.info.comments)
-                return 0;
-            return Object.keys(vm.info.comments).length;
-        }
-        vm.sendComment = function(comment) {
-             if(!$scope.$parent.isLogined()) {
-                $ionicPopup.alert({
-                    title: 'Member Only',
-                    template: 'You need to login'
-                });
-                return;
-            }
-            var newComment = {
-                uuid: $rootScope.currentUser.uid,
-                writter: $rootScope.currentUser.email,
-                caption: comment,
-                timestamp: firebase.database.ServerValue.TIMESTAMP
-            }           
-            console.log('send comment'); 
-            MatchService.addComment(vm.info.key,newComment);
-            vm.newComment = '';
-            $timeout(function() {
-                 $ionicScrollDelegate.scrollBottom();
-            },100);
-        }
-        vm.ConvertComment= function(val) {
-            val.avatar = PhotoService.Avatars.get(val.uuid);
-            val.when = Tools.time_ago(new Date(Math.abs(val.timestamp)));
-            return val;
-        }       
- 
-        vm.toggleLikes = function () {
-            console.log('seulki');
-            if (!CheckLogin()) 
-                return ture;
-            
-            MatchService.info.toggleLikes(key, $rootScope.currentUser.uid);
-        }
-
-    function CheckLogin() {
-        if(!$rootScope.currentUser) {
-            $ionicPopup.alert({
-                title: 'Required Authentication!!',
-                template: 'Log in Please!!'
-            });
-            return false;
-        }
-        return true;
-    }
-
     $scope.$on('$ionicView.afterEnter', function (event, viewData) {
         var info = MatchService.getByKey($stateParams.id);  
         if(null != info) {
@@ -78,7 +27,61 @@ ctrlModule.controller('matchDetailCtrl', function($scope,$rootScope,$ionicHistor
         if(!EventTrigger.isRefreshing())
             $scope.$apply();
         }
-    );     
+    );   
+
+
+
+    vm.count_comments = function () {
+        if (!vm.info.comments)
+            return 0;
+        return Object.keys(vm.info.comments).length;
+    }
+    vm.sendComment = function (comment) {
+        if (!$scope.$parent.isLogined()) {
+            $ionicPopup.alert({
+                title: 'Member Only',
+                template: 'You need to login'
+            });
+            return;
+        }
+        var newComment = {
+            uuid: $rootScope.currentUser.uid,
+            writter: $rootScope.currentUser.email,
+            caption: comment,
+            timestamp: firebase.database.ServerValue.TIMESTAMP
+        }
+        console.log('send comment');
+        MatchService.addComment(vm.info.key, newComment);
+        vm.newComment = '';
+        $timeout(function () {
+            $ionicScrollDelegate.scrollBottom();
+        }, 100);
+    }
+    vm.ConvertComment = function (val) {
+        val.avatar = PhotoService.Avatars.get(val.uuid);
+        val.when = Tools.time_ago(new Date(Math.abs(val.timestamp)));
+        return val;
+    }
+
+    vm.toggleLikes = function (no,key) {
+        console.log('seulki',no);
+        if (!CheckLogin())
+            return;
+        MatchService.toggleLikes(no,key, $rootScope.currentUser.uid);
+    }  
+
+    function CheckLogin() {
+        if(!$rootScope.currentUser) {
+            $ionicPopup.alert({
+                title: 'Required Authentication!!',
+                template: 'Log in Please!!'
+            });
+            return false;
+        }
+        return true;
+    }
+
+      
 
 	 ////////////////////////////////////////////////////////////
 	$ionicPopover.fromTemplateUrl('templates/match_popover.html', {

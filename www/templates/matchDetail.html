@@ -22,22 +22,22 @@
                     <div class="row">
                         <div class="col col-50">
                             <img style="width:100%" ng-src='{{vm.info.imgPath1 || "img/ImageLoading.png"}}'>
-                            <a class="item stable-bg assertive" ng-click="vm.toggleLikes(vm.info.key)" style="padding: 15px 0 5px 0; font-size: 20px;text-align: center;">
+                            <a class="item stable-bg assertive" ng-click="vm.toggleLikes('1',vm.info.key)" style="padding: 15px 0 5px 0; font-size: 20px;text-align: center;">
                                 <i class="icon ion-heart"></i>
-                                <span>{{vm.info.likeCount||0}}</span>
+                                <span>{{vm.info.i1.likeCount||0}}</span>
                             </a>
                         </div>
                         <div class="col col-50">
                             <img style="width:100%" ng-src='{{vm.info.imgPath2 || "img/ImageLoading.png"}}'>
-                            <a class="item stable-bg assertive" ng-click="vm.toggleLikes(vm.info.key)"style="padding: 15px 0 5px 0; font-size: 20px;text-align: center;">
+                            <a class="item stable-bg assertive" ng-click="vm.toggleLikes('2',vm.info.key)"style="padding: 15px 0 5px 0; font-size: 20px;text-align: center;">
                                  <i class="icon ion-heart"></i>
-                                 <span>{{vm.info.likeCount||0}}</span>
+                                 <span>{{vm.info.i2.likeCount||0}}</span>
                              </a>
                         </div>
                     </div>                    
                     
                     <div ng-show="!vm.isEditMode">
-                    <strong>{{vm.info.writter}}</strong> added a match item <strong>{{vm.info.caption}}</strong> ...</div>
+                    <strong>{{vm.info.caption}}</strong></div>
                     <div ng-show="vm.isEditMode" class="item"> 
                         <input class="item-input-wrapper full-image" type="text" ng-model="vm.edit.caption" placeholder="Write a title.">
                         <div class="item">

@@ -50,6 +50,9 @@ ctrlModule.controller('weeklyPhotoUploadCtrl', function($scope,$ionicHistory) {
     });
 
 })
+
+/*
+
 .controller('paletteCtrl', function ($scope,
     $stateParams, $ionicActionSheet, $timeout, $ionicLoading, $ionicModal, $ionicPopup, ionicMaterialInk) {
     ionicMaterialInk.displayEffect();
@@ -66,10 +69,11 @@ ctrlModule.controller('weeklyPhotoUploadCtrl', function($scope,$ionicHistory) {
             $scope.groups[i].items.push(i + '-' + j);
         }
     }
-    /*
-        * if given group is the selected group, deselect it
-        * else, select the given group
-        */
+        //
+        // if given group is the selected group, deselect it
+        // else, select the given group
+        //
+
     $scope.toggleGroup = function (group) {
         group.show = !group.show;
     };
@@ -105,4 +109,8 @@ ctrlModule.controller('weeklyPhotoUploadCtrl', function($scope,$ionicHistory) {
         }, 2000);
 
     };
-});
+    
+
+})
+*/
+;
